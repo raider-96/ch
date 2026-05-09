@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>چگار - لوحة الأدمن</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,sans-serif}
+        body{background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);min-height:100vh;color:#fff;padding:20px}
+        .header{display:flex;justify-content:space-between;align-items:center;padding:15px 25px;background:rgba(255,255,255,0.08);border-radius:14px;margin-bottom:20px}
+        .header h1{color:#f39c12;font-size:24px}
+        .logout-btn{padding:8px 18px;border:1px solid #e74c3c;border-radius:10px;background:transparent;color:#e74c3c;cursor:pointer;font-size:14px}
+        .logout-btn:hover{background:#e74c3c;color:#fff}
+
+        .add-section{background:rgba(46,204,113,0.1);border:1px solid rgba(46,204,113,0.3);border-radius:16px;padding:20px;margin-bottom:20px}
+        .add-section h3{color:#2ecc71;margin-bottom:15px}
+        .add-form{display:flex;gap:10px;flex-wrap:wrap}
+        .add-form input{flex:1;min-width:150px;padding:12px;border:2px solid rgba(255,255,255,0.15);border-radius:10px;background:rgba(255,255,255,0.06);color:#fff;font-size:14px;outline:none}
+        .add-form input:focus{border-color:#2ecc71}
+        .add-form input::placeholder{color:#666}
+        .add-btn{padding:12px 25px;border:none;border-radius:10px;background:#2ecc71;color:#fff;font-weight:700;cursor:pointer;font-size:14px}
+        .add-btn:hover{background:#27ae60}
+
+        .users-table{width:100%;border-collapse:collapse;background:rgba(255,255,255,0.06);border-radius:14px;overflow:hidden}
+        .users-table th{background:rgba(243,156,18,0.2);padding:14px;text-align:right;color:#f39c12;font-size:14px}
+        .users-table td{padding:12px 14px;border-bottom:1px solid rgba(255,255,255,0.06);font-size:14px}
+        .users-table tr:hover{background:rgba(255,255,255,0.03)}
+
+        .status-active{color:#2ecc71;font-weight:700}
+        .status-inactive{color:#e74c3c;font-weight:700}
+
+        .action-btn{padding:6px 14px;border:none;border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;margin:2px}
+        .btn-toggle{background:rgba(243,156,18,0.2);color:#f39c12;border:1px solid rgba(243,156,18,0.4)}
+        .btn-delete{background:rgba(231,76,60,0.2);color:#e74c3c;border:1px solid rgba(231,76,60,0.4)}
+        .btn-copy{background:rgba(52,152,219,0.2);color:#3498db;border:1px solid rgba(52,152,219,0.4)}
+
+        .msg{text-align:center;padding:10px;border-radius:10px;margin-bottom:15px;display:none}
+        .msg.show{display:block;background:rgba(46,204,113,0.2);border:1px solid rgba(46,204,113,0.4);color:#2ecc71}
+
+        .stats-box{display:flex;gap:15px;margin-bottom:20px;flex-wrap:wrap}
+        .stat-card{flex:1;min-width:150px;background:rgba(255,255,255,0.06);border-radius:12px;padding:15px;text-align:center}
+        .stat-card .num{font-size:32px;font-weight:800;color:#f39c12}
+        .stat-card .label{font-size:13px;color:#888;margin-top:5px}
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🛠️ لوحة تحكم الأدمن</h1>
+        <button class="logout-btn" onclick="logout()">🚪خروج</button>
+    </div>
+
+    <div id="adminMsg" class="msg"></div>
+
+    <div class="stats-box" id="statsBox"></div>
+
+    <div class="add-section">
+        <h3>➕ إضافة يوزر جديد</h3>
+        <div class="add-form">
+            <input type="text" id="newUsername" placeholder="اسم المستخدم">
+            <input type="text" id="newPassword" placeholder="كلمة المرور">
+            <button class="add-btn" onclick="addUser()">➕ إضافة</button>
+        </div>
+    </div>
+
+    <table class="users-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>اليوزر</th>
+                <th>كلمة المرور</th>
+                <th>الحالة</th>
+                <th>الإجراءات</th>
+            </tr>
+        </thead>
+        <tbody id="usersBody"></tbody>
+    </table>
+
+    <script>
+        // تحقق من الأدمن
+        fetch('/api/auth/me').then(function(r){return r.json()}).then(function(d){
+            if(!d.loggedIn||!d.isAdmin) window.location.href='/index.html';
+            else loadUsers();
+        });
+
+        function loadUsers(){
+            fetch('/api/admin/users').then(function(r){return r.json()}).then(function(data){
+                if(!data.success) return;
+
+                var active=0,inactive=0;
+                var body=document.getElementById('usersBody');
+                body.innerHTML='';
+
+                for(var i=0;i<data.users.length;i++){
+                    var u=data.users[i];
+                    if(u.active) active++; else inactive++;
+
+                    var tr=document.createElement('tr');
+                    tr.innerHTML=
+                        '<td>'+(i+1)+'</td>'+
+                        '<td><strong>'+u.username+'</strong></td>'+
+                        '<td>'+u.password+'</td>'+
+                        '<td><span class="'+(u.active?'status-active':'status-inactive')+'">'+(u.active?'✅ فعال':'❌ معطل')+'</span></td>'+
+                        '<td>'+
+                            '<button class="action-btn btn-copy" onclick="copyInfo(\''+u.username+'\',\''+u.password+'\')">📋 نسخ</button>'+
+                            '<button class="action-btn btn-toggle" onclick="toggleUser(\''+u.id+'\')">'+(u.active?'🔒 تعطيل':'🔓 تفعيل')+'</button>'+
+                            '<button class="action-btn btn-delete" onclick="deleteUser(\''+u.id+'\',\''+u.username+'\')">🗑️ حذف</button>'+
+                        '</td>';
+                    body.appendChild(tr);
+                }
+
+                document.getElementById('statsBox').innerHTML=
+                    '<div class="stat-card"><div class="num">'+data.users.length+'</div><div class="label">إجمالي اليوزرات</div></div>'+
+                    '<div class="stat-card"><div class="num" style="color:#2ecc71">'+active+'</div><div class="label">فعال</div></div>'+
+                    '<div class="stat-card"><div class="num" style="color:#e74c3c">'+inactive+'</div><div class="label">معطل</div></div>';
+            });
+        }
+
+        function addUser(){
+            var username=document.getElementById('newUsername').value.trim();
+            var password=document.getElementById('newPassword').value.trim();
+            if(!username||!password){alert('أدخل البيانات');return}
+
+            fetch('/api/admin/add-user',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:username,password:password})})
+            .then(function(r){return r.json()})
+            .then(function(data){
+                if(data.success){
+                    showAdminMsg(data.message);
+                    document.getElementById('newUsername').value='';
+                    document.getElementById('newPassword').value='';
+                    loadUsers();
+                } else { alert(data.message); }
+            });
+        }
+
+        function toggleUser(userId){
+            fetch('/api/admin/toggle-user',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({userId:userId})})
+            .then(function(r){return r.json()})
+            .then(function(data){ if(data.success) loadUsers(); });
+        }
+
+        function deleteUser(userId,username){
+            if(!confirm('حذف يوزر '+username+'؟')) return;
+            fetch('/api/admin/delete-user',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({userId:userId})})
+            .then(function(r){return r.json()})
+            .then(function(data){ if(data.success) loadUsers(); });
+        }
+
+        function copyInfo(username,password){
+            var text='🎮 چگار - بيانات الدخول\n';
+            text+='━━━━━━━━━━━━━━━━\n';
+            text+='👤 اليوزر: '+username+'\n';
+            text+='🔒 كلمة المرور: '+password+'\n';
+            text+='🌐 الرابط: '+window.location.origin+'\n';
+            text+='━━━━━━━━━━━━━━━━';
+
+            navigator.clipboard.writeText(text).then(function(){
+                showAdminMsg('تم نسخ بيانات '+username);
+            });
+        }
+
+        function showAdminMsg(t){
+            var m=document.getElementById('adminMsg');
+            m.textContent='✅ '+t;
+            m.className='msg show';
+            setTimeout(function(){m.className='msg'},3000);
+        }
+
+        function logout(){
+            fetch('/api/auth/logout',{method:'POST'}).then(function(){window.location.href='/index.html'});
+        }
+    </script>
+</body>
+</html>

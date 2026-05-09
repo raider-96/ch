@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>چگار - النتائج</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .results-container {
+            max-width: 700px;
+            width: 100%;
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .trophy {
+            text-align: center;
+            font-size: 100px;
+            margin-bottom: 15px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* ✅ الإصلاح هنا */
+        .winner-title {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 8px;
+            background: linear-gradient(45deg, #f39c12, #e74c3c, #9b59b6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            font-weight: 700;
+        }
+
+        .winner-name {
+            text-align: center;
+            font-size: 48px;
+            font-weight: 900;
+            color: #f39c12;
+            margin-bottom: 30px;
+            text-shadow: 0 0 30px rgba(243, 156, 18, 0.3);
+        }
+
+        .final-scores {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 35px;
+        }
+
+        .final-team {
+            text-align: center;
+            padding: 25px 35px;
+            border-radius: 20px;
+            min-width: 200px;
+            transition: all 0.3s;
+        }
+
+        .final-team.winner-card {
+            background: rgba(243, 156, 18, 0.15);
+            border: 3px solid #f39c12;
+            animation: glow 2s infinite;
+        }
+
+        .final-team.loser-card {
+            background: rgba(255, 255, 255, 0.06);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 15px rgba(243, 156, 18, 0.2); }
+            50% { box-shadow: 0 0 35px rgba(243, 156, 18, 0.5); }
+        }
+
+        .final-team .f-name {
+            font-size: 18px;
+            color: #bbb;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .final-team .f-score {
+            font-size: 48px;
+            font-weight: 900;
+        }
+
+        .winner-card .f-score { color: #f39c12; }
+        .loser-card .f-score { color: #7f8c8d; }
+
+        .stats-section {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stats-title {
+            font-size: 20px;
+            color: #f39c12;
+            margin-bottom: 18px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            transition: background 0.3s;
+        }
+
+        .stat-row:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .stat-row:last-child { border: none; }
+        .stat-cat { color: #ccc; font-weight: 500; }
+        .stat-correct { color: #2ecc71; font-weight: 600; }
+        .stat-points { color: #f39c12; font-weight: 700; }
+
+        .actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            padding: 16px 40px;
+            border: none;
+            border-radius: 14px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .new-game-btn {
+            background: linear-gradient(45deg, #2ecc71, #27ae60);
+            color: #fff;
+        }
+
+        .new-game-btn:hover {
+            box-shadow: 0 8px 25px rgba(46, 204, 113, 0.4);
+        }
+
+        .home-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .home-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .confetti {
+            position: fixed;
+            border-radius: 3px;
+            animation: fall linear forwards;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(105vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .final-scores { flex-direction: column; align-items: center; }
+            .final-team { min-width: 250px; }
+            .winner-name { font-size: 36px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="results-container">
+        <div class="trophy">🏆</div>
+        <div class="winner-title">🎉 الفائز هو</div>
+        <div class="winner-name" id="winnerName">...</div>
+
+        <div class="final-scores" id="finalScores"></div>
+
+        <div class="stats-section">
+            <div class="stats-title">📊 إحصائيات الأصناف</div>
+            <div id="statsBody"></div>
+        </div>
+
+        <div class="actions">
+            <button class="action-btn new-game-btn" onclick="newGame()">🔄 لعبة جديدة</button>
+            <button class="action-btn home-btn" onclick="goHome()">🏠 الرئيسية</button>
+        </div>
+    </div>
+
+    <script>
+        var gameId = localStorage.getItem('currentGameId');
+
+        if (!gameId) {
+            window.location.href = '/lobby.html';
+        }
+
+        // جلب النتائج
+        fetch('/api/games/' + gameId + '/results')
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                if (!data.success) {
+                    alert('خطأ في جلب النتائج');
+                    return;
+                }
+
+                // الفائز
+                document.getElementById('winnerName').textContent = data.winner;
+
+                // النقاط النهائية
+                var scoresDiv = document.getElementById('finalScores');
+                var t1IsWinner = data.team1.score >= data.team2.score;
+
+                scoresDiv.innerHTML =
+                    '<div class="final-team ' + (t1IsWinner ? 'winner-card' : 'loser-card') + '">' +
+                        '<div class="f-name">' + (t1IsWinner ? '👑 ' : '') + data.team1.name + '</div>' +
+                        '<div class="f-score">' + data.team1.score + '</div>' +
+                    '</div>' +
+                    '<div class="final-team ' + (!t1IsWinner ? 'winner-card' : 'loser-card') + '">' +
+                        '<div class="f-name">' + (!t1IsWinner ? '👑 ' : '') + data.team2.name + '</div>' +
+                        '<div class="f-score">' + data.team2.score + '</div>' +
+                    '</div>';
+
+                // إحصائيات
+                var statsBody = document.getElementById('statsBody');
+                statsBody.innerHTML = '';
+                var entries = Object.entries(data.categoryStats);
+                entries.forEach(function(entry) {
+                    var cat = entry[0];
+                    var stats = entry[1];
+                    var row = document.createElement('div');
+                    row.className = 'stat-row';
+                    row.innerHTML =
+                        '<span class="stat-cat">📂 ' + cat + '</span>' +
+                        '<span class="stat-correct">✅ ' + stats.correct + '/' + stats.total + '</span>' +
+                        '<span class="stat-points">💰 ' + stats.points + ' نقطة</span>';
+                    statsBody.appendChild(row);
+                });
+
+                // كونفيتي
+                launchConfetti();
+            });
+
+        function newGame() {
+            localStorage.removeItem('currentGameId');
+            window.location.href = '/lobby.html';
+        }
+
+        function goHome() {
+            localStorage.removeItem('currentGameId');
+            window.location.href = '/lobby.html';
+        }
+
+        function launchConfetti() {
+            var colors = ['#e74c3c', '#f39c12', '#2ecc71', '#3498db', '#9b59b6', '#e91e63', '#00bcd4'];
+            for (var i = 0; i < 60; i++) {
+                (function(index) {
+                    setTimeout(function() {
+                        var confetti = document.createElement('div');
+                        confetti.className = 'confetti';
+                        confetti.style.left = Math.random() * 100 + 'vw';
+                        confetti.style.top = '-15px';
+                        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                        confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                        var size = Math.random() * 8 + 5;
+                        confetti.style.width = size + 'px';
+                        confetti.style.height = size + 'px';
+                        confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+                        document.body.appendChild(confetti);
+                        setTimeout(function() { confetti.remove(); }, 5500);
+                    }, index * 80);
+                })(i);
+            }
+        }
+    </script>
+</body>
+</html>

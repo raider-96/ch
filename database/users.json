@@ -1,0 +1,148 @@
+{
+  "users": [
+    {
+      "id": "u1",
+      "username": "player01",
+      "password": "jkar2024",
+      "active": true,
+      "createdAt": "2026-05-09T08:49:28.247Z"
+    },
+    {
+      "id": "u2",
+      "username": "player02",
+      "password": "jkar2024",
+      "active": true,
+      "createdAt": "2026-05-09T08:49:28.249Z"
+    },
+    {
+      "id": "u3",
+      "username": "player03",
+      "password": "jkar2024",
+      "active": true,
+      "createdAt": "2026-05-09T08:49:28.249Z"
+    },
+    {
+      "id": "u4",
+      "username": "player04",
+      "password": "jkar2024",
+      "active": true,
+      "createdAt": "2026-05-09T08:49:28.249Z"
+    },
+    {
+      "id": "u5",
+      "username": "player05",
+      "password": "jkar2024",
+      "active": true,
+      "createdAt": "2026-05-09T08:49:28.249Z"
+    },
+    {
+      "id": "u6",
+      "username": "player06",
+      "password": "jkar2024",
+      "active": true,
+      "createdAt": "2026-05-09T08:49:28.249Z"
+    },
+    {
+      "id": "u7",
+      "username": "player07",
+      "password": "jkar2024",
+      "active": true,
+      "createdAt": "2026-05-09T08:49:28.249Z"
+    },
+    {
+      "id": "u8",
+      "username": "player08",
+      "password": "jkar2024",
+      "active": true,
+      "createdAt": "2026-05-09T08:49:28.249Z"
+    },
+    {
+      "id": "u9",
+      "username": "player09",
+      "password": "jkar2024",
+      "active": true,
+      "createdAt": "2026-05-09T08:49:28.249Z"
+    },
+    {
+      "id": "u10",
+      "username": "player10",
+      "password": "jkar2024",
+      "active": true,
+      "createdAt": "2026-05-09T08:49:28.249Z"
+    },
+    {
+      "id": "u11",
+      "username": "player11",
+      "password": "jkar2024",
+      "active": true,
+      "createdAt": "2026-05-09T08:49:28.249Z"
+    },
+    {
+      "id": "u12",
+      "username": "player12",
+      "password": "jkar2024",
+      "active": true,
+      "createdAt": "2026-05-09T08:49:28.249Z"
+    },
+    {
+      "id": "u13",
+      "username": "player13",
+      "password": "jkar2024",
+      "active": true,
+      "createdAt": "2026-05-09T08:49:28.249Z"
+    },
+    {
+      "id": "u14",
+      "username": "player14",
+      "password": "jkar2024",
+      "active": true,
+      "createdAt": "2026-05-09T08:49:28.249Z"
+    },
+    {
+      "id": "u15",
+      "username": "player15",
+      "password": "jkar2024",
+      "active": true,
+      "createdAt": "2026-05-09T08:49:28.249Z"
+    },
+    {
+      "id": "u16",
+      "username": "player16",
+      "password": "jkar2024",
+      "active": true,
+      "createdAt": "2026-05-09T08:49:28.249Z"
+    },
+    {
+      "id": "u17",
+      "username": "player17",
+      "password": "jkar2024",
+      "active": true,
+      "createdAt": "2026-05-09T08:49:28.249Z"
+    },
+    {
+      "id": "u18",
+      "username": "player18",
+      "password": "jkar2024",
+      "active": true,
+      "createdAt": "2026-05-09T08:49:28.249Z"
+    },
+    {
+      "id": "u19",
+      "username": "player19",
+      "password": "jkar2024",
+      "active": true,
+      "createdAt": "2026-05-09T08:49:28.249Z"
+    },
+    {
+      "id": "u20",
+      "username": "player20",
+      "password": "jkar2024",
+      "active": true,
+      "createdAt": "2026-05-09T08:49:28.249Z"
+    }
+  ],
+  "admin": {
+    "username": "reder",
+    "password": "reder11"
+  }
+}

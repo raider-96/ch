@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>چگار - تجهيز اللعبة</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header h1 {
+            font-size: 30px;
+            color: #f39c12;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-info span {
+            color: #f39c12;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .logout-btn {
+            padding: 8px 18px;
+            border: 1px solid #e74c3c;
+            border-radius: 10px;
+            background: transparent;
+            color: #e74c3c;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #e74c3c;
+            color: #fff;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .rules-box {
+            background: rgba(243, 156, 18, 0.08);
+            border: 1px solid rgba(243, 156, 18, 0.25);
+            border-radius: 16px;
+            padding: 22px 28px;
+            margin-bottom: 25px;
+        }
+
+        .rules-box h3 {
+            color: #f39c12;
+            margin-bottom: 12px;
+            font-size: 18px;
+        }
+
+        .rules-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            list-style: none;
+            padding: 0;
+        }
+
+        .rules-list li {
+            color: #bbb;
+            font-size: 14px;
+            padding: 4px 0;
+        }
+
+        .teams-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .team-card {
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            padding: 25px;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .team-card.team1 {
+            border-color: rgba(52, 152, 219, 0.4);
+        }
+
+        .team-card.team2 {
+            border-color: rgba(231, 76, 60, 0.4);
+        }
+
+        .team-title {
+            font-size: 22px;
+            margin-bottom: 18px;
+            font-weight: 700;
+        }
+
+        .team1 .team-title { color: #3498db; }
+        .team2 .team-title { color: #e74c3c; }
+
+        .team-name-input {
+            width: 100%;
+            padding: 13px 18px;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.06);
+            color: #fff;
+            font-size: 16px;
+            margin-bottom: 18px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .team-name-input:focus {
+            border-color: #f39c12;
+        }
+
+        .team-name-input::placeholder {
+            color: #666;
+        }
+
+        .categories-title {
+            font-size: 15px;
+            color: #aaa;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .cat-option {
+            padding: 14px 10px;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.04);
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 500;
+            user-select: none;
+        }
+
+        .cat-option:hover {
+            border-color: #f39c12;
+            background: rgba(243, 156, 18, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .cat-option.selected {
+            border-color: #2ecc71;
+            background: rgba(46, 204, 113, 0.15);
+            box-shadow: 0 0 15px rgba(46, 204, 113, 0.15);
+        }
+
+        .cat-icon {
+            font-size: 30px;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .selected-count {
+            color: #f39c12;
+            font-size: 13px;
+            margin-top: 12px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .start-btn {
+            display: block;
+            width: 100%;
+            max-width: 450px;
+            margin: 0 auto;
+            padding: 18px;
+            border: none;
+            border-radius: 16px;
+            background: linear-gradient(45deg, #2ecc71, #27ae60);
+            color: #fff;
+            font-size: 22px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .start-btn:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(46, 204, 113, 0.4);
+        }
+
+        .start-btn:disabled {
+            background: linear-gradient(45deg, #555, #444);
+            cursor: not-allowed;
+            color: #888;
+        }
+
+        .error-msg {
+            text-align: center;
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            background: rgba(231, 76, 60, 0.2);
+            border: 1px solid rgba(231, 76, 60, 0.4);
+            color: #ff6b6b;
+            display: none;
+        }
+
+        .loading-msg {
+            text-align: center;
+            padding: 40px;
+            font-size: 18px;
+            color: #f39c12;
+        }
+
+        @media (max-width: 768px) {
+            .teams-section { grid-template-columns: 1fr; }
+            .rules-list { grid-template-columns: 1fr; }
+            .header { flex-direction: column; gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎮 چگار</h1>
+        <div class="user-info">
+            <span id="welcomeUser">مرحباً</span>
+            <button class="logout-btn" onclick="logout()">🚪 خروج</button>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="rules-box">
+            <h3>📋 قواعد اللعبة</h3>
+            <ul class="rules-list">
+                <li>🎯 كل فريق يختار 3 أصناف (المجموع 6)</li>
+                <li>🎯 لكل صنف 3 مستويات صعوبة</li>
+                <li>🟢 سهل = 100 نقطة</li>
+                <li>🟡 متوسط = 200 نقطة</li>
+                <li>🔴 صعب = 400 نقطة</li>
+                <li>🎯 لكل مستوى سؤالان في اللعبة</li>
+                <li>🎯 الأسئلة لا تتكرر أبداً!</li>
+                <li>🏆 الفريق الأعلى نقاطاً يفوز</li>
+            </ul>
+        </div>
+
+        <div class="error-msg" id="errorMsg"></div>
+
+        <!-- حالة التحميل -->
+        <div class="loading-msg" id="loadingMsg">
+            ⏳ جاري تحميل الأصناف...
+        </div>
+
+        <!-- محتوى اللعبة -->
+        <div id="gameSetup" style="display: none;">
+            <div class="teams-section">
+                <!-- الفريق الأول -->
+                <div class="team-card team1">
+                    <div class="team-title">🔵 الفريق الأول</div>
+                    <input type="text" class="team-name-input" id="team1Name"
+                           placeholder="✏️ اسم الفريق الأول">
+                    <div class="categories-title">اختر 3 أصناف:</div>
+                    <div class="category-grid" id="team1Grid"></div>
+                    <div class="selected-count" id="team1Count">تم اختيار: 0 / 3</div>
+                </div>
+
+                <!-- الفريق الثاني -->
+                <div class="team-card team2">
+                    <div class="team-title">🔴 الفريق الثاني</div>
+                    <input type="text" class="team-name-input" id="team2Name"
+                           placeholder="✏️ اسم الفريق الثاني">
+                    <div class="categories-title">اختر 3 أصناف:</div>
+                    <div class="category-grid" id="team2Grid"></div>
+                    <div class="selected-count" id="team2Count">تم اختيار: 0 / 3</div>
+                </div>
+            </div>
+
+            <button class="start-btn" id="startBtn" onclick="startGame()" disabled>
+                🚀 ابدأ اللعبة!
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // ===== المتغيرات =====
+        var categories = [];
+        var team1Selected = [];
+        var team2Selected = [];
+
+        // ===== التحقق من تسجيل الدخول =====
+        fetch('/api/auth/me')
+            .then(function(response) { return response.json(); })
+            .then(function(data) {
+                if (!data.loggedIn) {
+                    window.location.href = '/index.html';
+                } else {
+                    document.getElementById('welcomeUser').textContent = '👋 مرحباً ' + data.username;
+                    loadCategories();
+                }
+            })
+            .catch(function(err) {
+                console.error('خطأ:', err);
+                showError('خطأ في الاتصال بالسيرفر');
+            });
+
+        // ===== تحميل الأصناف =====
+        function loadCategories() {
+            console.log('جاري تحميل الأصناف...');
+
+            fetch('/api/categories')
+                .then(function(response) {
+                    console.log('حالة الاستجابة:', response.status);
+                    return response.json();
+                })
+                .then(function(data) {
+                    console.log('البيانات:', data);
+
+                    if (data.success) {
+                        categories = data.categories;
+                        console.log('عدد الأصناف:', categories.length);
+
+                        // إخفاء التحميل وإظهار المحتوى
+                        document.getElementById('loadingMsg').style.display = 'none';
+                        document.getElementById('gameSetup').style.display = 'block';
+
+                        // بناء الأصناف
+                        buildCategories();
+                    } else {
+                        showError('فشل تحميل الأصناف: ' + data.message);
+                    }
+                })
+                .catch(function(err) {
+                    console.error('خطأ في تحميل الأصناف:', err);
+                    showError('خطأ في الاتصال - تأكد أن السيرفر يعمل');
+                });
+        }
+
+        // ===== بناء شبكة الأصناف =====
+        function buildCategories() {
+            var grid1 = document.getElementById('team1Grid');
+            var grid2 = document.getElementById('team2Grid');
+
+            grid1.innerHTML = '';
+            grid2.innerHTML = '';
+
+            for (var i = 0; i < categories.length; i++) {
+                var cat = categories[i];
+
+                // فريق 1
+                var div1 = document.createElement('div');
+                div1.className = 'cat-option';
+                div1.setAttribute('data-cat-id', cat.id);
+                div1.setAttribute('data-team', 'team1');
+                div1.innerHTML = '<span class="cat-icon">' + cat.icon + '</span>' + cat.name;
+
+                // إضافة الحدث بطريقة مختلفة
+                (function(catId, element) {
+                    element.addEventListener('click', function() {
+                        handleCategoryClick('team1', catId, element);
+                    });
+                })(cat.id, div1);
+
+                grid1.appendChild(div1);
+
+                // فريق 2
+                var div2 = document.createElement('div');
+                div2.className = 'cat-option';
+                div2.setAttribute('data-cat-id', cat.id);
+                div2.setAttribute('data-team', 'team2');
+                div2.innerHTML = '<span class="cat-icon">' + cat.icon + '</span>' + cat.name;
+
+                (function(catId, element) {
+                    element.addEventListener('click', function() {
+                        handleCategoryClick('team2', catId, element);
+                    });
+                })(cat.id, div2);
+
+                grid2.appendChild(div2);
+            }
+
+            console.log('تم بناء الأصناف بنجاح');
+        }
+
+        // ===== معالجة النقر على الصنف =====
+        function handleCategoryClick(team, catId, element) {
+            console.log('تم النقر:', team, catId);
+
+            var selected;
+            if (team === 'team1') {
+                selected = team1Selected;
+            } else {
+                selected = team2Selected;
+            }
+
+            // هل الصنف مختار مسبقاً؟
+            var index = selected.indexOf(catId);
+
+            if (index !== -1) {
+                // إزالة الاختيار
+                selected.splice(index, 1);
+                element.classList.remove('selected');
+                console.log('تمت الإزالة:', catId);
+            } else {
+                // التحقق من الحد الأقصى
+                if (selected.length >= 3) {
+                    showError('⚠️ لا يمكن اختيار أكثر من 3 أصناف!');
+                    setTimeout(function() { hideError(); }, 2000);
+                    return;
+                }
+
+                // إضافة الاختيار
+                selected.push(catId);
+                element.classList.add('selected');
+                console.log('تمت الإضافة:', catId);
+            }
+
+            // تحديث المتغيرات
+            if (team === 'team1') {
+                team1Selected = selected;
+            } else {
+                team2Selected = selected;
+            }
+
+            // تحديث العداد
+            updateCount(team);
+
+            // التحقق من الجاهزية
+            checkReady();
+
+            // إخفاء رسالة الخطأ
+            hideError();
+        }
+
+        // ===== تحديث العداد =====
+        function updateCount(team) {
+            var count;
+            if (team === 'team1') {
+                count = team1Selected.length;
+            } else {
+                count = team2Selected.length;
+            }
+
+            var countElement = document.getElementById(team + 'Count');
+            countElement.textContent = 'تم اختيار: ' + count + ' / 3';
+
+            // تغيير اللون حسب العدد
+            if (count === 3) {
+                countElement.style.color = '#2ecc71';
+            } else {
+                countElement.style.color = '#f39c12';
+            }
+        }
+
+        // ===== التحقق من الجاهزية =====
+        function checkReady() {
+            var t1Name = document.getElementById('team1Name').value.trim();
+            var t2Name = document.getElementById('team2Name').value.trim();
+            var btn = document.getElementById('startBtn');
+
+            var ready = t1Name.length > 0 &&
+                       t2Name.length > 0 &&
+                       team1Selected.length === 3 &&
+                       team2Selected.length === 3;
+
+            btn.disabled = !ready;
+
+            if (ready) {
+                btn.textContent = '🚀 ابدأ اللعبة!';
+            } else {
+                var remaining = '';
+                if (!t1Name) remaining += ' | اسم الفريق 1';
+                if (!t2Name) remaining += ' | اسم الفريق 2';
+                if (team1Selected.length < 3) remaining += ' | فريق 1 يحتاج ' + (3 - team1Selected.length) + ' أصناف';
+                if (team2Selected.length < 3) remaining += ' | فريق 2 يحتاج ' + (3 - team2Selected.length) + ' أصناف';
+                btn.textContent = '⏳ أكمل الإعدادات';
+            }
+        }
+
+        // ===== مراقبة أسماء الفرق =====
+        document.getElementById('team1Name').addEventListener('input', checkReady);
+        document.getElementById('team2Name').addEventListener('input', checkReady);
+        document.getElementById('team1Name').addEventListener('keyup', checkReady);
+        document.getElementById('team2Name').addEventListener('keyup', checkReady);
+
+        // ===== بدء اللعبة =====
+        function startGame() {
+            var team1Name = document.getElementById('team1Name').value.trim();
+            var team2Name = document.getElementById('team2Name').value.trim();
+
+            if (!team1Name || !team2Name) {
+                showError('يرجى إدخال أسماء الفريقين');
+                return;
+            }
+            if (team1Selected.length !== 3) {
+                showError('يجب على الفريق الأول اختيار 3 أصناف');
+                return;
+            }
+            if (team2Selected.length !== 3) {
+                showError('يجب على الفريق الثاني اختيار 3 أصناف');
+                return;
+            }
+
+            var btn = document.getElementById('startBtn');
+            btn.disabled = true;
+            btn.textContent = '⏳ جاري بدء اللعبة...';
+
+            var requestData = {
+                team1Name: team1Name,
+                team2Name: team2Name,
+                team1Categories: team1Selected,
+                team2Categories: team2Selected,
+                team1Players: [],
+                team2Players: []
+            };
+
+            console.log('إرسال بيانات اللعبة:', requestData);
+
+            fetch('/api/games/start', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(requestData)
+            })
+            .then(function(response) { return response.json(); })
+            .then(function(data) {
+                console.log('نتيجة بدء اللعبة:', data);
+
+                if (data.success) {
+                    // حفظ بيانات اللعبة
+                    localStorage.setItem('currentGameId', data.gameId);
+                    localStorage.setItem('team1Name', team1Name);
+                    localStorage.setItem('team2Name', team2Name);
+
+                    // الانتقال لصفحة اللعبة
+                    window.location.href = '/game.html';
+                } else {
+                    showError(data.message);
+                    btn.disabled = false;
+                    btn.textContent = '🚀 ابدأ اللعبة!';
+                }
+            })
+            .catch(function(err) {
+                console.error('خطأ:', err);
+                showError('خطأ في الاتصال بالسيرفر');
+                btn.disabled = false;
+                btn.textContent = '🚀 ابدأ اللعبة!';
+            });
+        }
+
+        // ===== إظهار/إخفاء رسائل الخطأ =====
+        function showError(msg) {
+            var el = document.getElementById('errorMsg');
+            el.textContent = msg;
+            el.style.display = 'block';
+        }
+
+        function hideError() {
+            document.getElementById('errorMsg').style.display = 'none';
+        }
+
+        // ===== تسجيل الخروج =====
+        function logout() {
+            fetch('/api/auth/logout', { method: 'POST' })
+                .then(function() {
+                    window.location.href = '/index.html';
+                });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1430 @@
+{
+  "games": [
+    {
+      "id": "game_1778307401629",
+      "team1": {
+        "name": "1",
+        "categories": [
+          "series",
+          "history",
+          "celebrities"
+        ],
+        "score": 900
+      },
+      "team2": {
+        "name": "2",
+        "categories": [
+          "sport",
+          "geography",
+          "cartoon"
+        ],
+        "score": 1100
+      },
+      "questions": [
+        {
+          "questionId": "sr3",
+          "categoryId": "series",
+          "categoryName": "مسلسلات",
+          "text": "ما جنسية مسلسل وادي الذئاب؟",
+          "options": [
+            "سوري",
+            "تركي",
+            "مصري",
+            "لبناني"
+          ],
+          "correctIndex": 1,
+          "difficulty": "easy",
+          "points": 100,
+          "answered": true,
+          "answeredTeam": "team1",
+          "isCorrect": true,
+          "selectedOption": 1
+        },
+        {
+          "questionId": "sr1",
+          "categoryId": "series",
+          "categoryName": "مسلسلات",
+          "text": "من بطل مسلسل باب الحارة؟",
+          "options": [
+            "تيم حسن",
+            "عباس النوري",
+            "وائل شرف",
+            "سامر المصري"
+          ],
+          "correctIndex": 1,
+          "difficulty": "easy",
+          "points": 100,
+          "answered": true,
+          "answeredTeam": "team2",
+          "isCorrect": false,
+          "selectedOption": 3
+        },
+        {
+          "questionId": "sr6",
+          "categoryId": "series",
+          "categoryName": "مسلسلات",
+          "text": "مسلسل خلف الشمس من أي سنة؟",
+          "options": [
+            "2005",
+            "2008",
+            "2010",
+            "2012"
+          ],
+          "correctIndex": 1,
+          "difficulty": "medium",
+          "points": 200,
+          "answered": true,
+          "answeredTeam": "team1",
+          "isCorrect": true,
+          "selectedOption": 1
+        },
+        {
+          "questionId": "sr7",
+          "categoryId": "series",
+          "categoryName": "مسلسلات",
+          "text": "من أخرج مسلسل Game of Thrones؟",
+          "options": [
+            "بينيوف فقط",
+            "عدة مخرجين",
+            "بيتر جاكسون",
+            "نولان"
+          ],
+          "correctIndex": 1,
+          "difficulty": "medium",
+          "points": 200,
+          "answered": true,
+          "answeredTeam": "team2",
+          "isCorrect": false,
+          "selectedOption": 2
+        },
+        {
+          "questionId": "sr9",
+          "categoryId": "series",
+          "categoryName": "مسلسلات",
+          "text": "متى عرض مسلسل رأفت الهجان؟",
+          "options": [
+            "1986",
+            "1988",
+            "1990",
+            "1992"
+          ],
+          "correctIndex": 1,
+          "difficulty": "hard",
+          "points": 400,
+          "answered": true,
+          "answeredTeam": "team1",
+          "isCorrect": false,
+          "selectedOption": 0
+        },
+        {
+          "questionId": "sr10",
+          "categoryId": "series",
+          "categoryName": "مسلسلات",
+          "text": "وادي الذئاب كم موسم استمر؟",
+          "options": [
+            "7",
+            "9",
+            "10",
+            "13"
+          ],
+          "correctIndex": 2,
+          "difficulty": "hard",
+          "points": 400,
+          "answered": true,
+          "answeredTeam": "team2",
+          "isCorrect": false,
+          "selectedOption": 0
+        },
+        {
+          "questionId": "hi1",
+          "categoryId": "history",
+          "categoryName": "تاريخ",
+          "text": "متى تأسست الدولة العراقية الحديثة؟",
+          "options": [
+            "1920",
+            "1921",
+            "1932",
+            "1918"
+          ],
+          "correctIndex": 1,
+          "difficulty": "easy",
+          "points": 100,
+          "answered": true,
+          "answeredTeam": "team1",
+          "isCorrect": false,
+          "selectedOption": 0
+        },
+        {
+          "questionId": "hi3",
+          "categoryId": "history",
+          "categoryName": "تاريخ",
+          "text": "متى فتحت القسطنطينية؟",
+          "options": [
+            "1453",
+            "1492",
+            "1517",
+            "1258"
+          ],
+          "correctIndex": 0,
+          "difficulty": "easy",
+          "points": 100,
+          "answered": true,
+          "answeredTeam": "team2",
+          "isCorrect": true,
+          "selectedOption": 0
+        },
+        {
+          "questionId": "hi8",
+          "categoryId": "history",
+          "categoryName": "تاريخ",
+          "text": "في أي معركة انتصر المسلمون على الفرس؟",
+          "options": [
+            "حطين",
+            "اليرموك",
+            "القادسية",
+            "بدر"
+          ],
+          "correctIndex": 2,
+          "difficulty": "medium",
+          "points": 200,
+          "answered": true,
+          "answeredTeam": "team1",
+          "isCorrect": false,
+          "selectedOption": 0
+        },
+        {
+          "questionId": "hi7",
+          "categoryId": "history",
+          "categoryName": "تاريخ",
+          "text": "من قاد ثورة العشرين في العراق؟",
+          "options": [
+            "ياسين الهاشمي",
+            "عدة زعماء قبائل",
+            "نوري السعيد",
+            "الكيلاني"
+          ],
+          "correctIndex": 1,
+          "difficulty": "medium",
+          "points": 200,
+          "answered": true,
+          "answeredTeam": "team2",
+          "isCorrect": false,
+          "selectedOption": 0
+        },
+        {
+          "questionId": "hi10",
+          "categoryId": "history",
+          "categoryName": "تاريخ",
+          "text": "متى قامت ثورة 14 تموز في العراق؟",
+          "options": [
+            "1956",
+            "1958",
+            "1960",
+            "1963"
+          ],
+          "correctIndex": 1,
+          "difficulty": "hard",
+          "points": 400,
+          "answered": true,
+          "answeredTeam": "team1",
+          "isCorrect": false,
+          "selectedOption": 0
+        },
+        {
+          "questionId": "hi9",
+          "categoryId": "history",
+          "categoryName": "تاريخ",
+          "text": "ما معركة صلاح الدين ضد الصليبيين 1187؟",
+          "options": [
+            "عين جالوت",
+            "حطين",
+            "اليرموك",
+            "القادسية"
+          ],
+          "correctIndex": 1,
+          "difficulty": "hard",
+          "points": 400,
+          "answered": true,
+          "answeredTeam": "team2",
+          "isCorrect": false,
+          "selectedOption": 0
+        },
+        {
+          "questionId": "ce2",
+          "categoryId": "celebrities",
+          "categoryName": "مشاهير",
+          "text": "من لعب دور Iron Man؟",
+          "options": [
+            "كريس إيفانز",
+            "روبرت داوني",
+            "هيمسوورث",
+            "رافالو"
+          ],
+          "correctIndex": 1,
+          "difficulty": "easy",
+          "points": 100,
+          "answered": true,
+          "answeredTeam": "team1",
+          "isCorrect": false,
+          "selectedOption": 0
+        },
+        {
+          "questionId": "ce1",
+          "categoryId": "celebrities",
+          "categoryName": "مشاهير",
+          "text": "من هو ملك البوب؟",
+          "options": [
+            "إلفيس",
+            "مايكل جاكسون",
+            "برنس",
+            "تمبرليك"
+          ],
+          "correctIndex": 1,
+          "difficulty": "easy",
+          "points": 100,
+          "answered": true,
+          "answeredTeam": "team2",
+          "isCorrect": true,
+          "selectedOption": 1
+        },
+        {
+          "questionId": "ce5",
+          "categoryId": "celebrities",
+          "categoryName": "مشاهير",
+          "text": "من هو قيصر الأغنية العربية؟",
+          "options": [
+            "كاظم الساهر",
+            "ماجد المهندس",
+            "حسام الرسام",
+            "عبد الجبار"
+          ],
+          "correctIndex": 0,
+          "difficulty": "medium",
+          "points": 200,
+          "answered": true,
+          "answeredTeam": "team1",
+          "isCorrect": true,
+          "selectedOption": 0
+        },
+        {
+          "questionId": "ce7",
+          "categoryId": "celebrities",
+          "categoryName": "مشاهير",
+          "text": "من فاز بأوسكار أفضل ممثل 2024؟",
+          "options": [
+            "كيليان مورفي",
+            "برادلي كوبر",
+            "دي كابريو",
+            "جيفري رايت"
+          ],
+          "correctIndex": 0,
+          "difficulty": "medium",
+          "points": 200,
+          "answered": true,
+          "answeredTeam": "team2",
+          "isCorrect": false,
+          "selectedOption": 1
+        },
+        {
+          "questionId": "ce9",
+          "categoryId": "celebrities",
+          "categoryName": "مشاهير",
+          "text": "في أي سنة ولد كاظم الساهر؟",
+          "options": [
+            "1957",
+            "1961",
+            "1963",
+            "1965"
+          ],
+          "correctIndex": 1,
+          "difficulty": "hard",
+          "points": 400,
+          "answered": true,
+          "answeredTeam": "team1",
+          "isCorrect": false,
+          "selectedOption": 0
+        },
+        {
+          "questionId": "ce10",
+          "categoryId": "celebrities",
+          "categoryName": "مشاهير",
+          "text": "من أول عربي حصل على نوبل بالأدب؟",
+          "options": [
+            "طه حسين",
+            "نجيب محفوظ",
+            "أدونيس",
+            "درويش"
+          ],
+          "correctIndex": 1,
+          "difficulty": "hard",
+          "points": 400,
+          "answered": true,
+          "answeredTeam": "team2",
+          "isCorrect": false,
+          "selectedOption": 0
+        },
+        {
+          "questionId": "sp1",
+          "categoryId": "sport",
+          "categoryName": "رياضة",
+          "text": "من هو هداف كأس العالم 2022؟",
+          "options": [
+            "كيليان مبابي",
+            "ليونيل ميسي",
+            "جيرو",
+            "ألفاريز"
+          ],
+          "correctIndex": 0,
+          "difficulty": "easy",
+          "points": 100,
+          "answered": true,
+          "answeredTeam": "team1",
+          "isCorrect": true,
+          "selectedOption": 0
+        },
+        {
+          "questionId": "sp4",
+          "categoryId": "sport",
+          "categoryName": "رياضة",
+          "text": "من فاز بكأس العالم 2018؟",
+          "options": [
+            "كرواتيا",
+            "فرنسا",
+            "بلجيكا",
+            "إنجلترا"
+          ],
+          "correctIndex": 1,
+          "difficulty": "easy",
+          "points": 100,
+          "answered": true,
+          "answeredTeam": "team2",
+          "isCorrect": false,
+          "selectedOption": 0
+        },
+        {
+          "questionId": "sp5",
+          "categoryId": "sport",
+          "categoryName": "رياضة",
+          "text": "من هو أكثر لاعب فوزا بالكرة الذهبية؟",
+          "options": [
+            "رونالدو",
+            "ميسي",
+            "بلاتيني",
+            "كرويف"
+          ],
+          "correctIndex": 1,
+          "difficulty": "medium",
+          "points": 200,
+          "answered": true,
+          "answeredTeam": "team1",
+          "isCorrect": false,
+          "selectedOption": 0
+        },
+        {
+          "questionId": "sp6",
+          "categoryId": "sport",
+          "categoryName": "رياضة",
+          "text": "ما النادي الأكثر فوزا بدوري الأبطال؟",
+          "options": [
+            "برشلونة",
+            "بايرن",
+            "ريال مدريد",
+            "ميلان"
+          ],
+          "correctIndex": 2,
+          "difficulty": "medium",
+          "points": 200,
+          "answered": true,
+          "answeredTeam": "team2",
+          "isCorrect": false,
+          "selectedOption": 0
+        },
+        {
+          "questionId": "sp9",
+          "categoryId": "sport",
+          "categoryName": "رياضة",
+          "text": "كم هدف سجل غيرد مولر في مونديال 1970؟",
+          "options": [
+            "8",
+            "10",
+            "12",
+            "14"
+          ],
+          "correctIndex": 1,
+          "difficulty": "hard",
+          "points": 400,
+          "answered": true,
+          "answeredTeam": "team1",
+          "isCorrect": false,
+          "selectedOption": 0
+        },
+        {
+          "questionId": "sp10",
+          "categoryId": "sport",
+          "categoryName": "رياضة",
+          "text": "من أول عربي لعب نهائي دوري الأبطال؟",
+          "options": [
+            "محمد صلاح",
+            "بن عطية",
+            "محرز",
+            "خضيرا"
+          ],
+          "correctIndex": 0,
+          "difficulty": "hard",
+          "points": 400,
+          "answered": true,
+          "answeredTeam": "team2",
+          "isCorrect": true,
+          "selectedOption": 0
+        },
+        {
+          "questionId": "ge3",
+          "categoryId": "geography",
+          "categoryName": "جغرافية",
+          "text": "في أي قارة تقع البرازيل؟",
+          "options": [
+            "أمريكا الشمالية",
+            "أمريكا الجنوبية",
+            "أوروبا",
+            "أفريقيا"
+          ],
+          "correctIndex": 1,
+          "difficulty": "easy",
+          "points": 100,
+          "answered": true,
+          "answeredTeam": "team1",
+          "isCorrect": false,
+          "selectedOption": 0
+        },
+        {
+          "questionId": "ge4",
+          "categoryId": "geography",
+          "categoryName": "جغرافية",
+          "text": "عاصمة كازاخستان هي؟",
+          "options": [
+            "ألماتي",
+            "أستانا",
+            "بيشكيك",
+            "طشقند"
+          ],
+          "correctIndex": 1,
+          "difficulty": "easy",
+          "points": 100,
+          "answered": true,
+          "answeredTeam": "team2",
+          "isCorrect": false,
+          "selectedOption": 0
+        },
+        {
+          "questionId": "ge5",
+          "categoryId": "geography",
+          "categoryName": "جغرافية",
+          "text": "ما أصغر دولة في العالم؟",
+          "options": [
+            "موناكو",
+            "الفاتيكان",
+            "سان مارينو",
+            "مالطا"
+          ],
+          "correctIndex": 1,
+          "difficulty": "medium",
+          "points": 200,
+          "answered": true,
+          "answeredTeam": "team1",
+          "isCorrect": false,
+          "selectedOption": 0
+        },
+        {
+          "questionId": "ge6",
+          "categoryId": "geography",
+          "categoryName": "جغرافية",
+          "text": "ما البحر بين أوروبا وأفريقيا؟",
+          "options": [
+            "الأحمر",
+            "المتوسط",
+            "العرب",
+            "الأسود"
+          ],
+          "correctIndex": 1,
+          "difficulty": "medium",
+          "points": 200,
+          "answered": true,
+          "answeredTeam": "team2",
+          "isCorrect": false,
+          "selectedOption": 0
+        },
+        {
+          "questionId": "ge9",
+          "categoryId": "geography",
+          "categoryName": "جغرافية",
+          "text": "أي دولة فيها أكبر عدد بحيرات؟",
+          "options": [
+            "روسيا",
+            "كندا",
+            "البرازيل",
+            "فنلندا"
+          ],
+          "correctIndex": 1,
+          "difficulty": "hard",
+          "points": 400,
+          "answered": true,
+          "answeredTeam": "team1",
+          "isCorrect": false,
+          "selectedOption": 0
+        },
+        {
+          "questionId": "ge10",
+          "categoryId": "geography",
+          "categoryName": "جغرافية",
+          "text": "ما أعمق محيط في العالم؟",
+          "options": [
+            "الأطلسي",
+            "الهندي",
+            "الهادئ",
+            "المتجمد"
+          ],
+          "correctIndex": 2,
+          "difficulty": "hard",
+          "points": 400,
+          "answered": true,
+          "answeredTeam": "team2",
+          "isCorrect": false,
+          "selectedOption": 0
+        },
+        {
+          "questionId": "ca3",
+          "categoryId": "cartoon",
+          "categoryName": "كارتون قديم",
+          "text": "كرتون كرة القدم الشهير؟",
+          "options": [
+            "كابتن ماجد",
+            "سلام دانك",
+            "أبطال الملاعب",
+            "كرة القدم"
+          ],
+          "correctIndex": 0,
+          "difficulty": "easy",
+          "points": 100,
+          "answered": true,
+          "answeredTeam": "team1",
+          "isCorrect": true,
+          "selectedOption": 0
+        },
+        {
+          "questionId": "ca4",
+          "categoryId": "cartoon",
+          "categoryName": "كارتون قديم",
+          "text": "ما اسم الروبوت في مازنجر؟",
+          "options": [
+            "مازنجر Z",
+            "غرندايزر",
+            "فولترون",
+            "جايكنغ"
+          ],
+          "correctIndex": 0,
+          "difficulty": "easy",
+          "points": 100,
+          "answered": true,
+          "answeredTeam": "team2",
+          "isCorrect": true,
+          "selectedOption": 0
+        },
+        {
+          "questionId": "ca7",
+          "categoryId": "cartoon",
+          "categoryName": "كارتون قديم",
+          "text": "كرتون عن محقق صغير؟",
+          "options": [
+            "كونان",
+            "سندباد",
+            "زينة ونحول",
+            "ساسوكي"
+          ],
+          "correctIndex": 0,
+          "difficulty": "medium",
+          "points": 200,
+          "answered": true,
+          "answeredTeam": "team1",
+          "isCorrect": true,
+          "selectedOption": 0
+        },
+        {
+          "questionId": "ca6",
+          "categoryId": "cartoon",
+          "categoryName": "كارتون قديم",
+          "text": "كم أجزاء Dragon Ball الأصلية؟",
+          "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "correctIndex": 2,
+          "difficulty": "medium",
+          "points": 200,
+          "answered": true,
+          "answeredTeam": "team2",
+          "isCorrect": false,
+          "selectedOption": 0
+        },
+        {
+          "questionId": "ca9",
+          "categoryId": "cartoon",
+          "categoryName": "كارتون قديم",
+          "text": "متى بدأ عرض كرتون مغامرات سندباد؟",
+          "options": [
+            "1975",
+            "1978",
+            "1980",
+            "1983"
+          ],
+          "correctIndex": 1,
+          "difficulty": "hard",
+          "points": 400,
+          "answered": true,
+          "answeredTeam": "team1",
+          "isCorrect": false,
+          "selectedOption": 0
+        },
+        {
+          "questionId": "ca10",
+          "categoryId": "cartoon",
+          "categoryName": "كارتون قديم",
+          "text": "من صانع شخصية ميكي ماوس؟",
+          "options": [
+            "والت ديزني",
+            "سبيلبرغ",
+            "ميازاكي",
+            "تشاك جونز"
+          ],
+          "correctIndex": 0,
+          "difficulty": "hard",
+          "points": 400,
+          "answered": true,
+          "answeredTeam": "team2",
+          "isCorrect": true,
+          "selectedOption": 0
+        }
+      ],
+      "currentTeamTurn": "team1",
+      "status": "finished",
+      "createdAt": "2026-05-09T06:16:41.631Z"
+    },
+    {
+      "id": "game_1778308636302",
+      "team1": {
+        "name": "1",
+        "categories": [
+          "series",
+          "sport",
+          "brands"
+        ],
+        "score": 0,
+        "helps": {
+          "remove2": 1,
+          "extraTime": 1,
+          "changeQ": 1
+        }
+      },
+      "team2": {
+        "name": "2",
+        "categories": [
+          "characters",
+          "brands",
+          "celebrities"
+        ],
+        "score": 0,
+        "helps": {
+          "remove2": 1,
+          "extraTime": 1,
+          "changeQ": 1
+        }
+      },
+      "questions": [
+        {
+          "questionId": "sr3",
+          "categoryId": "series",
+          "categoryName": "مسلسلات",
+          "text": "ما جنسية مسلسل وادي الذئاب؟",
+          "options": [
+            "سوري",
+            "تركي",
+            "مصري",
+            "لبناني"
+          ],
+          "correctIndex": 1,
+          "difficulty": "easy",
+          "points": 100,
+          "image": "",
+          "answered": false,
+          "answeredTeam": null,
+          "isCorrect": null,
+          "selectedOption": null
+        },
+        {
+          "questionId": "sr4",
+          "categoryId": "series",
+          "categoryName": "مسلسلات",
+          "text": "من بطل مسلسل عمر المختار؟",
+          "options": [
+            "أنتوني كوين",
+            "عمر الشريف",
+            "أحمد مظهر",
+            "العلايلي"
+          ],
+          "correctIndex": 0,
+          "difficulty": "easy",
+          "points": 100,
+          "image": "",
+          "answered": false,
+          "answeredTeam": null,
+          "isCorrect": null,
+          "selectedOption": null
+        },
+        {
+          "questionId": "sr7",
+          "categoryId": "series",
+          "categoryName": "مسلسلات",
+          "text": "من أخرج مسلسل Game of Thrones؟",
+          "options": [
+            "بينيوف فقط",
+            "عدة مخرجين",
+            "بيتر جاكسون",
+            "نولان"
+          ],
+          "correctIndex": 1,
+          "difficulty": "medium",
+          "points": 200,
+          "image": "",
+          "answered": false,
+          "answeredTeam": null,
+          "isCorrect": null,
+          "selectedOption": null
+        },
+        {
+          "questionId": "sr8",
+          "categoryId": "series",
+          "categoryName": "مسلسلات",
+          "text": "ما المسلسل العراقي عن الأحياء الشعبية؟",
+          "options": [
+            "الذئب وعيون المدينة",
+            "تحت موسى",
+            "النسر",
+            "بيوت الطين"
+          ],
+          "correctIndex": 0,
+          "difficulty": "medium",
+          "points": 200,
+          "image": "",
+          "answered": false,
+          "answeredTeam": null,
+          "isCorrect": null,
+          "selectedOption": null
+        },
+        {
+          "questionId": "sr9",
+          "categoryId": "series",
+          "categoryName": "مسلسلات",
+          "text": "متى عرض مسلسل رأفت الهجان؟",
+          "options": [
+            "1986",
+            "1988",
+            "1990",
+            "1992"
+          ],
+          "correctIndex": 1,
+          "difficulty": "hard",
+          "points": 400,
+          "image": "",
+          "answered": false,
+          "answeredTeam": null,
+          "isCorrect": null,
+          "selectedOption": null
+        },
+        {
+          "questionId": "sr10",
+          "categoryId": "series",
+          "categoryName": "مسلسلات",
+          "text": "وادي الذئاب كم موسم استمر؟",
+          "options": [
+            "7",
+            "9",
+            "10",
+            "13"
+          ],
+          "correctIndex": 2,
+          "difficulty": "hard",
+          "points": 400,
+          "image": "",
+          "answered": false,
+          "answeredTeam": null,
+          "isCorrect": null,
+          "selectedOption": null
+        },
+        {
+          "questionId": "sp1",
+          "categoryId": "sport",
+          "categoryName": "رياضة",
+          "text": "من هو هداف كأس العالم 2022؟",
+          "options": [
+            "كيليان مبابي",
+            "ليونيل ميسي",
+            "جيرو",
+            "ألفاريز"
+          ],
+          "correctIndex": 0,
+          "difficulty": "easy",
+          "points": 100,
+          "image": "",
+          "answered": false,
+          "answeredTeam": null,
+          "isCorrect": null,
+          "selectedOption": null
+        },
+        {
+          "questionId": "sp2",
+          "categoryId": "sport",
+          "categoryName": "رياضة",
+          "text": "كم مرة فاز البرازيل بكأس العالم؟",
+          "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "correctIndex": 2,
+          "difficulty": "easy",
+          "points": 100,
+          "image": "",
+          "answered": false,
+          "answeredTeam": null,
+          "isCorrect": null,
+          "selectedOption": null
+        },
+        {
+          "questionId": "sp5",
+          "categoryId": "sport",
+          "categoryName": "رياضة",
+          "text": "من هو أكثر لاعب فوزا بالكرة الذهبية؟",
+          "options": [
+            "رونالدو",
+            "ميسي",
+            "بلاتيني",
+            "كرويف"
+          ],
+          "correctIndex": 1,
+          "difficulty": "medium",
+          "points": 200,
+          "image": "",
+          "answered": false,
+          "answeredTeam": null,
+          "isCorrect": null,
+          "selectedOption": null
+        },
+        {
+          "questionId": "sp8",
+          "categoryId": "sport",
+          "categoryName": "رياضة",
+          "text": "في أي ملعب أقيم نهائي مونديال 2022؟",
+          "options": [
+            "البيت",
+            "الثمامة",
+            "لوسيل",
+            "أحمد بن علي"
+          ],
+          "correctIndex": 2,
+          "difficulty": "medium",
+          "points": 200,
+          "image": "",
+          "answered": false,
+          "answeredTeam": null,
+          "isCorrect": null,
+          "selectedOption": null
+        },
+        {
+          "questionId": "sp9",
+          "categoryId": "sport",
+          "categoryName": "رياضة",
+          "text": "كم هدف سجل غيرد مولر في مونديال 1970؟",
+          "options": [
+            "8",
+            "10",
+            "12",
+            "14"
+          ],
+          "correctIndex": 1,
+          "difficulty": "hard",
+          "points": 400,
+          "image": "",
+          "answered": false,
+          "answeredTeam": null,
+          "isCorrect": null,
+          "selectedOption": null
+        },
+        {
+          "questionId": "sp10",
+          "categoryId": "sport",
+          "categoryName": "رياضة",
+          "text": "من أول عربي لعب نهائي دوري الأبطال؟",
+          "options": [
+            "محمد صلاح",
+            "بن عطية",
+            "محرز",
+            "خضيرا"
+          ],
+          "correctIndex": 0,
+          "difficulty": "hard",
+          "points": 400,
+          "image": "",
+          "answered": false,
+          "answeredTeam": null,
+          "isCorrect": null,
+          "selectedOption": null
+        },
+        {
+          "questionId": "br3",
+          "categoryId": "brands",
+          "categoryName": "ماركات",
+          "text": "شركة سيارات شعارها الحصان الجامح؟",
+          "options": [
+            "لامبورغيني",
+            "فيراري",
+            "بورش",
+            "ماكلارين"
+          ],
+          "correctIndex": 1,
+          "difficulty": "easy",
+          "points": 100,
+          "image": "",
+          "answered": false,
+          "answeredTeam": null,
+          "isCorrect": null,
+          "selectedOption": null
+        },
+        {
+          "questionId": "br4",
+          "categoryId": "brands",
+          "categoryName": "ماركات",
+          "text": "شركة شعارها الخطوط الثلاثة؟",
+          "options": [
+            "نايكي",
+            "بوما",
+            "أديداس",
+            "ريبوك"
+          ],
+          "correctIndex": 2,
+          "difficulty": "easy",
+          "points": 100,
+          "image": "",
+          "answered": false,
+          "answeredTeam": null,
+          "isCorrect": null,
+          "selectedOption": null
+        },
+        {
+          "questionId": "br7",
+          "categoryId": "brands",
+          "categoryName": "ماركات",
+          "text": "ما أغلى ماركة أزياء 2024؟",
+          "options": [
+            "غوتشي",
+            "لويس فيتون",
+            "شانيل",
+            "هيرميس"
+          ],
+          "correctIndex": 1,
+          "difficulty": "medium",
+          "points": 200,
+          "image": "",
+          "answered": false,
+          "answeredTeam": null,
+          "isCorrect": null,
+          "selectedOption": null
+        },
+        {
+          "questionId": "br6",
+          "categoryId": "brands",
+          "categoryName": "ماركات",
+          "text": "ماركة شعارها الأسد؟",
+          "options": [
+            "بيجو",
+            "رينو",
+            "ستروين",
+            "فيات"
+          ],
+          "correctIndex": 0,
+          "difficulty": "medium",
+          "points": 200,
+          "image": "",
+          "answered": false,
+          "answeredTeam": null,
+          "isCorrect": null,
+          "selectedOption": null
+        },
+        {
+          "questionId": "br9",
+          "categoryId": "brands",
+          "categoryName": "ماركات",
+          "text": "متى تأسست كوكا كولا؟",
+          "options": [
+            "1886",
+            "1892",
+            "1900",
+            "1876"
+          ],
+          "correctIndex": 0,
+          "difficulty": "hard",
+          "points": 400,
+          "image": "",
+          "answered": false,
+          "answeredTeam": null,
+          "isCorrect": null,
+          "selectedOption": null
+        },
+        {
+          "questionId": "br10",
+          "categoryId": "brands",
+          "categoryName": "ماركات",
+          "text": "من مؤسس شركة زارا؟",
+          "options": [
+            "أرماني",
+            "أمانسيو أورتيغا",
+            "رالف لورين",
+            "كالفن كلاين"
+          ],
+          "correctIndex": 1,
+          "difficulty": "hard",
+          "points": 400,
+          "image": "",
+          "answered": false,
+          "answeredTeam": null,
+          "isCorrect": null,
+          "selectedOption": null
+        },
+        {
+          "questionId": "ch3",
+          "categoryId": "characters",
+          "categoryName": "شخصيات",
+          "text": "من أول رئيس أمريكي؟",
+          "options": [
+            "جيفرسون",
+            "جورج واشنطن",
+            "لنكولن",
+            "آدمز"
+          ],
+          "correctIndex": 1,
+          "difficulty": "easy",
+          "points": 100,
+          "image": "",
+          "answered": false,
+          "answeredTeam": null,
+          "isCorrect": null,
+          "selectedOption": null
+        },
+        {
+          "questionId": "ch2",
+          "categoryId": "characters",
+          "categoryName": "شخصيات",
+          "text": "من مؤسس تسلا؟",
+          "options": [
+            "جيف بيزوس",
+            "إيلون ماسك",
+            "لاري بيج",
+            "تيم كوك"
+          ],
+          "correctIndex": 1,
+          "difficulty": "easy",
+          "points": 100,
+          "image": "",
+          "answered": false,
+          "answeredTeam": null,
+          "isCorrect": null,
+          "selectedOption": null
+        },
+        {
+          "questionId": "ch7",
+          "categoryId": "characters",
+          "categoryName": "شخصيات",
+          "text": "من مؤسس الدولة الأموية؟",
+          "options": [
+            "عبد الملك",
+            "معاوية بن أبي سفيان",
+            "يزيد",
+            "مروان"
+          ],
+          "correctIndex": 1,
+          "difficulty": "medium",
+          "points": 200,
+          "image": "",
+          "answered": false,
+          "answeredTeam": null,
+          "isCorrect": null,
+          "selectedOption": null
+        },
+        {
+          "questionId": "ch5",
+          "categoryId": "characters",
+          "categoryName": "شخصيات",
+          "text": "من اخترع الجبر؟",
+          "options": [
+            "ابن سينا",
+            "الخوارزمي",
+            "ابن الهيثم",
+            "الرازي"
+          ],
+          "correctIndex": 1,
+          "difficulty": "medium",
+          "points": 200,
+          "image": "",
+          "answered": false,
+          "answeredTeam": null,
+          "isCorrect": null,
+          "selectedOption": null
+        },
+        {
+          "questionId": "ch10",
+          "categoryId": "characters",
+          "categoryName": "شخصيات",
+          "text": "من مخترع المصباح الكهربائي؟",
+          "options": [
+            "تسلا",
+            "توماس إديسون",
+            "بيل",
+            "واط"
+          ],
+          "correctIndex": 1,
+          "difficulty": "hard",
+          "points": 400,
+          "image": "",
+          "answered": false,
+          "answeredTeam": null,
+          "isCorrect": null,
+          "selectedOption": null
+        },
+        {
+          "questionId": "ch9",
+          "categoryId": "characters",
+          "categoryName": "شخصيات",
+          "text": "من وضع نظرية النسبية؟",
+          "options": [
+            "نيوتن",
+            "آينشتاين",
+            "هوكينغ",
+            "بور"
+          ],
+          "correctIndex": 1,
+          "difficulty": "hard",
+          "points": 400,
+          "image": "",
+          "answered": false,
+          "answeredTeam": null,
+          "isCorrect": null,
+          "selectedOption": null
+        },
+        {
+          "questionId": "br2",
+          "categoryId": "brands",
+          "categoryName": "ماركات",
+          "text": "ماركة شعارها Just Do It؟",
+          "options": [
+            "أديداس",
+            "بوما",
+            "نايكي",
+            "ريبوك"
+          ],
+          "correctIndex": 2,
+          "difficulty": "easy",
+          "points": 100,
+          "image": "",
+          "answered": false,
+          "answeredTeam": null,
+          "isCorrect": null,
+          "selectedOption": null
+        },
+        {
+          "questionId": "br1",
+          "categoryId": "brands",
+          "categoryName": "ماركات",
+          "text": "ماركة شعارها التفاحة المقضومة؟",
+          "options": [
+            "سامسونغ",
+            "آبل",
+            "هواوي",
+            "جوجل"
+          ],
+          "correctIndex": 1,
+          "difficulty": "easy",
+          "points": 100,
+          "image": "",
+          "answered": false,
+          "answeredTeam": null,
+          "isCorrect": null,
+          "selectedOption": null
+        },
+        {
+          "questionId": "br5",
+          "categoryId": "brands",
+          "categoryName": "ماركات",
+          "text": "في أي بلد تأسست تويوتا؟",
+          "options": [
+            "كوريا",
+            "الصين",
+            "اليابان",
+            "ألمانيا"
+          ],
+          "correctIndex": 2,
+          "difficulty": "medium",
+          "points": 200,
+          "image": "",
+          "answered": false,
+          "answeredTeam": null,
+          "isCorrect": null,
+          "selectedOption": null
+        },
+        {
+          "questionId": "br8",
+          "categoryId": "brands",
+          "categoryName": "ماركات",
+          "text": "من مؤسس شركة أمازون؟",
+          "options": [
+            "إيلون ماسك",
+            "جيف بيزوس",
+            "بيل غيتس",
+            "زوكربيرغ"
+          ],
+          "correctIndex": 1,
+          "difficulty": "medium",
+          "points": 200,
+          "image": "",
+          "answered": false,
+          "answeredTeam": null,
+          "isCorrect": null,
+          "selectedOption": null
+        },
+        {
+          "questionId": "ce3",
+          "categoryId": "celebrities",
+          "categoryName": "مشاهير",
+          "text": "من صاحبة لقب كوكب الشرق؟",
+          "options": [
+            "فيروز",
+            "أم كلثوم",
+            "وردة",
+            "صباح"
+          ],
+          "correctIndex": 1,
+          "difficulty": "easy",
+          "points": 100,
+          "image": "",
+          "answered": false,
+          "answeredTeam": null,
+          "isCorrect": null,
+          "selectedOption": null
+        },
+        {
+          "questionId": "ce4",
+          "categoryId": "celebrities",
+          "categoryName": "مشاهير",
+          "text": "من هي سيدة الشاشة العربية؟",
+          "options": [
+            "سعاد حسني",
+            "فاتن حمامة",
+            "هند رستم",
+            "شادية"
+          ],
+          "correctIndex": 1,
+          "difficulty": "easy",
+          "points": 100,
+          "image": "",
+          "answered": false,
+          "answeredTeam": null,
+          "isCorrect": null,
+          "selectedOption": null
+        },
+        {
+          "questionId": "ce5",
+          "categoryId": "celebrities",
+          "categoryName": "مشاهير",
+          "text": "من هو قيصر الأغنية العربية؟",
+          "options": [
+            "كاظم الساهر",
+            "ماجد المهندس",
+            "حسام الرسام",
+            "عبد الجبار"
+          ],
+          "correctIndex": 0,
+          "difficulty": "medium",
+          "points": 200,
+          "image": "",
+          "answered": false,
+          "answeredTeam": null,
+          "isCorrect": null,
+          "selectedOption": null
+        },
+        {
+          "questionId": "ce6",
+          "categoryId": "celebrities",
+          "categoryName": "مشاهير",
+          "text": "من صاحبة لقب الشحرورة؟",
+          "options": [
+            "فيروز",
+            "صباح",
+            "وردة",
+            "نجاة"
+          ],
+          "correctIndex": 1,
+          "difficulty": "medium",
+          "points": 200,
+          "image": "",
+          "answered": false,
+          "answeredTeam": null,
+          "isCorrect": null,
+          "selectedOption": null
+        },
+        {
+          "questionId": "ce9",
+          "categoryId": "celebrities",
+          "categoryName": "مشاهير",
+          "text": "في أي سنة ولد كاظم الساهر؟",
+          "options": [
+            "1957",
+            "1961",
+            "1963",
+            "1965"
+          ],
+          "correctIndex": 1,
+          "difficulty": "hard",
+          "points": 400,
+          "image": "",
+          "answered": false,
+          "answeredTeam": null,
+          "isCorrect": null,
+          "selectedOption": null
+        },
+        {
+          "questionId": "ce10",
+          "categoryId": "celebrities",
+          "categoryName": "مشاهير",
+          "text": "من أول عربي حصل على نوبل بالأدب؟",
+          "options": [
+            "طه حسين",
+            "نجيب محفوظ",
+            "أدونيس",
+            "درويش"
+          ],
+          "correctIndex": 1,
+          "difficulty": "hard",
+          "points": 400,
+          "image": "",
+          "answered": false,
+          "answeredTeam": null,
+          "isCorrect": null,
+          "selectedOption": null
+        }
+      ],
+      "currentTeamTurn": "team1",
+      "status": "playing",
+      "createdAt": "2026-05-09T06:37:16.304Z"
+    }
+  ]
+}
