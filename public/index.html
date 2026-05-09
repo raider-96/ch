@@ -4,43 +4,374 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>چگار - دخول</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
     <style>
-        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,sans-serif}
-        body{background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);min-height:100vh;display:flex;justify-content:center;align-items:center;color:#fff}
-        .login-box{background:rgba(255,255,255,0.08);border-radius:24px;padding:45px 40px;width:400px;max-width:95%;border:1px solid rgba(255,255,255,0.15)}
-        .logo{text-align:center;margin-bottom:35px}
-        .logo .emoji{font-size:70px;margin-bottom:10px}
-        .logo h1{font-size:48px;color:#f39c12;font-weight:900;margin-bottom:8px}
-        .logo p{color:#888;font-size:14px}
-        .form-group{margin-bottom:20px}
-        .form-group label{display:block;margin-bottom:8px;color:#ccc;font-size:14px}
-        .form-group input{width:100%;padding:14px 18px;border:2px solid rgba(255,255,255,0.12);border-radius:14px;background:rgba(255,255,255,0.06);color:#fff;font-size:16px;outline:none;transition:all 0.3s}
-        .form-group input:focus{border-color:#f39c12}
-        .form-group input::placeholder{color:#666}
-        .login-btn{width:100%;padding:16px;border:none;border-radius:14px;background:linear-gradient(45deg,#e74c3c,#f39c12);color:#fff;font-size:18px;font-weight:700;cursor:pointer;transition:all 0.3s}
-        .login-btn:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(243,156,18,0.4)}
-        .msg{text-align:center;margin-top:15px;padding:12px;border-radius:10px;font-size:14px;display:none}
-        .msg.error{display:block;background:rgba(231,76,60,0.2);border:1px solid rgba(231,76,60,0.4);color:#ff6b6b}
-        .msg.success{display:block;background:rgba(46,204,113,0.2);border:1px solid rgba(46,204,113,0.4);color:#2ecc71}
-        .info-box{margin-top:20px;padding:15px;background:rgba(52,152,219,0.1);border:1px solid rgba(52,152,219,0.3);border-radius:12px;text-align:center}
-        .info-box p{color:#87ceeb;font-size:13px;line-height:1.6}
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Tajawal', sans-serif; }
+
+        body {
+            background: linear-gradient(135deg, #0a0015, #1a0030, #0d001a);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* خلفية نجوم متحركة */
+        .stars-container { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; }
+
+        .star {
+            position: absolute;
+            border-radius: 50%;
+            background: #fff;
+            animation: twinkle var(--duration) infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.1; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* دوائر متحركة في الخلفية */
+        .floating-circle {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.15;
+            animation: floatCircle 15s infinite;
+            z-index: 0;
+        }
+
+        .circle1 { width:400px; height:400px; background:#e74c3c; top:-100px; right:-100px; animation-delay:0s; }
+        .circle2 { width:300px; height:300px; background:#3498db; bottom:-80px; left:-80px; animation-delay:5s; }
+        .circle3 { width:350px; height:350px; background:#f39c12; top:50%; left:50%; animation-delay:10s; }
+        .circle4 { width:250px; height:250px; background:#9b59b6; top:30%; right:20%; animation-delay:7s; }
+
+        @keyframes floatCircle {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(30px, -30px) rotate(90deg); }
+            50% { transform: translate(-20px, 20px) rotate(180deg); }
+            75% { transform: translate(20px, 30px) rotate(270deg); }
+        }
+
+        /* شرائط ضوء متحركة */
+        .light-beam {
+            position: fixed;
+            width: 2px;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, #f39c12, transparent);
+            animation: beam 4s linear infinite;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        @keyframes beam {
+            0% { top: -100px; opacity: 0; }
+            50% { opacity: 0.5; }
+            100% { top: 110vh; opacity: 0; }
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border-radius: 28px;
+            padding: 50px 42px;
+            width: 430px;
+            max-width: 95%;
+            box-shadow: 0 15px 60px rgba(0, 0, 0, 0.5),
+                        inset 0 1px 0 rgba(255,255,255,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            position: relative;
+            z-index: 1;
+            animation: containerEntry 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes containerEntry {
+            from { opacity: 0; transform: translateY(60px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* حدود متوهجة */
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            border-radius: 30px;
+            background: linear-gradient(45deg, #e74c3c, #f39c12, #9b59b6, #3498db, #e74c3c);
+            background-size: 400% 400%;
+            animation: glowBorder 8s ease infinite;
+            z-index: -1;
+            opacity: 0.4;
+        }
+
+        @keyframes glowBorder {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .game-emoji {
+            font-size: 80px;
+            display: block;
+            margin-bottom: 12px;
+            animation: logoFloat 3s ease-in-out infinite;
+            filter: drop-shadow(0 5px 15px rgba(243, 156, 18, 0.4));
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-8px) rotate(2deg); }
+            75% { transform: translateY(-4px) rotate(-2deg); }
+        }
+
+        .logo h1 {
+            font-size: 56px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #f39c12, #e74c3c, #ff6b9d, #c471f5, #f39c12);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            animation: gradientShift 4s ease infinite;
+            letter-spacing: 3px;
+            text-shadow: none;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .logo p {
+            color: #8e8ea0;
+            font-size: 15px;
+            letter-spacing: 4px;
+            font-weight: 500;
+            margin-top: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: #b8b8cc;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .input-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.04);
+            color: #fff;
+            font-size: 16px;
+            font-weight: 500;
+            outline: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .form-group input:focus {
+            border-color: #f39c12;
+            background: rgba(243, 156, 18, 0.06);
+            box-shadow: 0 0 25px rgba(243, 156, 18, 0.15),
+                        0 0 60px rgba(243, 156, 18, 0.05);
+            transform: translateY(-1px);
+        }
+
+        .form-group input::placeholder {
+            color: #555;
+            font-weight: 400;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 18px;
+            border: none;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #e74c3c, #f39c12, #e74c3c);
+            background-size: 200% 200%;
+            color: #fff;
+            font-size: 20px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 2px;
+            animation: btnGlow 3s ease infinite;
+        }
+
+        @keyframes btnGlow {
+            0%, 100% { background-position: 0% 50%; box-shadow: 0 5px 25px rgba(231, 76, 60, 0.3); }
+            50% { background-position: 100% 50%; box-shadow: 0 5px 25px rgba(243, 156, 18, 0.4); }
+        }
+
+        .login-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(243, 156, 18, 0.5) !important;
+        }
+
+        .login-btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* تأثير بريق على الزر */
+        .login-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            animation: btnShine 3s ease-in-out infinite;
+        }
+
+        @keyframes btnShine {
+            0% { transform: rotate(45deg) translateX(-200%); }
+            50% { transform: rotate(45deg) translateX(200%); }
+            100% { transform: rotate(45deg) translateX(200%); }
+        }
+
+        .msg {
+            text-align: center;
+            margin-top: 18px;
+            padding: 14px;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: 600;
+            display: none;
+            animation: msgSlide 0.4s ease;
+        }
+
+        @keyframes msgSlide {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .msg.error {
+            display: block;
+            background: rgba(231, 76, 60, 0.15);
+            border: 1px solid rgba(231, 76, 60, 0.3);
+            color: #ff6b6b;
+        }
+
+        .msg.success {
+            display: block;
+            background: rgba(46, 204, 113, 0.15);
+            border: 1px solid rgba(46, 204, 113, 0.3);
+            color: #2ecc71;
+        }
+
+        .info-box {
+            margin-top: 24px;
+            padding: 18px;
+            background: rgba(52, 152, 219, 0.08);
+            border: 1px solid rgba(52, 152, 219, 0.2);
+            border-radius: 16px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-box::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(52,152,219,0.05), transparent);
+            animation: infoShine 4s ease infinite;
+        }
+
+        @keyframes infoShine {
+            0% { left: -100%; }
+            50% { left: 100%; }
+            100% { left: 100%; }
+        }
+
+        .info-box p {
+            color: #7eb8e0;
+            font-size: 13px;
+            line-height: 1.8;
+            font-weight: 500;
+            position: relative;
+        }
+
+        /* جسيمات متحركة صغيرة */
+        .particle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            animation: particleFloat 8s linear infinite;
+        }
+
+        @keyframes particleFloat {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
+        }
+
+        @media (max-width: 480px) {
+            .login-container { padding: 35px 25px; }
+            .logo h1 { font-size: 42px; }
+            .game-emoji { font-size: 60px; }
+        }
     </style>
 </head>
 <body>
-    <div class="login-box">
+    <!-- خلفية متحركة -->
+    <div class="stars-container" id="starsContainer"></div>
+    <div class="floating-circle circle1"></div>
+    <div class="floating-circle circle2"></div>
+    <div class="floating-circle circle3"></div>
+    <div class="floating-circle circle4"></div>
+
+    <div class="login-container">
         <div class="logo">
-            <div class="emoji">🎮</div>
-            <h1>چگاار</h1>
+            <span class="game-emoji">🎮</span>
+            <h1>چگار</h1>
             <p>لعبة الأسئلة الجماعية</p>
         </div>
 
         <div class="form-group">
             <label>👤 اسم المستخدم</label>
-            <input type="text" id="username" placeholder="أدخل اليوزر الخاص بك">
+            <div class="input-wrapper">
+                <input type="text" id="username" placeholder="أدخل اليوزر الخاص بك" autocomplete="username">
+            </div>
         </div>
         <div class="form-group">
             <label>🔒 كلمة المرور</label>
-            <input type="password" id="password" placeholder="أدخل كلمة المرور">
+            <div class="input-wrapper">
+                <input type="password" id="password" placeholder="أدخل كلمة المرور" autocomplete="current-password">
+            </div>
         </div>
 
         <button class="login-btn" onclick="login()">🚀 دخول</button>
@@ -48,41 +379,104 @@
         <div id="msg" class="msg"></div>
 
         <div class="info-box">
-            <p>🔑 تحتاج يوزر خاص للدخول<br>تواصل مع الإدارة للحصول عليه</p>
+            <p>🔑 تحتاج يوزر خاص للدخول<br>📱 تواصل مع الإدارة للحصول عليه</p>
         </div>
     </div>
 
     <script>
-        fetch('/api/auth/me').then(function(r){return r.json()}).then(function(d){
-            if(d.loggedIn){
-                if(d.isAdmin) window.location.href='/admin.html';
-                else window.location.href='/lobby.html';
+        // إنشاء النجوم
+        (function() {
+            var container = document.getElementById('starsContainer');
+            for (var i = 0; i < 100; i++) {
+                var star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                var size = Math.random() * 3 + 1;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.setProperty('--duration', (Math.random() * 4 + 2) + 's');
+                star.style.animationDelay = Math.random() * 4 + 's';
+                container.appendChild(star);
+            }
+        })();
+
+        // إنشاء جسيمات
+        (function() {
+            var colors = ['#e74c3c', '#f39c12', '#3498db', '#9b59b6', '#2ecc71', '#ff6b9d'];
+            for (var i = 0; i < 20; i++) {
+                var p = document.createElement('div');
+                p.className = 'particle';
+                p.style.left = Math.random() * 100 + '%';
+                p.style.background = colors[Math.floor(Math.random() * colors.length)];
+                p.style.animationDelay = Math.random() * 8 + 's';
+                p.style.animationDuration = (Math.random() * 6 + 6) + 's';
+                document.body.appendChild(p);
+            }
+        })();
+
+        // شرائط ضوء
+        (function() {
+            for (var i = 0; i < 5; i++) {
+                var beam = document.createElement('div');
+                beam.className = 'light-beam';
+                beam.style.left = Math.random() * 100 + '%';
+                beam.style.animationDelay = Math.random() * 6 + 's';
+                beam.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                document.body.appendChild(beam);
+            }
+        })();
+
+        // التحقق من تسجيل الدخول
+        fetch('/api/auth/me').then(function(r) { return r.json(); }).then(function(d) {
+            if (d.loggedIn) {
+                if (d.isAdmin) window.location.href = '/admin.html';
+                else window.location.href = '/lobby.html';
             }
         });
 
-        function login(){
-            var username=document.getElementById('username').value.trim();
-            var password=document.getElementById('password').value.trim();
-            if(!username||!password){showMsg('أدخل البيانات','error');return}
+        function login() {
+            var username = document.getElementById('username').value.trim();
+            var password = document.getElementById('password').value.trim();
+            if (!username || !password) { showMsg('أدخل البيانات', 'error'); return; }
 
-            fetch('/api/auth/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:username,password:password})})
-            .then(function(r){return r.json()})
-            .then(function(data){
-                if(data.success){
-                    showMsg(data.message,'success');
-                    setTimeout(function(){
-                        if(data.isAdmin) window.location.href='/admin.html';
-                        else window.location.href='/lobby.html';
-                    },800);
+            var btn = document.querySelector('.login-btn');
+            btn.textContent = '⏳ جاري الدخول...';
+            btn.style.pointerEvents = 'none';
+
+            fetch('/api/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username: username, password: password })
+            })
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                if (data.success) {
+                    showMsg('✅ ' + data.message, 'success');
+                    setTimeout(function() {
+                        if (data.isAdmin) window.location.href = '/admin.html';
+                        else window.location.href = '/lobby.html';
+                    }, 800);
                 } else {
-                    showMsg(data.message,'error');
+                    showMsg('⚠️ ' + data.message, 'error');
+                    btn.textContent = '🚀 دخول';
+                    btn.style.pointerEvents = 'auto';
                 }
+            })
+            .catch(function() {
+                showMsg('❌ خطأ في الاتصال', 'error');
+                btn.textContent = '🚀 دخول';
+                btn.style.pointerEvents = 'auto';
             });
         }
 
-        function showMsg(t,type){var m=document.getElementById('msg');m.textContent=t;m.className='msg '+type}
+        function showMsg(t, type) {
+            var m = document.getElementById('msg');
+            m.textContent = t;
+            m.className = 'msg ' + type;
+        }
 
-        document.addEventListener('keypress',function(e){if(e.key==='Enter')login()});
+        document.addEventListener('keypress', function(e) { if (e.key === 'Enter') login(); });
     </script>
 </body>
 </html>
