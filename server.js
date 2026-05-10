@@ -65,7 +65,7 @@ function getPresetUsers() {
     return {
         admin: { username: 'reder', password: 'reder11' },
         users: [
-            { id: 'u1', username: 'player01', password: 'jkar2024', active: true, usedQuestions: [] },
+            { id: 'u1', username: '1', password: '1', active: true, usedQuestions: [] },
             { id: 'u2', username: 'player02', password: 'jkar2024', active: true, usedQuestions: [] },
             { id: 'u3', username: 'player03', password: 'jkar2024', active: true, usedQuestions: [] },
             { id: 'u4', username: 'player04', password: 'jkar2024', active: true, usedQuestions: [] },
@@ -90,6 +90,7 @@ function getPresetUsers() {
 }
 
 // ===== بنك الأسئلة (مختصر للمثال) =====
+
 function getQuestionsData() {
     var data = { categories: [] };
 
@@ -463,125 +464,6 @@ function prepQuestions(qs) {
         });
     }
     return result;
-}
-function getQuestionsData() {
-    var data = { categories: [] };
-
-    var cats = [
-        { id: 'sport', name: 'رياضة', icon: '⚽', qs: [
-            { id: 'sp1', text: 'من هو هداف كأس العالم 2022؟', options: ['كيليان مبابي', 'ليونيل ميسي', 'جيرو', 'ألفاريز'], correctIndex: 0, difficulty: 'easy', points: 100 },
-            { id: 'sp2', text: 'كم مرة فاز البرازيل بكأس العالم؟', options: ['3', '4', '5', '6'], correctIndex: 2, difficulty: 'easy', points: 100 },
-            { id: 'sp3', text: 'في أي عام أقيمت أول كأس عالم؟', options: ['1926', '1930', '1934', '1928'], correctIndex: 1, difficulty: 'easy', points: 100 },
-            { id: 'sp4', text: 'من فاز بكأس العالم 2018؟', options: ['كرواتيا', 'فرنسا', 'بلجيكا', 'إنجلترا'], correctIndex: 1, difficulty: 'easy', points: 100 },
-            { id: 'sp5', text: 'من أكثر لاعب فوزا بالكرة الذهبية؟', options: ['رونالدو', 'ميسي', 'بلاتيني', 'كرويف'], correctIndex: 1, difficulty: 'medium', points: 200 },
-            { id: 'sp6', text: 'أكثر نادي فوزا بدوري الأبطال؟', options: ['برشلونة', 'بايرن', 'ريال مدريد', 'ميلان'], correctIndex: 2, difficulty: 'medium', points: 200 },
-            { id: 'sp7', text: 'من فاز بكأس آسيا 2023؟', options: ['قطر', 'السعودية', 'اليابان', 'الأردن'], correctIndex: 0, difficulty: 'medium', points: 200 },
-            { id: 'sp8', text: 'ملعب نهائي مونديال 2022؟', options: ['البيت', 'الثمامة', 'لوسيل', 'أحمد بن علي'], correctIndex: 2, difficulty: 'medium', points: 200 },
-            { id: 'sp9', text: 'أهداف غيرد مولر في مونديال 1970؟', options: ['8', '10', '12', '14'], correctIndex: 1, difficulty: 'hard', points: 400 },
-            { id: 'sp10', text: 'أول عربي بنهائي دوري الأبطال؟', options: ['محمد صلاح', 'بن عطية', 'محرز', 'خضيرا'], correctIndex: 0, difficulty: 'hard', points: 400 }
-        ]},
-        { id: 'series', name: 'مسلسلات', icon: '🎬', qs: [
-            { id: 'sr1', text: 'من بطل مسلسل باب الحارة؟', options: ['تيم حسن', 'عباس النوري', 'وائل شرف', 'سامر المصري'], correctIndex: 1, difficulty: 'easy', points: 100 },
-            { id: 'sr2', text: 'مسلسل الهيبة من بطولة؟', options: ['باسم مغنية', 'تيم حسن', 'قصي خولي', 'مكسيم خليل'], correctIndex: 1, difficulty: 'easy', points: 100 },
-            { id: 'sr3', text: 'جنسية مسلسل وادي الذئاب؟', options: ['سوري', 'تركي', 'مصري', 'لبناني'], correctIndex: 1, difficulty: 'easy', points: 100 },
-            { id: 'sr4', text: 'بطل مسلسل عمر المختار؟', options: ['أنتوني كوين', 'عمر الشريف', 'أحمد مظهر', 'العلايلي'], correctIndex: 0, difficulty: 'easy', points: 100 },
-            { id: 'sr5', text: 'بطلة مسلسل حريم السلطان؟', options: ['بيرين سات', 'مريم أوزرلي', 'توبا', 'نور'], correctIndex: 1, difficulty: 'medium', points: 200 },
-            { id: 'sr6', text: 'مسلسل خلف الشمس من أي سنة؟', options: ['2005', '2008', '2010', '2012'], correctIndex: 1, difficulty: 'medium', points: 200 },
-            { id: 'sr7', text: 'من أخرج Game of Thrones؟', options: ['بينيوف فقط', 'عدة مخرجين', 'جاكسون', 'نولان'], correctIndex: 1, difficulty: 'medium', points: 200 },
-            { id: 'sr8', text: 'مسلسل عراقي عن الأحياء الشعبية؟', options: ['الذئب وعيون المدينة', 'تحت موسى', 'النسر', 'بيوت الطين'], correctIndex: 0, difficulty: 'medium', points: 200 },
-            { id: 'sr9', text: 'متى عرض رأفت الهجان؟', options: ['1986', '1988', '1990', '1992'], correctIndex: 1, difficulty: 'hard', points: 400 },
-            { id: 'sr10', text: 'وادي الذئاب كم موسم؟', options: ['7', '9', '10', '13'], correctIndex: 2, difficulty: 'hard', points: 400 }
-        ]},
-        { id: 'geography', name: 'جغرافية', icon: '🌍', qs: [
-            { id: 'ge1', text: 'عاصمة أستراليا؟', options: ['سيدني', 'ملبورن', 'كانبيرا', 'بريزبن'], correctIndex: 2, difficulty: 'easy', points: 100 },
-            { id: 'ge2', text: 'أطول نهر في العالم؟', options: ['النيل', 'الأمازون', 'المسيسبي', 'اليانغتسي'], correctIndex: 0, difficulty: 'easy', points: 100 },
-            { id: 'ge3', text: 'قارة البرازيل؟', options: ['أمريكا الشمالية', 'أمريكا الجنوبية', 'أوروبا', 'أفريقيا'], correctIndex: 1, difficulty: 'easy', points: 100 },
-            { id: 'ge4', text: 'عاصمة كازاخستان؟', options: ['ألماتي', 'أستانا', 'بيشكيك', 'طشقند'], correctIndex: 1, difficulty: 'easy', points: 100 },
-            { id: 'ge5', text: 'أصغر دولة في العالم؟', options: ['موناكو', 'الفاتيكان', 'سان مارينو', 'مالطا'], correctIndex: 1, difficulty: 'medium', points: 200 },
-            { id: 'ge6', text: 'البحر بين أوروبا وأفريقيا؟', options: ['الأحمر', 'المتوسط', 'العرب', 'الأسود'], correctIndex: 1, difficulty: 'medium', points: 200 },
-            { id: 'ge7', text: 'عدد الدول العربية؟', options: ['20', '22', '24', '18'], correctIndex: 1, difficulty: 'medium', points: 200 },
-            { id: 'ge8', text: 'أكبر جزيرة في العالم؟', options: ['مدغشقر', 'غرينلاند', 'بورنيو', 'سومطرة'], correctIndex: 1, difficulty: 'medium', points: 200 },
-            { id: 'ge9', text: 'أكبر عدد بحيرات بأي دولة؟', options: ['روسيا', 'كندا', 'البرازيل', 'فنلندا'], correctIndex: 1, difficulty: 'hard', points: 400 },
-            { id: 'ge10', text: 'أعمق محيط؟', options: ['الأطلسي', 'الهندي', 'الهادئ', 'المتجمد'], correctIndex: 2, difficulty: 'hard', points: 400 }
-        ]},
-        { id: 'history', name: 'تاريخ', icon: '📜', qs: [
-            { id: 'hi1', text: 'تأسيس الدولة العراقية؟', options: ['1920', '1921', '1932', '1918'], correctIndex: 1, difficulty: 'easy', points: 100 },
-            { id: 'hi2', text: 'أول ملك للعراق؟', options: ['فيصل الأول', 'فيصل الثاني', 'غازي', 'عبد الإله'], correctIndex: 0, difficulty: 'easy', points: 100 },
-            { id: 'hi3', text: 'فتح القسطنطينية؟', options: ['1453', '1492', '1517', '1258'], correctIndex: 0, difficulty: 'easy', points: 100 },
-            { id: 'hi4', text: 'من فتح مصر؟', options: ['خالد بن الوليد', 'عمرو بن العاص', 'سعد بن أبي وقاص', 'أبو عبيدة'], correctIndex: 1, difficulty: 'easy', points: 100 },
-            { id: 'hi5', text: 'سقوط بغداد بيد المغول؟', options: ['1258', '1187', '1300', '1220'], correctIndex: 0, difficulty: 'medium', points: 200 },
-            { id: 'hi6', text: 'من بنى بغداد؟', options: ['هارون الرشيد', 'أبو جعفر المنصور', 'المأمون', 'المعتصم'], correctIndex: 1, difficulty: 'medium', points: 200 },
-            { id: 'hi7', text: 'قائد ثورة العشرين؟', options: ['الهاشمي', 'عدة زعماء قبائل', 'نوري السعيد', 'الكيلاني'], correctIndex: 1, difficulty: 'medium', points: 200 },
-            { id: 'hi8', text: 'معركة المسلمين ضد الفرس؟', options: ['حطين', 'اليرموك', 'القادسية', 'بدر'], correctIndex: 2, difficulty: 'medium', points: 200 },
-            { id: 'hi9', text: 'معركة صلاح الدين 1187؟', options: ['عين جالوت', 'حطين', 'اليرموك', 'القادسية'], correctIndex: 1, difficulty: 'hard', points: 400 },
-            { id: 'hi10', text: 'ثورة 14 تموز متى؟', options: ['1956', '1958', '1960', '1963'], correctIndex: 1, difficulty: 'hard', points: 400 }
-        ]},
-        { id: 'cartoon', name: 'كارتون قديم', icon: '📺', qs: [
-            { id: 'ca1', text: 'فتاة تعيش مع جدها بالجبال؟', options: ['ساندي بل', 'هايدي', 'سالي', 'ريمي'], correctIndex: 1, difficulty: 'easy', points: 100 },
-            { id: 'ca2', text: 'اسم القط في توم وجيري؟', options: ['جيري', 'توم', 'سيلفستر', 'غارفيلد'], correctIndex: 1, difficulty: 'easy', points: 100 },
-            { id: 'ca3', text: 'كرتون كرة القدم الشهير؟', options: ['كابتن ماجد', 'سلام دانك', 'أبطال الملاعب', 'كرة القدم'], correctIndex: 0, difficulty: 'easy', points: 100 },
-            { id: 'ca4', text: 'روبوت مازنجر؟', options: ['مازنجر Z', 'غرندايزر', 'فولترون', 'جايكنغ'], correctIndex: 0, difficulty: 'easy', points: 100 },
-            { id: 'ca5', text: 'صديق غرندايزر؟', options: ['كوجي', 'دايسكي', 'هيكارو', 'تيتسويا'], correctIndex: 1, difficulty: 'medium', points: 200 },
-            { id: 'ca6', text: 'أجزاء Dragon Ball؟', options: ['3', '4', '5', '6'], correctIndex: 2, difficulty: 'medium', points: 200 },
-            { id: 'ca7', text: 'كرتون عن محقق صغير؟', options: ['كونان', 'سندباد', 'زينة ونحول', 'ساسوكي'], correctIndex: 0, difficulty: 'medium', points: 200 },
-            { id: 'ca8', text: 'فتاة يتيمة في المدرسة؟', options: ['سالي', 'هايدي', 'ساندي بل', 'ريمي'], correctIndex: 0, difficulty: 'medium', points: 200 },
-            { id: 'ca9', text: 'بداية عرض مغامرات سندباد؟', options: ['1975', '1978', '1980', '1983'], correctIndex: 1, difficulty: 'hard', points: 400 },
-            { id: 'ca10', text: 'صانع ميكي ماوس؟', options: ['والت ديزني', 'سبيلبرغ', 'ميازاكي', 'تشاك جونز'], correctIndex: 0, difficulty: 'hard', points: 400 }
-        ]},
-        { id: 'celebrities', name: 'مشاهير', icon: '⭐', qs: [
-            { id: 'ce1', text: 'من ملك البوب؟', options: ['إلفيس', 'مايكل جاكسون', 'برنس', 'تمبرليك'], correctIndex: 1, difficulty: 'easy', points: 100 },
-            { id: 'ce2', text: 'من لعب Iron Man؟', options: ['كريس إيفانز', 'روبرت داوني', 'هيمسوورث', 'رافالو'], correctIndex: 1, difficulty: 'easy', points: 100 },
-            { id: 'ce3', text: 'كوكب الشرق؟', options: ['فيروز', 'أم كلثوم', 'وردة', 'صباح'], correctIndex: 1, difficulty: 'easy', points: 100 },
-            { id: 'ce4', text: 'سيدة الشاشة العربية؟', options: ['سعاد حسني', 'فاتن حمامة', 'هند رستم', 'شادية'], correctIndex: 1, difficulty: 'easy', points: 100 },
-            { id: 'ce5', text: 'قيصر الأغنية العربية؟', options: ['كاظم الساهر', 'ماجد المهندس', 'حسام الرسام', 'عبد الجبار'], correctIndex: 0, difficulty: 'medium', points: 200 },
-            { id: 'ce6', text: 'الشحرورة؟', options: ['فيروز', 'صباح', 'وردة', 'نجاة'], correctIndex: 1, difficulty: 'medium', points: 200 },
-            { id: 'ce7', text: 'أوسكار أفضل ممثل 2024؟', options: ['كيليان مورفي', 'برادلي كوبر', 'دي كابريو', 'رايت'], correctIndex: 0, difficulty: 'medium', points: 200 },
-            { id: 'ce8', text: 'صوت سبونج بوب بالعربي؟', options: ['طارق العربي', 'أحمد مصطفى', 'عدة ممثلين', 'محمد رجب'], correctIndex: 2, difficulty: 'medium', points: 200 },
-            { id: 'ce9', text: 'سنة ميلاد كاظم الساهر؟', options: ['1957', '1961', '1963', '1965'], correctIndex: 1, difficulty: 'hard', points: 400 },
-            { id: 'ce10', text: 'أول عربي نوبل بالأدب؟', options: ['طه حسين', 'نجيب محفوظ', 'أدونيس', 'درويش'], correctIndex: 1, difficulty: 'hard', points: 400 }
-        ]},
-        { id: 'characters', name: 'شخصيات', icon: '👤', qs: [
-            { id: 'ch1', text: 'مؤسس مايكروسوفت؟', options: ['جوبز', 'بيل غيتس', 'زوكربيرغ', 'ماسك'], correctIndex: 1, difficulty: 'easy', points: 100 },
-            { id: 'ch2', text: 'مؤسس تسلا؟', options: ['بيزوس', 'إيلون ماسك', 'لاري بيج', 'تيم كوك'], correctIndex: 1, difficulty: 'easy', points: 100 },
-            { id: 'ch3', text: 'أول رئيس أمريكي؟', options: ['جيفرسون', 'واشنطن', 'لنكولن', 'آدمز'], correctIndex: 1, difficulty: 'easy', points: 100 },
-            { id: 'ch4', text: 'أول امرأة نوبل؟', options: ['ماري كوري', 'فرانكلين', 'أوستن', 'إيرهارت'], correctIndex: 0, difficulty: 'easy', points: 100 },
-            { id: 'ch5', text: 'مخترع الجبر؟', options: ['ابن سينا', 'الخوارزمي', 'ابن الهيثم', 'الرازي'], correctIndex: 1, difficulty: 'medium', points: 200 },
-            { id: 'ch6', text: 'فاتح الأندلس؟', options: ['طارق بن زياد', 'موسى بن نصير', 'عقبة', 'خالد'], correctIndex: 0, difficulty: 'medium', points: 200 },
-            { id: 'ch7', text: 'مؤسس الدولة الأموية؟', options: ['عبد الملك', 'معاوية', 'يزيد', 'مروان'], correctIndex: 1, difficulty: 'medium', points: 200 },
-            { id: 'ch8', text: 'مكتشف الدورة الدموية الصغرى؟', options: ['ابن سينا', 'الرازي', 'ابن النفيس', 'الزهراوي'], correctIndex: 2, difficulty: 'medium', points: 200 },
-            { id: 'ch9', text: 'نظرية النسبية؟', options: ['نيوتن', 'آينشتاين', 'هوكينغ', 'بور'], correctIndex: 1, difficulty: 'hard', points: 400 },
-            { id: 'ch10', text: 'مخترع المصباح؟', options: ['تسلا', 'إديسون', 'بيل', 'واط'], correctIndex: 1, difficulty: 'hard', points: 400 }
-        ]},
-        { id: 'brands', name: 'ماركات', icon: '🏷️', qs: [
-            { id: 'br1', text: 'شعار التفاحة المقضومة؟', options: ['سامسونغ', 'آبل', 'هواوي', 'جوجل'], correctIndex: 1, difficulty: 'easy', points: 100 },
-            { id: 'br2', text: 'شعار Just Do It؟', options: ['أديداس', 'بوما', 'نايكي', 'ريبوك'], correctIndex: 2, difficulty: 'easy', points: 100 },
-            { id: 'br3', text: 'سيارة شعارها الحصان الجامح؟', options: ['لامبورغيني', 'فيراري', 'بورش', 'ماكلارين'], correctIndex: 1, difficulty: 'easy', points: 100 },
-            { id: 'br4', text: 'شعار الخطوط الثلاثة؟', options: ['نايكي', 'بوما', 'أديداس', 'ريبوك'], correctIndex: 2, difficulty: 'easy', points: 100 },
-            { id: 'br5', text: 'بلد تأسيس تويوتا؟', options: ['كوريا', 'الصين', 'اليابان', 'ألمانيا'], correctIndex: 2, difficulty: 'medium', points: 200 },
-            { id: 'br6', text: 'ماركة شعارها الأسد؟', options: ['بيجو', 'رينو', 'ستروين', 'فيات'], correctIndex: 0, difficulty: 'medium', points: 200 },
-            { id: 'br7', text: 'أغلى ماركة أزياء 2024؟', options: ['غوتشي', 'لويس فيتون', 'شانيل', 'هيرميس'], correctIndex: 1, difficulty: 'medium', points: 200 },
-            { id: 'br8', text: 'مؤسس أمازون؟', options: ['ماسك', 'جيف بيزوس', 'غيتس', 'زوكربيرغ'], correctIndex: 1, difficulty: 'medium', points: 200 },
-            { id: 'br9', text: 'تأسيس كوكا كولا؟', options: ['1886', '1892', '1900', '1876'], correctIndex: 0, difficulty: 'hard', points: 400 },
-            { id: 'br10', text: 'مؤسس زارا؟', options: ['أرماني', 'أورتيغا', 'لورين', 'كلاين'], correctIndex: 1, difficulty: 'hard', points: 400 }
-        ]}
-
-        
-    ];
-
-    for (var i = 0; i < cats.length; i++) {
-        var c = cats[i];
-        var questions = [];
-        for (var j = 0; j < c.qs.length; j++) {
-            var q = c.qs[j];
-            questions.push({
-                id: q.id, text: q.text, options: q.options,
-                correctIndex: q.correctIndex, difficulty: q.difficulty,
-                points: q.points, image: '', usedByUsers: []
-            });
-        }
-        data.categories.push({ id: c.id, name: c.name, icon: c.icon, questions: questions });
-    }
-    return data;
 }
 
 // ===== تهيئة =====
