@@ -801,12 +801,8 @@ app.post('/api/games/:gameId/edit-score', function(req, res) {
 
     if (team === 'team1') {
         game.team1.score += 100; 
-        game.team1.score -= 100; 
-
     } else {
         game.team2.score += 100;
-        game.team1.score -= 100; 
-
     }
 
     writeJSON('games.json', gData);
