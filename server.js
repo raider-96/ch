@@ -466,7 +466,7 @@ function prepQuestions(qs) {
     return result;
 }
 
-// ===== تهيئة =====
+// ===== تهيئة ===========================================================================================================================
 function initDB() {
     console.log('=== تهيئة قاعدة البيانات ===');
     if (!fs.existsSync(DB_DIR)) fs.mkdirSync(DB_DIR, { recursive: true });

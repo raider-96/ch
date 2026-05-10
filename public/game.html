@@ -171,8 +171,8 @@
         <div class="opts-grid" id="optsGrid"></div>
     </div>
 
-    <!-- نافذة اختيار الفريق -->
-    <div class="team-overlay" id="teamOverlay">
+ <!-- نافذة اختيار الفريق -->
+   <!--   <div class="team-overlay" id="teamOverlay"> 
         <div class="team-card">
             <h2>🎯 من أجاب على السؤال؟</h2>
             <p>اختر الفريق الذي قدّم الإجابة</p>
@@ -182,7 +182,7 @@
             </div>
             <button class="btn-none" onclick="submitWithTeam('none')">⏭️ لا أحد أجاب - تخطي السؤال</button>
         </div>
-    </div>
+    </div> -->
 
     <!-- نتيجة الإجابة -->
     <div class="result-overlay" id="resultOverlay">
@@ -231,7 +231,7 @@
 
         function saveScore() {
             var newScore = parseInt(document.getElementById('editScoreInput').value);
-            if (isNaN(newScore) || newScore < 0) { alert('أدخل رقم صحيح'); return; }
+            if (isNaN(newScore) || newScore < 100) { alert('أدخل رقم صحيح'); return; }
 
             fetch('/api/games/' + gameId + '/edit-score', {
                 method: 'POST',
@@ -465,7 +465,7 @@
         function startSecondChance() {
             isSecondChance = true;
             var label = document.getElementById('timerLabel');
-            label.textContent = '⚡ فرصة أخيرة! 15 ثانية للفريق الآخر';
+            label.textContent = '⚡ 15 ثانية للفريق الآخر';
             label.className = 'timer-label red';
             startTimer(15);
         }
