@@ -11,28 +11,31 @@
 
         .game-header{display:flex;justify-content:center;padding:15px 20px;background:rgba(255,255,255,0.06);backdrop-filter:blur(20px);border-radius:18px;margin-bottom:12px;border:1px solid rgba(255,255,255,0.08)}
         .score-board{display:flex;gap:15px;align-items:center;width:100%}
-        .team-score{flex:1;text-align:center;padding:12px;border-radius:16px;cursor:pointer;transition:all 0.3s;position:relative}
+        .team-score{flex:1;text-align:center;padding:12px;border-radius:16px;position:relative}
         .team1-score{background:rgba(52,152,219,0.15);border:2px solid rgba(52,152,219,0.4)}
         .team2-score{background:rgba(231,76,60,0.15);border:2px solid rgba(231,76,60,0.4)}
-        .team-score:hover{transform:scale(1.02)}
         .team-name{font-size:13px;color:#aaa;margin-bottom:4px;font-weight:600}
         .points{font-size:30px;font-weight:900}
         .team1-score .points{color:#3498db}
         .team2-score .points{color:#e74c3c}
         .vs-text{font-size:20px;color:#f39c12;font-weight:900;min-width:50px;text-align:center}
 
-        /* تعديل النقاط */
-        .edit-score-box{display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.95);border:1px solid rgba(255,255,255,0.2);border-radius:12px;padding:12px;z-index:50;width:200px;margin-top:8px}
-        .edit-score-box.show{display:block}
-        .edit-score-box input{width:100%;padding:8px;border:1px solid rgba(255,255,255,0.2);border-radius:8px;background:rgba(255,255,255,0.1);color:#fff;font-size:16px;text-align:center;margin-bottom:8px;outline:none}
-        .edit-score-box button{width:100%;padding:8px;border:none;border-radius:8px;cursor:pointer;font-weight:700;font-size:13px}
-        .edit-save{background:#2ecc71;color:#fff;margin-bottom:4px}
-        .edit-cancel{background:rgba(255,255,255,0.1);color:#aaa}
+        .edit-score-btn{display:block;margin-top:6px;padding:4px 10px;border:1px solid rgba(255,255,255,0.2);border-radius:8px;background:rgba(255,255,255,0.05);color:#aaa;cursor:pointer;font-size:11px;font-weight:600;transition:all 0.3s}
+        .edit-score-btn:hover{background:rgba(243,156,18,0.15);color:#f39c12;border-color:#f39c12}
 
-        /* عداد الأسئلة المتبقية */
+        .edit-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);justify-content:center;align-items:center;z-index:300}
+        .edit-overlay.show{display:flex}
+        .edit-card{background:rgba(255,255,255,0.1);backdrop-filter:blur(25px);border-radius:20px;padding:30px;text-align:center;width:300px;border:1px solid rgba(255,255,255,0.15)}
+        .edit-card h3{color:#f39c12;margin-bottom:15px;font-size:18px}
+        .edit-card input{width:100%;padding:12px;border:2px solid rgba(255,255,255,0.2);border-radius:10px;background:rgba(255,255,255,0.08);color:#fff;font-size:20px;text-align:center;outline:none;margin-bottom:12px}
+        .edit-card input:focus{border-color:#f39c12}
+        .edit-btns{display:flex;gap:8px}
+        .edit-btns button{flex:1;padding:10px;border:none;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer}
+        .save-btn{background:#2ecc71;color:#fff}
+        .cancel-btn{background:rgba(255,255,255,0.1);color:#aaa}
+
         .remaining-bar{text-align:center;padding:8px;background:rgba(243,156,18,0.08);border:1px solid rgba(243,156,18,0.2);border-radius:12px;margin-bottom:12px;font-size:14px;font-weight:700;color:#f39c12}
 
-        /* لوحة الأصناف */
         .board{max-width:900px;margin:0 auto 15px}
         .board-cat{background:rgba(255,255,255,0.04);border-radius:16px;padding:14px;margin-bottom:10px;border:1px solid rgba(255,255,255,0.08)}
         .board-cat-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
@@ -48,7 +51,6 @@
         .diff-btn.medium .diff-label{color:#f39c12}
         .diff-btn.hard .diff-label{color:#e74c3c}
 
-        /* شاشة السؤال */
         .question-screen{display:none;max-width:800px;margin:0 auto}
         .q-meta{display:flex;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:6px}
         .badge{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700}
@@ -58,12 +60,12 @@
         .diff-badge-hard{background:rgba(231,76,60,0.15);border:1px solid rgba(231,76,60,0.4);color:#e74c3c}
         .pts-badge{background:rgba(243,156,18,0.15);border:1px solid rgba(243,156,18,0.4);color:#f39c12;font-weight:800}
 
-        /* المؤقت */
         .timer-box{text-align:center;margin-bottom:12px}
         .timer{font-size:52px;font-weight:900;color:#2ecc71;transition:color 0.3s}
         .timer.warn{color:#f39c12}
         .timer.danger{color:#e74c3c;animation:pulse 0.5s infinite}
-        .timer-label{font-size:13px;color:#888;margin-top:2px;font-weight:600}
+        .timer-label{font-size:14px;color:#888;margin-top:4px;font-weight:700}
+        .timer-label.red{color:#e74c3c}
         @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
         .timer-bar{width:100%;height:8px;background:rgba(255,255,255,0.06);border-radius:4px;margin-top:6px;overflow:hidden}
         .timer-fill{height:100%;background:#2ecc71;border-radius:4px;transition:width 1s linear}
@@ -74,13 +76,11 @@
         .q-image{text-align:center;margin-bottom:12px}
         .q-image img{max-width:100%;max-height:220px;border-radius:14px;border:2px solid rgba(255,255,255,0.1)}
 
-        /* المساعدات */
         .helps-bar{display:flex;gap:8px;justify-content:center;margin-bottom:12px;flex-wrap:wrap}
         .help-btn{padding:8px 14px;border:2px solid rgba(255,255,255,0.15);border-radius:10px;background:rgba(255,255,255,0.04);color:#fff;cursor:pointer;font-size:12px;font-weight:700;transition:all 0.3s}
         .help-btn:hover:not(.used-help){border-color:#f39c12;background:rgba(243,156,18,0.08)}
         .help-btn.used-help{opacity:0.25;cursor:not-allowed;text-decoration:line-through}
 
-        /* الخيارات */
         .opts-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
         .opt-btn{padding:16px;border:2px solid rgba(255,255,255,0.12);border-radius:14px;background:rgba(255,255,255,0.04);color:#fff;font-size:15px;cursor:pointer;transition:all 0.3s;text-align:center;font-weight:600}
         .opt-btn:hover:not(.disabled):not(.hidden-opt){border-color:#f39c12;background:rgba(243,156,18,0.08);transform:translateY(-2px)}
@@ -90,111 +90,107 @@
         .opt-btn.hidden-opt{opacity:0.08;pointer-events:none;border-style:dashed}
         .opt-letter{display:inline-flex;width:26px;height:26px;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,0.12);margin-left:8px;font-weight:800;font-size:12px}
 
-        .back-btn{display:block;margin:12px auto;padding:10px 25px;border:none;border-radius:10px;background:linear-gradient(45deg,#3498db,#2980b9);color:#fff;font-size:15px;font-weight:700;cursor:pointer}
-
-        /* نافذة اختيار الفريق المجاوب */
-        .team-select-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);justify-content:center;align-items:center;z-index:200}
-        .team-select-overlay.show{display:flex}
-        .team-select-card{background:rgba(255,255,255,0.08);backdrop-filter:blur(25px);border-radius:24px;padding:35px;text-align:center;max-width:400px;width:90%;border:1px solid rgba(255,255,255,0.12)}
-        .team-select-title{font-size:22px;font-weight:800;margin-bottom:8px;color:#f39c12}
-        .team-select-subtitle{font-size:14px;color:#888;margin-bottom:20px}
-        .team-select-btns{display:flex;gap:12px}
-        .team-sel-btn{flex:1;padding:18px;border:none;border-radius:14px;font-size:16px;font-weight:800;cursor:pointer;transition:all 0.3s}
-        .team-sel-btn:hover{transform:translateY(-3px)}
-        .team-sel-btn.sel-t1{background:linear-gradient(135deg,#3498db,#2980b9);color:#fff}
-        .team-sel-btn.sel-t2{background:linear-gradient(135deg,#e74c3c,#c0392b);color:#fff}
-        .team-sel-btn.sel-none{background:rgba(255,255,255,0.1);color:#888;border:1px solid rgba(255,255,255,0.15);font-size:13px;padding:12px}
+        /* نافذة اختيار الفريق */
+        .team-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.9);justify-content:center;align-items:center;z-index:200}
+        .team-overlay.show{display:flex}
+        .team-card{background:rgba(255,255,255,0.08);backdrop-filter:blur(25px);border-radius:24px;padding:35px;text-align:center;max-width:420px;width:92%;border:1px solid rgba(255,255,255,0.12)}
+        .team-card h2{font-size:24px;font-weight:900;margin-bottom:6px;color:#f39c12}
+        .team-card p{font-size:14px;color:#888;margin-bottom:20px}
+        .team-btns{display:flex;gap:12px;margin-bottom:12px}
+        .team-btn{flex:1;padding:20px 10px;border:none;border-radius:16px;font-size:17px;font-weight:800;cursor:pointer;transition:all 0.3s}
+        .team-btn:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(0,0,0,0.3)}
+        .btn-t1{background:linear-gradient(135deg,#3498db,#2980b9);color:#fff}
+        .btn-t2{background:linear-gradient(135deg,#e74c3c,#c0392b);color:#fff}
+        .btn-none{width:100%;padding:14px;border:1px solid rgba(255,255,255,0.15);border-radius:12px;background:rgba(255,255,255,0.05);color:#999;cursor:pointer;font-size:14px;font-weight:700;transition:all 0.3s}
+        .btn-none:hover{background:rgba(255,255,255,0.1);color:#fff}
 
         /* نافذة النتيجة */
-        .overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);justify-content:center;align-items:center;z-index:100}
-        .overlay.show{display:flex}
-        .overlay-card{background:rgba(255,255,255,0.08);backdrop-filter:blur(25px);border-radius:24px;padding:40px;text-align:center;max-width:420px;width:90%;border:1px solid rgba(255,255,255,0.12)}
-        .overlay-icon{font-size:70px;margin-bottom:10px}
-        .overlay-text{font-size:20px;margin-bottom:6px;font-weight:700}
-        .overlay-pts{font-size:36px;font-weight:900;margin-bottom:18px}
-        .overlay-btn{padding:14px 35px;border:none;border-radius:12px;background:linear-gradient(45deg,#3498db,#2980b9);color:#fff;font-size:16px;font-weight:700;cursor:pointer}
+        .result-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.9);justify-content:center;align-items:center;z-index:100}
+        .result-overlay.show{display:flex}
+        .result-card{background:rgba(255,255,255,0.08);backdrop-filter:blur(25px);border-radius:24px;padding:40px;text-align:center;max-width:420px;width:92%;border:1px solid rgba(255,255,255,0.12)}
+        .result-icon{font-size:70px;margin-bottom:10px}
+        .result-text{font-size:20px;margin-bottom:6px;font-weight:700}
+        .result-pts{font-size:36px;font-weight:900;margin-bottom:18px}
+        .result-btn{padding:14px 35px;border:none;border-radius:12px;background:linear-gradient(45deg,#3498db,#2980b9);color:#fff;font-size:16px;font-weight:700;cursor:pointer;transition:all 0.3s}
+        .result-btn:hover{transform:translateY(-2px)}
 
-        @media(max-width:768px){.opts-grid{grid-template-columns:1fr}.score-board{gap:8px}.points{font-size:24px}.team-select-btns{flex-direction:column}}
+        @media(max-width:768px){.opts-grid{grid-template-columns:1fr}.score-board{gap:8px}.points{font-size:24px}.team-btns{flex-direction:column}}
     </style>
 </head>
 <body>
-    <!-- لوحة النقاط -->
     <div class="game-header">
         <div class="score-board">
-            <div class="team-score team1-score" onclick="toggleEditScore('team1')">
+            <div class="team-score team1-score">
                 <div class="team-name" id="t1name">فريق 1</div>
                 <div class="points" id="t1score">0</div>
-                <div class="edit-score-box" id="editTeam1">
-                    <input type="number" id="editScore1" placeholder="النقاط الجديدة">
-                    <button class="edit-save" onclick="saveScore('team1')">💾 حفظ</button>
-                    <button class="edit-cancel" onclick="toggleEditScore('team1')">إلغاء</button>
-                </div>
+                <button class="edit-score-btn" onclick="openEditScore('team1')">✏️ تعديل</button>
             </div>
             <div class="vs-text">⚡VS⚡</div>
-            <div class="team-score team2-score" onclick="toggleEditScore('team2')">
+            <div class="team-score team2-score">
                 <div class="team-name" id="t2name">فريق 2</div>
                 <div class="points" id="t2score">0</div>
-                <div class="edit-score-box" id="editTeam2">
-                    <input type="number" id="editScore2" placeholder="النقاط الجديدة">
-                    <button class="edit-save" onclick="saveScore('team2')">💾 حفظ</button>
-                    <button class="edit-cancel" onclick="toggleEditScore('team2')">إلغاء</button>
-                </div>
+                <button class="edit-score-btn" onclick="openEditScore('team2')">✏️ تعديل</button>
             </div>
         </div>
     </div>
 
-    <!-- عداد الأسئلة المتبقية -->
+    <!-- تعديل النقاط -->
+    <div class="edit-overlay" id="editOverlay">
+        <div class="edit-card">
+            <h3 id="editTitle">✏️ تعديل نقاط الفريق</h3>
+            <input type="number" id="editScoreInput" placeholder="النقاط الجديدة" min="0">
+            <div class="edit-btns">
+                <button class="save-btn" onclick="saveScore()">💾 حفظ</button>
+                <button class="cancel-btn" onclick="closeEditScore()">❌ إلغاء</button>
+            </div>
+        </div>
+    </div>
+
     <div class="remaining-bar" id="remainingBar">📊 الأسئلة المتبقية: 0</div>
 
-    <!-- لوحة الأصناف -->
     <div class="board" id="boardView"></div>
 
-    <!-- شاشة السؤال -->
     <div class="question-screen" id="questionScreen">
         <div class="q-meta">
             <span class="badge cat-badge" id="qCat">📂 صنف</span>
             <span class="badge" id="qDiff">سهل</span>
             <span class="badge pts-badge" id="qPts">💰 100</span>
         </div>
-
         <div class="timer-box">
             <div class="timer" id="timer">60</div>
-            <div class="timer-label" id="timerLabel">⏱️ وقت الفريق الأول</div>
+            <div class="timer-label" id="timerLabel">⏱️ وقت الإجابة</div>
             <div class="timer-bar"><div class="timer-fill" id="timerFill"></div></div>
         </div>
-
         <div class="q-image" id="qImageBox" style="display:none">
             <img id="qImage" src="" alt="صورة">
         </div>
-
         <div class="q-box">
             <div class="q-text" id="qText">السؤال</div>
         </div>
-
         <div class="helps-bar" id="helpsBar"></div>
         <div class="opts-grid" id="optsGrid"></div>
     </div>
 
-    <!-- اختيار الفريق المجاوب -->
-    <div class="team-select-overlay" id="teamSelectOverlay">
-        <div class="team-select-card">
-            <div class="team-select-title" id="teamSelectTitle">🎯 من أجاب؟</div>
-            <div class="team-select-subtitle" id="teamSelectSub">اختر الفريق الذي قدّم الإجابة</div>
-            <div class="team-select-btns">
-                <button class="team-sel-btn sel-t1" id="selT1Btn" onclick="confirmAnswer('team1')">🔵 <span id="selT1Name">فريق 1</span></button>
-                <button class="team-sel-btn sel-t2" id="selT2Btn" onclick="confirmAnswer('team2')">🔴 <span id="selT2Name">فريق 2</span></button>
+    <!-- نافذة اختيار الفريق -->
+    <div class="team-overlay" id="teamOverlay">
+        <div class="team-card">
+            <h2>🎯 من أجاب على السؤال؟</h2>
+            <p>اختر الفريق الذي قدّم الإجابة</p>
+            <div class="team-btns">
+                <button class="team-btn btn-t1" onclick="submitWithTeam('team1')">🔵 <span id="selT1">فريق 1</span></button>
+                <button class="team-btn btn-t2" onclick="submitWithTeam('team2')">🔴 <span id="selT2">فريق 2</span></button>
             </div>
-            <button class="team-sel-btn sel-none" onclick="confirmAnswer('none')" style="margin-top:10px;width:100%">⏭️ لم يجب أحد - تخطي</button>
+            <button class="btn-none" onclick="submitWithTeam('none')">⏭️ لا أحد أجاب - تخطي السؤال</button>
         </div>
     </div>
 
     <!-- نتيجة الإجابة -->
-    <div class="overlay" id="resultOverlay">
-        <div class="overlay-card">
-            <div class="overlay-icon" id="resIcon">✅</div>
-            <div class="overlay-text" id="resText">إجابة صحيحة!</div>
-            <div class="overlay-pts" id="resPts">+100</div>
-            <button class="overlay-btn" id="resBtn" onclick="backToBoard()">🔙 العودة للوحة</button>
+    <div class="result-overlay" id="resultOverlay">
+        <div class="result-card">
+            <div class="result-icon" id="resIcon">✅</div>
+            <div class="result-text" id="resText">إجابة صحيحة!</div>
+            <div class="result-pts" id="resPts">+100</div>
+            <button class="result-btn" id="resBtn" onclick="backToBoard()">🔙 العودة للوحة</button>
         </div>
     </div>
 
@@ -208,16 +204,49 @@
         var answered = false;
         var selectedOptionIndex = -1;
         var isSecondChance = false;
-        var hiddenIndexes = [];
+        var editingTeam = '';
 
         document.getElementById('t1name').textContent = team1Name;
         document.getElementById('t2name').textContent = team2Name;
-        document.getElementById('selT1Name').textContent = team1Name;
-        document.getElementById('selT2Name').textContent = team2Name;
+        document.getElementById('selT1').textContent = team1Name;
+        document.getElementById('selT2').textContent = team2Name;
 
-        if (!gameId) { alert('لا توجد لعبة!'); window.location.href = '/lobby.html'; }
+        if (!gameId) { window.location.href = '/lobby.html'; }
+        else { loadBoard(); }
 
-        loadBoard();
+        // ===== تعديل النقاط =====
+        function openEditScore(team) {
+            editingTeam = team;
+            var currentScore = document.getElementById(team === 'team1' ? 't1score' : 't2score').textContent;
+            var teamDisplayName = team === 'team1' ? team1Name : team2Name;
+            document.getElementById('editTitle').textContent = '✏️ تعديل نقاط ' + teamDisplayName;
+            document.getElementById('editScoreInput').value = currentScore;
+            document.getElementById('editOverlay').classList.add('show');
+            document.getElementById('editScoreInput').focus();
+        }
+
+        function closeEditScore() {
+            document.getElementById('editOverlay').classList.remove('show');
+        }
+
+        function saveScore() {
+            var newScore = parseInt(document.getElementById('editScoreInput').value);
+            if (isNaN(newScore) || newScore < 0) { alert('أدخل رقم صحيح'); return; }
+
+            fetch('/api/games/' + gameId + '/edit-score', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ team: editingTeam, newScore: newScore })
+            })
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                if (data.success) {
+                    document.getElementById('t1score').textContent = data.team1Score;
+                    document.getElementById('t2score').textContent = data.team2Score;
+                    closeEditScore();
+                }
+            });
+        }
 
         // ===== تحميل اللوحة =====
         function loadBoard() {
@@ -228,77 +257,65 @@
             fetch('/api/games/' + gameId + '/board')
                 .then(function(r) { return r.json(); })
                 .then(function(data) {
-                    if (!data.success) { alert(data.message); return; }
+                    if (!data.success) return;
                     if (data.status === 'finished') { window.location.href = '/results.html'; return; }
 
                     document.getElementById('t1score').textContent = data.team1.score;
                     document.getElementById('t2score').textContent = data.team2.score;
-                    window.team1Helps = data.team1.helps;
-                    window.team2Helps = data.team2.helps;
+                    window.t1Helps = data.team1.helps;
+                    window.t2Helps = data.team2.helps;
 
-                    var boardHtml = '';
-                    var totalRemaining = 0;
+                    var html = '';
+                    var totalR = 0;
 
                     for (var i = 0; i < data.board.length; i++) {
                         var cat = data.board[i];
-                        var catRemaining = 0;
-                        var catTotal = 0;
-
+                        var catR = 0, catT = 0;
                         var diffs = [
-                            { key: 'easy', label: 'سهل 🟢', pts: 100 },
-                            { key: 'medium', label: 'متوسط 🟡', pts: 200 },
-                            { key: 'hard', label: 'صعب 🔴', pts: 400 }
+                            { key:'easy', label:'سهل 🟢' },
+                            { key:'medium', label:'متوسط 🟡' },
+                            { key:'hard', label:'صعب 🔴' }
                         ];
 
-                        var diffHtml = '';
+                        var dHtml = '';
                         for (var d = 0; d < diffs.length; d++) {
-                            var questions = cat[diffs[d].key];
-                            for (var q = 0; q < questions.length; q++) {
-                                catTotal++;
-                                if (!questions[q].answered) catRemaining++;
-                                var usedClass = questions[q].answered ? ' used' : '';
-                                diffHtml += '<div class="diff-btn ' + diffs[d].key + usedClass + '" ';
-                                if (!questions[q].answered) {
-                                    diffHtml += 'onclick="selectQuestion(\'' + questions[q].questionId + '\')"';
-                                }
-                                diffHtml += '>';
-                                diffHtml += '<div class="diff-label">' + diffs[d].label + '</div>';
-                                diffHtml += '<div class="diff-points">' + (questions[q].answered ? '✅' : questions[q].points) + '</div>';
-                                diffHtml += '</div>';
+                            var qs = cat[diffs[d].key];
+                            for (var q = 0; q < qs.length; q++) {
+                                catT++;
+                                if (!qs[q].answered) catR++;
+                                dHtml += '<div class="diff-btn ' + diffs[d].key + (qs[q].answered ? ' used' : '') + '" ';
+                                if (!qs[q].answered) dHtml += 'onclick="selectQuestion(\'' + qs[q].questionId + '\')"';
+                                dHtml += '><div class="diff-label">' + diffs[d].label + '</div>';
+                                dHtml += '<div class="diff-points">' + (qs[q].answered ? '✅' : qs[q].points) + '</div></div>';
                             }
                         }
 
-                        totalRemaining += catRemaining;
-
-                        boardHtml += '<div class="board-cat">';
-                        boardHtml += '<div class="board-cat-header">';
-                        boardHtml += '<div class="board-cat-title">📂 ' + cat.categoryName + '</div>';
-                        boardHtml += '<div class="board-cat-remaining">متبقي: ' + catRemaining + '/' + catTotal + '</div>';
-                        boardHtml += '</div>';
-                        boardHtml += '<div class="diff-row">' + diffHtml + '</div>';
-                        boardHtml += '</div>';
+                        totalR += catR;
+                        html += '<div class="board-cat"><div class="board-cat-header">';
+                        html += '<div class="board-cat-title">📂 ' + cat.categoryName + '</div>';
+                        html += '<div class="board-cat-remaining">متبقي: ' + catR + '/' + catT + '</div>';
+                        html += '</div><div class="diff-row">' + dHtml + '</div></div>';
                     }
 
-                    document.getElementById('boardView').innerHTML = boardHtml;
-                    document.getElementById('remainingBar').textContent = '📊 إجمالي الأسئلة المتبقية: ' + totalRemaining;
+                    document.getElementById('boardView').innerHTML = html;
+                    document.getElementById('remainingBar').textContent = '📊 إجمالي الأسئلة المتبقية: ' + totalR;
 
-                    if (totalRemaining === 0) window.location.href = '/results.html';
+                    if (totalR === 0) window.location.href = '/results.html';
                 });
         }
 
         // ===== اختيار سؤال =====
-        function selectQuestion(questionId) {
-            fetch('/api/games/' + gameId + '/question/' + questionId)
+        function selectQuestion(qId) {
+            fetch('/api/games/' + gameId + '/question/' + qId)
                 .then(function(r) { return r.json(); })
                 .then(function(data) {
-                    if (!data.success) { alert(data.message || 'خطأ'); return; }
+                    if (!data.success) { alert('خطأ'); return; }
 
                     currentQuestion = data.question;
-                    currentQuestion.questionId = questionId;
+                    currentQuestion.questionId = qId;
                     answered = false;
                     selectedOptionIndex = -1;
                     isSecondChance = false;
-                    hiddenIndexes = [];
 
                     document.getElementById('boardView').style.display = 'none';
                     document.getElementById('questionScreen').style.display = 'block';
@@ -306,10 +323,10 @@
                     document.getElementById('qCat').textContent = '📂 ' + currentQuestion.categoryName;
 
                     var diffEl = document.getElementById('qDiff');
-                    var diffMap = { easy: 'سهل 🟢', medium: 'متوسط 🟡', hard: 'صعب 🔴' };
-                    var diffClassMap = { easy: 'diff-badge-easy', medium: 'diff-badge-medium', hard: 'diff-badge-hard' };
-                    diffEl.textContent = diffMap[currentQuestion.difficulty];
-                    diffEl.className = 'badge ' + diffClassMap[currentQuestion.difficulty];
+                    var dMap = { easy:'سهل 🟢', medium:'متوسط 🟡', hard:'صعب 🔴' };
+                    var dClass = { easy:'diff-badge-easy', medium:'diff-badge-medium', hard:'diff-badge-hard' };
+                    diffEl.textContent = dMap[currentQuestion.difficulty];
+                    diffEl.className = 'badge ' + dClass[currentQuestion.difficulty];
 
                     document.getElementById('qPts').textContent = '💰 ' + currentQuestion.points + ' نقطة';
                     document.getElementById('qText').textContent = currentQuestion.text;
@@ -318,59 +335,60 @@
                     if (currentQuestion.image && currentQuestion.image.length > 5) {
                         document.getElementById('qImage').src = currentQuestion.image;
                         imgBox.style.display = 'block';
-                    } else {
-                        imgBox.style.display = 'none';
-                    }
+                    } else { imgBox.style.display = 'none'; }
 
-                    // الخيارات
                     var grid = document.getElementById('optsGrid');
                     grid.innerHTML = '';
-                    var letters = ['أ', 'ب', 'ج', 'د'];
+                    var letters = ['أ','ب','ج','د'];
                     for (var i = 0; i < currentQuestion.options.length; i++) {
                         var btn = document.createElement('div');
                         btn.className = 'opt-btn';
-                        btn.setAttribute('data-index', i);
                         btn.innerHTML = '<span class="opt-letter">' + letters[i] + '</span> ' + currentQuestion.options[i];
-                        (function(idx, el) {
-                            el.addEventListener('click', function() { selectAnswer(idx); });
-                        })(i, btn);
+                        (function(idx, el) { el.addEventListener('click', function() { pickAnswer(idx); }); })(i, btn);
                         grid.appendChild(btn);
                     }
 
-                    renderHelps('team1');
-                    document.getElementById('timerLabel').textContent = '⏱️ وقت الإجابة';
+                    renderHelps();
+
+                    var label = document.getElementById('timerLabel');
+                    label.textContent = '⏱️ وقت الإجابة';
+                    label.className = 'timer-label';
+
                     startTimer(60);
                 });
         }
 
         // ===== المساعدات =====
-        function renderHelps(team) {
-            var helps = (team === 'team1') ? window.team1Helps : window.team2Helps;
+        function renderHelps() {
             var bar = document.getElementById('helpsBar');
             bar.innerHTML = '';
 
-            var list = [
-                { key: 'remove2', label: '❌ حذف إجابتين', count: helps.remove2 },
-                { key: 'extraTime', label: '⏱️ +30 ثانية', count: helps.extraTime },
-                { key: 'changeQ', label: '🔄 تغيير السؤال', count: helps.changeQ }
+            // دمج مساعدات الفريقين
+            var allHelps = [
+                { key:'remove2', label:'❌ حذف إجابتين', t1: window.t1Helps.remove2, t2: window.t2Helps.remove2 },
+                { key:'extraTime', label:'⏱️ +30 ثانية', t1: window.t1Helps.extraTime, t2: window.t2Helps.extraTime },
+                { key:'changeQ', label:'🔄 تغيير السؤال', t1: window.t1Helps.changeQ, t2: window.t2Helps.changeQ }
             ];
 
-            for (var i = 0; i < list.length; i++) {
-                var h = list[i];
+            for (var i = 0; i < allHelps.length; i++) {
+                var h = allHelps[i];
+                var total = h.t1 + h.t2;
                 var btn = document.createElement('div');
-                btn.className = 'help-btn' + (h.count <= 0 ? ' used-help' : '');
-                btn.textContent = h.label + ' (' + h.count + ')';
-                if (h.count > 0) {
-                    (function(helpKey) {
-                        btn.addEventListener('click', function() { useHelp(helpKey, team); });
+                btn.className = 'help-btn' + (total <= 0 ? ' used-help' : '');
+                btn.textContent = h.label;
+                if (total > 0) {
+                    (function(key) {
+                        btn.addEventListener('click', function() { useHelp(key); });
                     })(h.key);
                 }
                 bar.appendChild(btn);
             }
         }
 
-        function useHelp(helpType, team) {
+        function useHelp(helpType) {
             if (answered) return;
+            // نستخدم من team1 أولاً ثم team2
+            var team = window.t1Helps[helpType] > 0 ? 'team1' : 'team2';
 
             fetch('/api/games/' + gameId + '/use-help', {
                 method: 'POST',
@@ -381,42 +399,30 @@
             .then(function(data) {
                 if (!data.success) { alert(data.message || 'فشل'); return; }
 
-                if (team === 'team1') window.team1Helps = data.helps;
-                else window.team2Helps = data.helps;
-                renderHelps(team);
+                if (team === 'team1') window.t1Helps = data.helps;
+                else window.t2Helps = data.helps;
+                renderHelps();
 
                 if (data.helpType === 'remove2') {
-                    hiddenIndexes = data.removeIndexes;
                     var btns = document.querySelectorAll('.opt-btn');
                     for (var i = 0; i < data.removeIndexes.length; i++) {
                         btns[data.removeIndexes[i]].classList.add('hidden-opt');
                     }
                 }
-
-                if (data.helpType === 'extraTime') {
-                    timeLeft += data.extraSeconds;
-                }
-
+                if (data.helpType === 'extraTime') { timeLeft += data.extraSeconds; }
                 if (data.helpType === 'changeQ') {
                     currentQuestion = data.newQuestion;
                     document.getElementById('qText').textContent = currentQuestion.text;
-                    if (currentQuestion.image && currentQuestion.image.length > 5) {
-                        document.getElementById('qImage').src = currentQuestion.image;
-                        document.getElementById('qImageBox').style.display = 'block';
-                    } else {
-                        document.getElementById('qImageBox').style.display = 'none';
-                    }
                     var grid = document.getElementById('optsGrid');
                     grid.innerHTML = '';
-                    var letters = ['أ', 'ب', 'ج', 'د'];
+                    var letters = ['أ','ب','ج','د'];
                     for (var i = 0; i < currentQuestion.options.length; i++) {
                         var btn = document.createElement('div');
                         btn.className = 'opt-btn';
                         btn.innerHTML = '<span class="opt-letter">' + letters[i] + '</span> ' + currentQuestion.options[i];
-                        (function(idx) { btn.addEventListener('click', function() { selectAnswer(idx); }); })(i);
+                        (function(idx) { btn.addEventListener('click', function() { pickAnswer(idx); }); })(i);
                         grid.appendChild(btn);
                     }
-                    hiddenIndexes = [];
                     startTimer(60);
                 }
             });
@@ -426,20 +432,18 @@
         function startTimer(seconds) {
             clearInterval(timerInterval);
             timeLeft = seconds;
-            var maxTime = seconds;
-            updateTimer(maxTime);
+            var maxT = seconds;
+            updateTimer(maxT);
 
             timerInterval = setInterval(function() {
                 timeLeft--;
-                updateTimer(maxTime);
+                updateTimer(maxT);
                 if (timeLeft <= 0) {
                     clearInterval(timerInterval);
                     if (!answered) {
                         if (!isSecondChance) {
-                            // انتهى وقت الفريق الأول - 15 ثانية للفريق الثاني
                             startSecondChance();
                         } else {
-                            // انتهى الوقت للجميع
                             timeUpFinal();
                         }
                     }
@@ -447,37 +451,35 @@
             }, 1000);
         }
 
-        function updateTimer(maxTime) {
+        function updateTimer(maxT) {
             var el = document.getElementById('timer');
             var fill = document.getElementById('timerFill');
             el.textContent = timeLeft;
-            fill.style.width = ((timeLeft / maxTime) * 100) + '%';
+            fill.style.width = ((timeLeft / maxT) * 100) + '%';
 
             if (timeLeft <= 10) { el.className = 'timer danger'; fill.style.background = '#e74c3c'; }
             else if (timeLeft <= 20) { el.className = 'timer warn'; fill.style.background = '#f39c12'; }
             else { el.className = 'timer'; fill.style.background = '#2ecc71'; }
         }
 
-        // ===== وقت إضافي 15 ثانية للفريق الثاني =====
         function startSecondChance() {
             isSecondChance = true;
-            document.getElementById('timerLabel').textContent = '⚡ فرصة ثانية! الفريق الآخر يمكنه الإجابة';
-            document.getElementById('timerLabel').style.color = '#e74c3c';
+            var label = document.getElementById('timerLabel');
+            label.textContent = '⚡ فرصة أخيرة! 15 ثانية للفريق الآخر';
+            label.className = 'timer-label red';
             startTimer(15);
         }
 
+        // عند انتهاء الوقت نهائياً - نعرض نافذة اختيار الفريق
         function timeUpFinal() {
             answered = true;
-            var btns = document.querySelectorAll('.opt-btn');
-            for (var i = 0; i < btns.length; i++) btns[i].classList.add('disabled');
-            btns[currentQuestion.correctIndex].classList.add('correct');
-
-            // لم يجب أحد
-            submitToServer(-1, 'none');
+            clearInterval(timerInterval);
+            // نعرض نافذة "من أجاب" حتى لو انتهى الوقت
+            showTeamSelect();
         }
 
         // ===== اختيار إجابة =====
-        function selectAnswer(index) {
+        function pickAnswer(index) {
             if (answered) return;
             answered = true;
             clearInterval(timerInterval);
@@ -486,138 +488,99 @@
             var btns = document.querySelectorAll('.opt-btn');
             for (var i = 0; i < btns.length; i++) btns[i].classList.add('disabled');
 
-            // إظهار نافذة اختيار الفريق
-            document.getElementById('teamSelectTitle').textContent = '🎯 من أجاب على هذا السؤال؟';
-            document.getElementById('teamSelectOverlay').classList.add('show');
+            // إظهار نافذة "من أجاب على السؤال"
+            showTeamSelect();
         }
 
-        function confirmAnswer(team) {
-            document.getElementById('teamSelectOverlay').classList.remove('show');
+        function showTeamSelect() {
+            document.getElementById('teamOverlay').classList.add('show');
+        }
 
+        // ===== تأكيد الفريق المجاوب =====
+        function submitWithTeam(team) {
+            document.getElementById('teamOverlay').classList.remove('show');
+
+            var optionToSend = selectedOptionIndex;
+
+            // إذا "لا أحد" أو انتهى الوقت بدون إجابة
             if (team === 'none') {
-                // لم يجب أحد
-                var btns = document.querySelectorAll('.opt-btn');
-                btns[currentQuestion.correctIndex].classList.add('correct');
-                if (selectedOptionIndex >= 0 && selectedOptionIndex !== currentQuestion.correctIndex) {
-                    btns[selectedOptionIndex].classList.add('wrong');
-                }
-                showResult(false, 0, team);
-                // تسجيل في السيرفر
-                fetch('/api/games/' + gameId + '/answer', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ questionId: currentQuestion.questionId, selectedOption: -1, team: 'none' })
-                }).then(function(r) { return r.json(); }).then(function(data) {
-                    document.getElementById('t1score').textContent = data.team1Score;
-                    document.getElementById('t2score').textContent = data.team2Score;
-                    if (data.finished) {
-                        document.getElementById('resBtn').textContent = '🏆 النتائج';
-                        document.getElementById('resBtn').onclick = function() { window.location.href = '/results.html'; };
-                    }
-                });
-                return;
+                optionToSend = -1;
             }
 
-            submitToServer(selectedOptionIndex, team);
-        }
+            // إذا لم يتم اختيار إجابة (انتهى الوقت)
+            if (selectedOptionIndex === -1) {
+                optionToSend = -1;
+            }
 
-        function submitToServer(selectedIndex, team) {
             fetch('/api/games/' + gameId + '/answer', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ questionId: currentQuestion.questionId, selectedOption: selectedIndex, team: team })
+                body: JSON.stringify({
+                    questionId: currentQuestion.questionId,
+                    selectedOption: optionToSend,
+                    team: team
+                })
             })
             .then(function(r) { return r.json(); })
             .then(function(data) {
+                if (!data.success) { backToBoard(); return; }
+
+                // إظهار الإجابة الصحيحة والخاطئة
                 var btns = document.querySelectorAll('.opt-btn');
+                for (var i = 0; i < btns.length; i++) btns[i].classList.add('disabled');
                 btns[data.correctIndex].classList.add('correct');
-                if (selectedIndex >= 0 && selectedIndex !== data.correctIndex) btns[selectedIndex].classList.add('wrong');
+                if (optionToSend >= 0 && optionToSend !== data.correctIndex) {
+                    btns[optionToSend].classList.add('wrong');
+                }
 
                 document.getElementById('t1score').textContent = data.team1Score;
                 document.getElementById('t2score').textContent = data.team2Score;
 
                 setTimeout(function() {
-                    showResult(data.isCorrect, data.pointsEarned, team);
-                    if (data.finished) {
-                        document.getElementById('resBtn').textContent = '🏆 النتائج';
-                        document.getElementById('resBtn').onclick = function() { window.location.href = '/results.html'; };
+                    var icon = document.getElementById('resIcon');
+                    var text = document.getElementById('resText');
+                    var pts = document.getElementById('resPts');
+                    var btn = document.getElementById('resBtn');
+
+                    var teamDisplayName = team === 'team1' ? team1Name : team === 'team2' ? team2Name : '';
+
+                    if (team === 'none' || optionToSend === -1) {
+                        icon.textContent = '⏭️';
+                        text.textContent = 'لم يجب أحد على السؤال';
+                        pts.textContent = '0 نقطة';
+                        pts.style.color = '#888';
+                    } else if (data.isCorrect) {
+                        icon.textContent = '🎉';
+                        text.textContent = '✅ ' + teamDisplayName + ' أجاب بشكل صحيح!';
+                        pts.textContent = '+' + data.pointsEarned + ' نقطة';
+                        pts.style.color = '#2ecc71';
+                    } else {
+                        icon.textContent = '❌';
+                        text.textContent = '❌ ' + teamDisplayName + ' أجاب بشكل خاطئ';
+                        pts.textContent = '0 نقطة';
+                        pts.style.color = '#e74c3c';
                     }
+
+                    if (data.finished) {
+                        btn.textContent = '🏆 عرض النتائج';
+                        btn.onclick = function() { window.location.href = '/results.html'; };
+                    } else {
+                        btn.textContent = '🔙 العودة للوحة';
+                        btn.onclick = backToBoard;
+                    }
+
+                    document.getElementById('resultOverlay').classList.add('show');
                 }, 1200);
             });
         }
 
-        function showResult(isCorrect, pointsEarned, team) {
-            var icon = document.getElementById('resIcon');
-            var text = document.getElementById('resText');
-            var pts = document.getElementById('resPts');
-
-            var teamDisplayName = team === 'team1' ? team1Name : team === 'team2' ? team2Name : '';
-
-            if (team === 'none' || selectedOptionIndex === -1) {
-                icon.textContent = '⏰';
-                text.textContent = 'لم يجب أحد!';
-                pts.textContent = '0';
-                pts.style.color = '#e74c3c';
-            } else if (isCorrect) {
-                icon.textContent = '🎉';
-                text.textContent = teamDisplayName + ' - إجابة صحيحة!';
-                pts.textContent = '+' + pointsEarned;
-                pts.style.color = '#2ecc71';
-            } else {
-                icon.textContent = '❌';
-                text.textContent = teamDisplayName + ' - إجابة خاطئة!';
-                pts.textContent = '0';
-                pts.style.color = '#e74c3c';
-            }
-
-            document.getElementById('resultOverlay').classList.add('show');
-        }
-
         function backToBoard() {
             document.getElementById('resultOverlay').classList.remove('show');
-            document.getElementById('timerLabel').style.color = '#888';
+            var label = document.getElementById('timerLabel');
+            label.textContent = '⏱️ وقت الإجابة';
+            label.className = 'timer-label';
             loadBoard();
         }
-
-        // ===== تعديل النقاط =====
-        function toggleEditScore(team) {
-            event.stopPropagation();
-            var box = document.getElementById('edit' + (team === 'team1' ? 'Team1' : 'Team2'));
-            box.classList.toggle('show');
-
-            var currentScore = document.getElementById(team === 'team1' ? 't1score' : 't2score').textContent;
-            document.getElementById(team === 'team1' ? 'editScore1' : 'editScore2').value = currentScore;
-        }
-
-        function saveScore(team) {
-            event.stopPropagation();
-            var input = document.getElementById(team === 'team1' ? 'editScore1' : 'editScore2');
-            var newScore = parseInt(input.value);
-
-            if (isNaN(newScore) || newScore < 0) { alert('أدخل رقم صحيح'); return; }
-
-            fetch('/api/games/' + gameId + '/edit-score', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ team: team, newScore: newScore })
-            })
-            .then(function(r) { return r.json(); })
-            .then(function(data) {
-                if (data.success) {
-                    document.getElementById('t1score').textContent = data.team1Score;
-                    document.getElementById('t2score').textContent = data.team2Score;
-                    toggleEditScore(team);
-                }
-            });
-        }
-
-        // إغلاق تعديل النقاط عند الضغط خارجها
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.team-score')) {
-                document.getElementById('editTeam1').classList.remove('show');
-                document.getElementById('editTeam2').classList.remove('show');
-            }
-        });
     </script>
 </body>
 </html>
