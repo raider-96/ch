@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl"> 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -147,6 +147,20 @@
             font-weight: 500;
             transition: color 0.3s;
         }
+        .cat-count {
+    font-size: 11px;
+    color: #888;
+    margin-top: 6px;
+    background: rgba(255,255,255,0.05);
+    padding: 3px 8px;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+.cat-option.selected .cat-count {
+    color: #2ecc71;
+    background: rgba(46,204,113,0.1);
+}
 
         .rules-list li:hover { color: #fff; }
 
@@ -436,27 +450,27 @@
             });
         }
 
-        function buildCategories(){
-            var g1=document.getElementById('team1Grid');
-            var g2=document.getElementById('team2Grid');
-            g1.innerHTML=''; g2.innerHTML='';
+      function buildCategories(){
+    var g1=document.getElementById('team1Grid');
+    var g2=document.getElementById('team2Grid');
+    g1.innerHTML=''; g2.innerHTML='';
 
-            for(var i=0;i<categories.length;i++){
-                var cat=categories[i];
+    for(var i=0;i<categories.length;i++){
+        var cat=categories[i];
 
-                var d1=document.createElement('div');
-                d1.className='cat-option';
-                d1.innerHTML='<span class="cat-icon">'+cat.icon+'</span>'+cat.name;
-                (function(id,el){ el.addEventListener('click',function(){ handleClick('team1',id,el); }); })(cat.id,d1);
-                g1.appendChild(d1);
+        var d1=document.createElement('div');
+        d1.className='cat-option';
+        d1.innerHTML='<span class="cat-icon">'+cat.icon+'</span>'+cat.name+'<div class="cat-count">📊 '+cat.totalQuestions+' سؤال</div>';
+        (function(id,el){ el.addEventListener('click',function(){ handleClick('team1',id,el); }); })(cat.id,d1);
+        g1.appendChild(d1);
 
-                var d2=document.createElement('div');
-                d2.className='cat-option';
-                d2.innerHTML='<span class="cat-icon">'+cat.icon+'</span>'+cat.name;
-                (function(id,el){ el.addEventListener('click',function(){ handleClick('team2',id,el); }); })(cat.id,d2);
-                g2.appendChild(d2);
-            }
-        }
+        var d2=document.createElement('div');
+        d2.className='cat-option';
+        d2.innerHTML='<span class="cat-icon">'+cat.icon+'</span>'+cat.name+'<div class="cat-count">📊 '+cat.totalQuestions+' سؤال</div>';
+        (function(id,el){ el.addEventListener('click',function(){ handleClick('team2',id,el); }); })(cat.id,d2);
+        g2.appendChild(d2);
+    }
+}
 
         function handleClick(team,catId,el){
             var sel=(team==='team1')?team1Selected:team2Selected;
