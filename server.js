@@ -92,6 +92,17 @@ function getPresetUsers() {
 // ===== بنك الأسئلة (مختصر للمثال) =====
 
 function getQuestionsData() {
+    function prepQuestions(qs) {
+    var arr = [];
+    for (var i = 0; i < qs.length; i++) {
+        arr.push({
+            id: qs[i].id, text: qs[i].text, options: qs[i].options,
+            correctIndex: qs[i].correctIndex, difficulty: qs[i].difficulty,
+            points: qs[i].points, image: '', usedByUsers: []
+        });
+    }
+    return arr;
+} 
     var data = { categories: [] };
 
     // ==================== 1. مسلسلات عربية ====================
@@ -373,7 +384,6 @@ function getQuestionsData() {
         { id:'am60', text:'بطل فيلم زوجتي والكلب؟', options:['نور الشريف','محمود مرسي','شكري سرحان','صلاح قابيل'], correctIndex:1, difficulty:'hard', points:400 }
     ]};
     data.categories.push({ id:arabMovies.id, name:arabMovies.name, icon:arabMovies.icon, questions: prepQuestions(arabMovies.qs) });
-
     // ==================== 5. أفلام أجنبية ====================
     var foreignMovies = { id:'foreign_movies', name:'أفلام أجنبية', icon:'🎥', qs:[
         // سهل
@@ -443,7 +453,151 @@ function getQuestionsData() {
         { id:'fm60', text:'في أي سنة عرض فيلم Goodfellas؟', options:['1988','1989','1990','1991'], correctIndex:2, difficulty:'hard', points:400 }
     ]};
     data.categories.push({ id:foreignMovies.id, name:foreignMovies.name, icon:foreignMovies.icon, questions: prepQuestions(foreignMovies.qs) });
+    // ==================== 6. أسئلة دين ====================
+    var religion = { id:'religion', name:'أسئلة دين', icon:'🕌', qs:[
+        // ===== سهل (20 سؤال) =====
+        { id:'rl1', text:'كم عدد أركان الإسلام؟', options:['3','4','5','6'], correctIndex:2, difficulty:'easy', points:100 },
+        { id:'rl2', text:'كم عدد أركان الإيمان؟', options:['4','5','6','7'], correctIndex:2, difficulty:'easy', points:100 },
+        { id:'rl3', text:'كم عدد ركعات صلاة الظهر؟', options:['2','3','4','5'], correctIndex:2, difficulty:'easy', points:100 },
+        { id:'rl4', text:'كم عدد ركعات صلاة الفجر؟', options:['2','3','4','5'], correctIndex:0, difficulty:'easy', points:100 },
+        { id:'rl5', text:'كم عدد ركعات صلاة المغرب؟', options:['2','3','4','5'], correctIndex:1, difficulty:'easy', points:100 },
+        { id:'rl6', text:'في أي شهر يصوم المسلمون؟', options:['شعبان','رمضان','شوال','ذو الحجة'], correctIndex:1, difficulty:'easy', points:100 },
+        { id:'rl7', text:'كم عدد سور القرآن الكريم؟', options:['110','114','116','120'], correctIndex:1, difficulty:'easy', points:100 },
+        { id:'rl8', text:'ما هي أول سورة في القرآن؟', options:['البقرة','الفاتحة','الناس','العلق'], correctIndex:1, difficulty:'easy', points:100 },
+        { id:'rl9', text:'ما هي آخر سورة في القرآن؟', options:['الفلق','الناس','الإخلاص','الكوثر'], correctIndex:1, difficulty:'easy', points:100 },
+        { id:'rl10', text:'ما هي أطول سورة في القرآن؟', options:['البقرة','آل عمران','النساء','المائدة'], correctIndex:0, difficulty:'easy', points:100 },
+        { id:'rl11', text:'في أي مدينة وُلد النبي محمد ﷺ؟', options:['مكة','المدينة','الطائف','جدة'], correctIndex:0, difficulty:'easy', points:100 },
+        { id:'rl12', text:'في أي مدينة دُفن النبي محمد ﷺ؟', options:['مكة','المدينة','الطائف','القدس'], correctIndex:1, difficulty:'easy', points:100 },
+        { id:'rl13', text:'من هو أول الخلفاء الراشدين؟', options:['أبو بكر الصديق','عمر بن الخطاب','عثمان بن عفان','علي بن أبي طالب'], correctIndex:0, difficulty:'easy', points:100 },
+        { id:'rl14', text:'كم عدد الخلفاء الراشدين؟', options:['3','4','5','6'], correctIndex:1, difficulty:'easy', points:100 },
+        { id:'rl15', text:'ما اسم زوجة النبي الأولى؟', options:['عائشة','خديجة','حفصة','أم سلمة'], correctIndex:1, difficulty:'easy', points:100 },
+        { id:'rl16', text:'ما اسم والد النبي محمد ﷺ؟', options:['عبد المطلب','عبد الله','أبو طالب','حمزة'], correctIndex:1, difficulty:'easy', points:100 },
+        { id:'rl17', text:'ما اسم والدة النبي محمد ﷺ؟', options:['آمنة','خديجة','عائشة','فاطمة'], correctIndex:0, difficulty:'easy', points:100 },
+        { id:'rl18', text:'في أي شهر وُلد النبي محمد ﷺ؟', options:['ربيع الأول','رمضان','محرم','شعبان'], correctIndex:0, difficulty:'easy', points:100 },
+        { id:'rl19', text:'كم سنة عاش النبي محمد ﷺ؟', options:['60','63','65','70'], correctIndex:1, difficulty:'easy', points:100 },
+        { id:'rl20', text:'ما هي قبلة المسلمين؟', options:['الكعبة','القدس','المدينة','الطور'], correctIndex:0, difficulty:'easy', points:100 },
 
+        // ===== متوسط (20 سؤال) =====
+        { id:'rl21', text:'كم عدد آيات سورة البقرة؟', options:['282','284','286','288'], correctIndex:2, difficulty:'medium', points:200 },
+        { id:'rl22', text:'في أي سنة هجرية فُرضت الصلاة؟', options:['قبل الهجرة','السنة 1','السنة 2','السنة 3'], correctIndex:0, difficulty:'medium', points:200 },
+        { id:'rl23', text:'كم عدد الأنبياء المذكورين في القرآن؟', options:['20','25','30','35'], correctIndex:1, difficulty:'medium', points:200 },
+        { id:'rl24', text:'ما هي أول معركة في الإسلام؟', options:['أحد','بدر','الخندق','حنين'], correctIndex:1, difficulty:'medium', points:200 },
+        { id:'rl25', text:'في أي سنة هجرية وقعت غزوة بدر؟', options:['1','2','3','4'], correctIndex:1, difficulty:'medium', points:200 },
+        { id:'rl26', text:'من هو أول من أسلم من الرجال؟', options:['أبو بكر','علي بن أبي طالب','عمر','عثمان'], correctIndex:0, difficulty:'medium', points:200 },
+        { id:'rl27', text:'من هو أول من أسلم من الصبيان؟', options:['أبو بكر','علي بن أبي طالب','زيد بن حارثة','أسامة'], correctIndex:1, difficulty:'medium', points:200 },
+        { id:'rl28', text:'من هو أول من أسلم من الموالي؟', options:['زيد بن حارثة','بلال','سلمان الفارسي','صهيب'], correctIndex:0, difficulty:'medium', points:200 },
+        { id:'rl29', text:'كم سنة استمر النبي ﷺ يدعو في مكة قبل الهجرة؟', options:['10','13','15','20'], correctIndex:1, difficulty:'medium', points:200 },
+        { id:'rl30', text:'ما اسم الغار الذي اختبأ فيه النبي وأبو بكر؟', options:['غار حراء','غار ثور','غار الكهف','غار المرسلات'], correctIndex:1, difficulty:'medium', points:200 },
+        { id:'rl31', text:'ما اسم الغار الذي نزل فيه الوحي على النبي؟', options:['غار حراء','غار ثور','غار الكهف','غار النور'], correctIndex:0, difficulty:'medium', points:200 },
+        { id:'rl32', text:'ما هي السورة التي تُقرأ يوم الجمعة؟', options:['يس','الكهف','الملك','الواقعة'], correctIndex:1, difficulty:'medium', points:200 },
+        { id:'rl33', text:'كم عدد آيات سورة الفاتحة؟', options:['5','6','7','8'], correctIndex:2, difficulty:'medium', points:200 },
+        { id:'rl34', text:'ما هي السورة التي تعدل ثلث القرآن؟', options:['الفاتحة','يس','الإخلاص','الكوثر'], correctIndex:2, difficulty:'medium', points:200 },
+        { id:'rl35', text:'من هو خاتم الأنبياء والمرسلين؟', options:['عيسى','موسى','محمد','إبراهيم'], correctIndex:2, difficulty:'medium', points:200 },
+        { id:'rl36', text:'من هو نبي الله الذي كلمه الله مباشرة؟', options:['محمد','عيسى','موسى','إبراهيم'], correctIndex:2, difficulty:'medium', points:200 },
+        { id:'rl37', text:'كم عدد الكتب السماوية؟', options:['3','4','5','6'], correctIndex:1, difficulty:'medium', points:200 },
+        { id:'rl38', text:'على من نزل كتاب الزبور؟', options:['داود','سليمان','موسى','عيسى'], correctIndex:0, difficulty:'medium', points:200 },
+        { id:'rl39', text:'على من نزل الإنجيل؟', options:['موسى','عيسى','داود','محمد'], correctIndex:1, difficulty:'medium', points:200 },
+        { id:'rl40', text:'على من نزلت التوراة؟', options:['عيسى','داود','موسى','إبراهيم'], correctIndex:2, difficulty:'medium', points:200 },
+
+        // ===== صعب (20 سؤال) =====
+        { id:'rl41', text:'كم عدد آيات القرآن الكريم؟', options:['6236','6346','6446','6536'], correctIndex:0, difficulty:'hard', points:400 },
+        { id:'rl42', text:'كم عدد كلمات القرآن الكريم تقريباً؟', options:['77,000','77,439','78,000','79,000'], correctIndex:1, difficulty:'hard', points:400 },
+        { id:'rl43', text:'كم عدد أحرف القرآن الكريم تقريباً؟', options:['320,000','323,015','330,000','340,000'], correctIndex:1, difficulty:'hard', points:400 },
+        { id:'rl44', text:'كم عدد السور المكية في القرآن؟', options:['82','86','89','92'], correctIndex:2, difficulty:'hard', points:400 },
+        { id:'rl45', text:'كم عدد السور المدنية في القرآن؟', options:['25','27','29','31'], correctIndex:0, difficulty:'hard', points:400 },
+        { id:'rl46', text:'في أي سنة هجرية فُرض الصيام؟', options:['1','2','3','4'], correctIndex:1, difficulty:'hard', points:400 },
+        { id:'rl47', text:'في أي سنة هجرية فُرضت الزكاة؟', options:['1','2','3','4'], correctIndex:1, difficulty:'hard', points:400 },
+        { id:'rl48', text:'في أي سنة هجرية فُرض الحج؟', options:['7','8','9','10'], correctIndex:2, difficulty:'hard', points:400 },
+        { id:'rl49', text:'كم سنة استمرت خلافة أبي بكر الصديق؟', options:['سنتان','3 سنوات','4 سنوات','5 سنوات'], correctIndex:0, difficulty:'hard', points:400 },
+        { id:'rl50', text:'كم سنة استمرت خلافة عمر بن الخطاب؟', options:['8','10','12','14'], correctIndex:1, difficulty:'hard', points:400 },
+        { id:'rl51', text:'كم سنة استمرت خلافة عثمان بن عفان؟', options:['10','12','14','16'], correctIndex:1, difficulty:'hard', points:400 },
+        { id:'rl52', text:'كم سنة استمرت خلافة علي بن أبي طالب؟', options:['3','4','5','6'], correctIndex:1, difficulty:'hard', points:400 },
+        { id:'rl53', text:'ما اسم أول مسجد بُني في الإسلام؟', options:['قباء','النبوي','الحرام','الأقصى'], correctIndex:0, difficulty:'hard', points:400 },
+        { id:'rl54', text:'كم عدد الذين هاجروا في الهجرة الأولى للحبشة؟', options:['10','12','15','20'], correctIndex:0, difficulty:'hard', points:400 },
+        { id:'rl55', text:'من هو الصحابي الذي كان يكتب الوحي؟', options:['زيد بن ثابت','معاوية بن أبي سفيان','أبي بن كعب','جميع ما سبق'], correctIndex:3, difficulty:'hard', points:400 },
+        { id:'rl56', text:'في عهد أي خليفة جُمع القرآن في مصحف واحد؟', options:['أبي بكر','عمر','عثمان','علي'], correctIndex:2, difficulty:'hard', points:400 },
+        { id:'rl57', text:'من هو الصحابي الملقب بـ "أمين الأمة"؟', options:['أبو بكر','عمر','أبو عبيدة بن الجراح','معاذ بن جبل'], correctIndex:2, difficulty:'hard', points:400 },
+        { id:'rl58', text:'من هو الصحابي الملقب بـ "سيف الله المسلول"؟', options:['عمر بن الخطاب','خالد بن الوليد','علي بن أبي طالب','حمزة'], correctIndex:1, difficulty:'hard', points:400 },
+        { id:'rl59', text:'من هو الصحابي الذي قال عنه النبي "إن الجنة تشتاق إليه"؟', options:['عمر','علي','سلمان الفارسي','عمار بن ياسر'], correctIndex:2, difficulty:'hard', points:400 },
+        { id:'rl60', text:'كم عدد غزوات الرسول ﷺ؟', options:['25','27','29','30'], correctIndex:1, difficulty:'hard', points:400 }
+    ]};
+    data.categories.push({ id:religion.id, name:religion.name, icon:religion.icon, questions: prepQuestions(religion.qs) });
+       // ==================== 7. سيارات ====================
+    var cars = { id:'cars', name:'سيارات', icon:'🚗', qs:[
+        // سهل
+        { id:'car1', text:'ما هو شعار شركة BMW؟', options:['دائرة زرقاء وبيضاء','نجمة ثلاثية','حصان جامح','أربع حلقات'], correctIndex:0, difficulty:'easy', points:100 },
+        { id:'car2', text:'ما هو شعار مرسيدس؟', options:['أربع حلقات','نجمة ثلاثية','حصان','أسد'], correctIndex:1, difficulty:'easy', points:100 },
+        { id:'car3', text:'ما هو شعار أودي؟', options:['ثلاث حلقات','أربع حلقات','نجمة','صليب'], correctIndex:1, difficulty:'easy', points:100 },
+        { id:'car4', text:'من أي بلد تويوتا؟', options:['ألمانيا','اليابان','كوريا','أمريكا'], correctIndex:1, difficulty:'easy', points:100 },
+        { id:'car5', text:'من أي بلد بي إم دبليو؟', options:['ألمانيا','إيطاليا','فرنسا','بريطانيا'], correctIndex:0, difficulty:'easy', points:100 },
+        { id:'car6', text:'من أي بلد فيراري؟', options:['ألمانيا','إيطاليا','فرنسا','إسبانيا'], correctIndex:1, difficulty:'easy', points:100 },
+        { id:'car7', text:'من أي بلد لامبورغيني؟', options:['ألمانيا','إيطاليا','فرنسا','بريطانيا'], correctIndex:1, difficulty:'easy', points:100 },
+        { id:'car8', text:'من أي بلد هيونداي؟', options:['اليابان','الصين','كوريا الجنوبية','تايوان'], correctIndex:2, difficulty:'easy', points:100 },
+        { id:'car9', text:'من أي بلد فولكس فاجن؟', options:['ألمانيا','النمسا','هولندا','بلجيكا'], correctIndex:0, difficulty:'easy', points:100 },
+        { id:'car10', text:'من أي بلد رولز رويس؟', options:['ألمانيا','بريطانيا','فرنسا','إيطاليا'], correctIndex:1, difficulty:'easy', points:100 },
+        { id:'car11', text:'ما هو شعار فيراري؟', options:['أسد','حصان جامح','ثور','نمر'], correctIndex:1, difficulty:'easy', points:100 },
+        { id:'car12', text:'ما هو شعار لامبورغيني؟', options:['حصان','ثور','أسد','نمر'], correctIndex:1, difficulty:'easy', points:100 },
+        { id:'car13', text:'ما هو شعار بيجو؟', options:['حصان','أسد','ثور','نسر'], correctIndex:1, difficulty:'easy', points:100 },
+        { id:'car14', text:'ما هو شعار جاكوار؟', options:['أسد','نمر','جاكوار','فهد'], correctIndex:2, difficulty:'easy', points:100 },
+        { id:'car15', text:'ما هو شعار فيراري بالألوان؟', options:['أحمر وأسود','أصفر وأسود','أبيض وأسود','أزرق وأبيض'], correctIndex:1, difficulty:'easy', points:100 },
+        { id:'car16', text:'من أي بلد فولفو؟', options:['ألمانيا','السويد','النرويج','الدنمارك'], correctIndex:1, difficulty:'easy', points:100 },
+        { id:'car17', text:'من أي بلد سيات؟', options:['إيطاليا','إسبانيا','البرتغال','فرنسا'], correctIndex:1, difficulty:'easy', points:100 },
+        { id:'car18', text:'من أي بلد سكودا؟', options:['ألمانيا','تشيكيا','بولندا','المجر'], correctIndex:1, difficulty:'easy', points:100 },
+        { id:'car19', text:'من أي بلد أوبل؟', options:['ألمانيا','بريطانيا','فرنسا','إيطاليا'], correctIndex:0, difficulty:'easy', points:100 },
+        { id:'car20', text:'من أي بلد كرايسلر؟', options:['ألمانيا','أمريكا','كندا','بريطانيا'], correctIndex:1, difficulty:'easy', points:100 },
+
+        // متوسط
+        { id:'car21', text:'في أي عام تأسست شركة فيراري؟', options:['1929','1939','1947','1955'], correctIndex:2, difficulty:'medium', points:200 },
+        { id:'car22', text:'في أي عام تأسست تويوتا؟', options:['1925','1937','1945','1950'], correctIndex:1, difficulty:'medium', points:200 },
+        { id:'car23', text:'في أي عام تأسست بي إم دبليو؟', options:['1916','1925','1935','1945'], correctIndex:0, difficulty:'medium', points:200 },
+        { id:'car24', text:'من مؤسس فيراري؟', options:['إنزو فيراري','فيرنشيو لامبورغيني','هنري فورد','كارل بنز'], correctIndex:0, difficulty:'medium', points:200 },
+        { id:'car25', text:'من مؤسس لامبورغيني؟', options:['إنزو لامبورغيني','فيرنشيو لامبورغيني','هنري لامبورغيني','كارل لامبورغيني'], correctIndex:1, difficulty:'medium', points:200 },
+        { id:'car26', text:'من مؤسس فورد؟', options:['هنري فورد','جون فورد','جيمس فورد','ويليام فورد'], correctIndex:0, difficulty:'medium', points:200 },
+        { id:'car27', text:'ما هي أسرع سيارة إنتاج في العالم؟', options:['بوغاتي شيرون','هينيسي فينوم','كونيغسيج جيسكو','SSC توتارا'], correctIndex:3, difficulty:'medium', points:200 },
+        { id:'car28', text:'ما هي أغلى سيارة في العالم؟', options:['بوغاتي لا فواتور نوار','رولز رويس بوت تيل','بوغاتي شيرون','فيراري 250 GTO'], correctIndex:1, difficulty:'medium', points:200 },
+        { id:'car29', text:'من مؤسس تسلا؟', options:['إيلون ماسك','مارتن إيبرهارد','نيكولا تسلا','جيف بيزوس'], correctIndex:1, difficulty:'medium', points:200 },
+        { id:'car30', text:'في أي عام تأسست تسلا؟', options:['2001','2003','2005','2007'], correctIndex:1, difficulty:'medium', points:200 },
+        { id:'car31', text:'ما اسم أول سيارة من تسلا؟', options:['Model S','Model 3','Roadster','Model X'], correctIndex:2, difficulty:'medium', points:200 },
+        { id:'car32', text:'ما هي الشركة الأم لـ بنتلي؟', options:['BMW','فولكس فاجن','مرسيدس','أودي'], correctIndex:1, difficulty:'medium', points:200 },
+        { id:'car33', text:'ما هي الشركة الأم لـ بوغاتي؟', options:['BMW','فولكس فاجن','مرسيدس','بورش'], correctIndex:1, difficulty:'medium', points:200 },
+        { id:'car34', text:'ما هي الشركة الأم لـ رولز رويس؟', options:['BMW','فولكس فاجن','مرسيدس','جاكوار'], correctIndex:0, difficulty:'medium', points:200 },
+        { id:'car35', text:'ما هي الشركة الأم لـ ميني؟', options:['BMW','فولكس فاجن','مرسيدس','تويوتا'], correctIndex:0, difficulty:'medium', points:200 },
+        { id:'car36', text:'ما هي الشركة الأم لـ لكزس؟', options:['هوندا','تويوتا','نيسان','مازدا'], correctIndex:1, difficulty:'medium', points:200 },
+        { id:'car37', text:'ما هي الشركة الأم لـ إنفينيتي؟', options:['تويوتا','هوندا','نيسان','مازدا'], correctIndex:2, difficulty:'medium', points:200 },
+        { id:'car38', text:'ما هي الشركة الأم لـ أكورا؟', options:['تويوتا','هوندا','نيسان','مازدا'], correctIndex:1, difficulty:'medium', points:200 },
+        { id:'car39', text:'كم سرعة بوغاتي شيرون القصوى؟', options:['350 كم/س','420 كم/س','490 كم/س','520 كم/س'], correctIndex:1, difficulty:'medium', points:200 },
+        { id:'car40', text:'ما هو أكثر طراز سيارة مبيعاً في التاريخ؟', options:['تويوتا كورولا','فورد F-150','فولكس فاجن جولف','هوندا سيفيك'], correctIndex:0, difficulty:'medium', points:200 },
+
+        // صعب
+        { id:'car41', text:'في أي عام اخترع كارل بنز أول سيارة؟', options:['1876','1886','1896','1906'], correctIndex:1, difficulty:'hard', points:400 },
+        { id:'car42', text:'ما اسم أول سيارة في العالم؟', options:['فورد T','بنز موتورفاجن','فولكس بيتل','مرسيدس A'], correctIndex:1, difficulty:'hard', points:400 },
+        { id:'car43', text:'كم محرك تستخدم بوغاتي شيرون؟', options:['V8','V10','V12','W16'], correctIndex:3, difficulty:'hard', points:400 },
+        { id:'car44', text:'كم حصاناً قوة بوغاتي شيرون؟', options:['1200','1500','1800','2000'], correctIndex:1, difficulty:'hard', points:400 },
+        { id:'car45', text:'في أي عام أُسست بورش؟', options:['1921','1931','1941','1951'], correctIndex:1, difficulty:'hard', points:400 },
+        { id:'car46', text:'من مؤسس بورش؟', options:['فرديناند بورش','كارل بورش','هانز بورش','أوتو بورش'], correctIndex:0, difficulty:'hard', points:400 },
+        { id:'car47', text:'في أي عام أُنتجت أول سيارة فولكس فاجن بيتل؟', options:['1928','1938','1948','1958'], correctIndex:1, difficulty:'hard', points:400 },
+        { id:'car48', text:'كم عدد عجلات سيارة فورمولا 1؟', options:['4','6','8','4 + بدلاء'], correctIndex:0, difficulty:'hard', points:400 },
+        { id:'car49', text:'كم تكلفة محرك سيارة فورمولا 1 تقريباً؟', options:['5 مليون $','10 مليون $','15 مليون $','20 مليون $'], correctIndex:1, difficulty:'hard', points:400 },
+        { id:'car50', text:'من بطل العالم في فورمولا 1 لعام 2023؟', options:['لويس هاميلتون','ماكس فيرستابن','شارل لوكلير','جورج راسل'], correctIndex:1, difficulty:'hard', points:400 },
+        { id:'car51', text:'كم بطولة عالم حصد ميشيل شوماخر؟', options:['5','6','7','8'], correctIndex:2, difficulty:'hard', points:400 },
+        { id:'car52', text:'كم بطولة عالم حصد لويس هاميلتون؟', options:['5','6','7','8'], correctIndex:2, difficulty:'hard', points:400 },
+        { id:'car53', text:'ما اسم أقدم شركة سيارات لا تزال تعمل؟', options:['مرسيدس','بنز','بيجو','رينو'], correctIndex:2, difficulty:'hard', points:400 },
+        { id:'car54', text:'في أي عام تأسست بيجو؟', options:['1810','1830','1850','1870'], correctIndex:1, difficulty:'hard', points:400 },
+        { id:'car55', text:'ما اسم محرك مازدا الفريد؟', options:['روتاري','تيربو','هايبرد','V-Twin'], correctIndex:0, difficulty:'hard', points:400 },
+        { id:'car56', text:'ما هي السيارة التي ظهرت في فيلم Back to the Future؟', options:['فيراري','ديلوريان DMC-12','بورش','مستانج'], correctIndex:1, difficulty:'hard', points:400 },
+        { id:'car57', text:'ما هي سيارة جيمس بوند الشهيرة؟', options:['أستون مارتن','فيراري','بنتلي','جاكوار'], correctIndex:0, difficulty:'hard', points:400 },
+        { id:'car58', text:'كم لتر يستهلك محرك بوغاتي في 100 كم؟', options:['25 لتر','35 لتر','60 لتر','95 لتر'], correctIndex:2, difficulty:'hard', points:400 },
+        { id:'car59', text:'ما اسم مالك ومؤسس شركة كونيغسيج؟', options:['كريستيان فون كونيغسيج','إنزو كونيغسيج','هانز كونيغسيج','أرنولد كونيغسيج'], correctIndex:0, difficulty:'hard', points:400 },
+        { id:'car60', text:'كم تكلفة سيارة Rolls-Royce Boat Tail؟', options:['10 مليون $','20 مليون $','28 مليون $','35 مليون $'], correctIndex:2, difficulty:'hard', points:400 }
+    ]};
+    data.categories.push({ id:cars.id, name:cars.name, icon:cars.icon, questions: prepQuestions(cars.qs) });
+   
+   
+   
+   
+   
+   
+   
     return data;
 }
 
