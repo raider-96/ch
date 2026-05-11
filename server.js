@@ -591,12 +591,219 @@ function getQuestionsData() {
         { id:'car60', text:'كم تكلفة سيارة Rolls-Royce Boat Tail؟', options:['10 مليون $','20 مليون $','28 مليون $','35 مليون $'], correctIndex:2, difficulty:'hard', points:400 }
     ]};
     data.categories.push({ id:cars.id, name:cars.name, icon:cars.icon, questions: prepQuestions(cars.qs) });
+  
+
+
+// ==================== مشاهير عرب ====================
+var arabCelebs = { id:'arabCelebs', name:'مشاهير عرب', icon:'⭐', qs:[
+// سهل
+{ id:'ac1', text:'ما لقب أم كلثوم؟', options:['كوكب الشرق','سيدة الشاشة العربية','العندليب الأسمر','فنان العرب'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'ac2', text:'ما جنسية فيروز؟', options:['لبنانية','سورية','مصرية','أردنية'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'ac3', text:'ما لقب عمرو دياب؟', options:['الهضبة','القيصر','الكينغ','السفير'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'ac4', text:'من يُعرف بلقب الزعيم في الكوميديا المصرية؟', options:['عادل إمام','يحيى الفخراني','محمد هنيدي','أحمد حلمي'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'ac5', text:'ما لقب عبد الحليم حافظ؟', options:['العندليب الأسمر','صوت الأرض','الكينغ','الأسطورة'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'ac6', text:'من يُلقّب بسلطان الطرب؟', options:['جورج وسوف','وائل كفوري','ملحم بركات','راغب علامة'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'ac7', text:'من يُلقّب بفنان العرب؟', options:['محمد عبده','كاظم الساهر','حسين الجسمي','عبد المجيد عبد الله'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'ac8', text:'من نجم كرة القدم المصري المحترف في ليفربول؟', options:['محمد صلاح','محمود تريزيغيه','أحمد حجازي','مصطفى محمد'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'ac9', text:'من تُعرف بسيدة الشاشة العربية؟', options:['فاتن حمامة','سعاد حسني','يسرا','لبنى عبد العزيز'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'ac10', text:'من صاحبة أغنية "يا مرايتي"؟', options:['إليسا','نانسي عجرم','شيرين عبد الوهاب','نجوى كرم'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'ac11', text:'من المطرب المغربي صاحب أغنية "إنت معلم"؟', options:['سعد لمجرد','عبد الحفيظ الدوزي','حسني','حاتم عمور'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'ac12', text:'من مقدّم برنامج "خواطر"؟', options:['أحمد الشقيري','مصطفى الآغا','عمرو أديب','جورج قرداحي'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'ac13', text:'من بطل مسلسل "الهيبة"؟', options:['تيم حسن','قصي خولي','باسل خياط','مكسيم خليل'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'ac14', text:'من الفنانة اللبنانية الملقبة بـ"الشحرورة"؟', options:['صباح','نجاة الصغيرة','هيفاء وهبي','ماجدة الرومي'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'ac15', text:'من المطرب العراقي الملقب بـ"القيصر"؟', options:['كاظم الساهر','ماجد المهندس','حسام الرسام','نصرت البدر'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'ac16', text:'من الروائي المصري الحائز نوبل للأدب 1988؟', options:['نجيب محفوظ','يوسف إدريس','توفيق الحكيم','أحمد خالد توفيق'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'ac17', text:'من المطرب المصري الملقب بـ"الكينغ"؟', options:['محمد منير','حميد الشاعري','تامر حسني','محمد فؤاد'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'ac18', text:'من صاحبة أغنية "يا بنات"؟', options:['نانسي عجرم','شيرين عبد الوهاب','إليسا','كارول سماحة'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'ac19', text:'من بطل فيلم "الجزيرة"؟', options:['أحمد السقا','أحمد عز','أحمد حلمي','أحمد مكي'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'ac20', text:'من صاحب أغنية "بشرة خير"؟', options:['حسين الجسمي','راشد الماجد','راغب علامة','وائل جسار'], correctIndex:0, difficulty:'easy', points:100 },
+// متوسط
+{ id:'ac21', text:'ما الاسم الحقيقي لعمر الشريف؟', options:['ميشيل ديمتري شلهوب','أشرف زكي','يوسف شاهين','عزت أبو عوف'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'ac22', text:'ما الاسم الحقيقي لشادية؟', options:['فاطمة أحمد شاكر','فاطمة إبراهيم السيد','زهرة عفت','سامية جمال'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'ac23', text:'من ملحّن أغنية "الأطلال" لأم كلثوم؟', options:['رياض السنباطي','محمد عبد الوهاب','بليغ حمدي','زكريا أحمد'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'ac24', text:'من شاعر قصيدة "الأطلال"؟', options:['إبراهيم ناجي','نزار قباني','أحمد شوقي','صلاح جاهين'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'ac25', text:'في أي عام حصل نجيب محفوظ على جائزة نوبل؟', options:['1988','1986','1990','1994'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'ac26', text:'من يُلقّب بـ"صوت الأرض"؟', options:['طلال مدّاح','محمد عبده','عبد المجيد عبد الله','عبادي الجوهر'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'ac27', text:'من كاتب كلمات "رسالة من تحت الماء" لعبد الحليم؟', options:['نزار قباني','عبد الرحمن الأبنودي','صلاح جاهين','حسين السيد'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'ac28', text:'من ملحّن "قارئة الفنجان"؟', options:['محمد الموجي','كمال الطويل','بليغ حمدي','حلمي بكر'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'ac29', text:'في أي محافظة وُلدت أم كلثوم؟', options:['الدقهلية','القاهرة','الغربية','المنيا'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'ac30', text:'ما جنسية المطربة وردة؟', options:['جزائرية','مصرية','مغربية','تونسية'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'ac31', text:'من كان زوج فيروز وشريكها الفني؟', options:['عاصي الرحباني','منصور الرحباني','زياد الرحباني','إلياس الرحباني'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'ac32', text:'من مخرج فيلم "الكيت كات"؟', options:['داود عبد السيد','يوسف شاهين','خالد يوسف','علي بدرخان'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'ac33', text:'من المخرج الفلسطيني لفيلم "عمر" المرشّح للأوسكار؟', options:['هاني أبو أسعد','إيليا سليمان','ميشيل خليفي','آن ماري جاسر'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'ac34', text:'من مخرج فيلم "المصير"؟', options:['يوسف شاهين','شريف عرفة','محمد خان','إيناس الدغيدي'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'ac35', text:'من مؤلف رواية "رجال في الشمس"؟', options:['غسان كنفاني','عبد الرحمن منيف','سهيل إدريس','إلياس خوري'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'ac36', text:'ما جنسية المطربة سميرة سعيد؟', options:['مغربية','جزائرية','مصرية','تونسية'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'ac37', text:'من مؤلف السيرة "الأيام"؟', options:['طه حسين','عباس محمود العقاد','إحسان عبد القدوس','مصطفى لطفي المنفلوطي'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'ac38', text:'ما لقب أحمد شوقي؟', options:['أمير الشعراء','شاعر النيل','شاعر المرأة','شاعر العرب'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'ac39', text:'من تُلقّب "سندريلا الشاشة العربية"؟', options:['سعاد حسني','فاتن حمامة','نادية لطفي','نجلاء فتحي'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'ac40', text:'من صاحب أغنية "الأماكن"؟', options:['محمد عبده','طلال مدّاح','عبد المجيد عبد الله','ماجد المهندس'], correctIndex:0, difficulty:'medium', points:200 },// صعب
+{ id:'ac41', text:'ما الاسم الحقيقي لفيروز؟', options:['نهاد وديع حدّاد','فاطمة الزهراء','جانيت فغالي','نوال الزغبي'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'ac42', text:'ما الاسم الحقيقي لوردة الجزائرية؟', options:['وردة فتوكي','وردة قنديل','وردة رباح','وردة الأطرش'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'ac43', text:'ما الاسم الحقيقي لأم كلثوم؟', options:['فاطمة إبراهيم السيد البلتاجي','آمال محمد علي','فاطمة أحمد شاكر','فاطمة ساسي'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'ac44', text:'من شاعر قصيدة "أنا وليلى"؟', options:['حسن المرواني','نزار قباني','عبد الوهاب البياتي','بدر شاكر السياب'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'ac45', text:'من ملحّن أغنية "أنا وليلى"؟', options:['كاظم الساهر','رياض السنباطي','محمد الموجي','بليغ حمدي'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'ac46', text:'من مخرج فيلم "باب الحديد" (1958)؟', options:['يوسف شاهين','صلاح أبو سيف','هنري بركات','كمال الشيخ'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'ac47', text:'في أي سنة توفيت سعاد حسني؟', options:['2001','1999','2003','1997'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'ac48', text:'من ملحّن "أمل حياتي" لأم كلثوم؟', options:['محمد عبد الوهاب','بليغ حمدي','زكريا أحمد','رياض السنباطي'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'ac49', text:'في أي مدينة وُلد نزار قباني؟', options:['دمشق','حلب','بيروت','بغداد'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'ac50', text:'من مؤلف رواية "الخبز الحافي"؟', options:['محمد شكري','الطيب صالح','إدريس الشرايبي','أمين معلوف'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'ac51', text:'من غنّى "مقادير" أولًا؟', options:['طلال مدّاح','محمد عبده','عبد المجيد عبد الله','راشد الماجد'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'ac52', text:'من مخرج فيلم "المخدوعون" (1972)؟', options:['توفيق صالح','يوسف شاهين','محمد ملص','مصطفى العقاد'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'ac53', text:'من مؤلف رواية "اللص والكلاب"؟', options:['نجيب محفوظ','إبراهيم أصلان','يوسف إدريس','بهاء طاهر'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'ac54', text:'من يُلقّب بـ"صوت الجبل"؟', options:['وديع الصافي','نصري شمس الدين','راغب علامة','ملحم زين'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'ac55', text:'من مؤلف كتاب "عبقرية محمد"؟', options:['عباس محمود العقاد','طه حسين','مصطفى محمود','أحمد أمين'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'ac56', text:'من مؤلف رواية "عودة الروح"؟', options:['توفيق الحكيم','إحسان عبد القدوس','يحيى حقي','محمد حسين هيكل'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'ac57', text:'من مؤلف "موسم الهجرة إلى الشمال"؟', options:['الطيب صالح','جمال الغيطاني','عبد الرحمن منيف','يوسف زيدان'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'ac58', text:'في أي مدينة وُلد عمر الشريف؟', options:['الإسكندرية','القاهرة','المنصورة','بورسعيد'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'ac59', text:'ما الاسم الحقيقي للفنانة صباح؟', options:['جانيت جرجس فغالي','بولا إليزا','نوال ظاهر الزيد','سعاد محمد'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'ac60', text:'من كاتب نشيد "موطني"؟', options:['إبراهيم طوقان','فدوى طوقان','سعيد عقل','أحمد شوقي'], correctIndex:0, difficulty:'hard', points:400 }
+]};
+data.categories.push({ id:arabCelebs.id, name:arabCelebs.name, icon:arabCelebs.icon, questions: prepQuestions(arabCelebs.qs) });
+
+
+// ==================== ألعاب الفيديو ====================
+var videoGames = { id:'videoGames', name:'ألعاب الفيديو', icon:'🎮', qs:[
+// سهل
+{ id:'vg1', text:'بطل سلسلة سوبر ماريو؟', options:['ماريو','لويجي','واريو','يوشي'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'vg2', text:'بطل سلسلة أسطورة زيلدا؟', options:['لينك','زيلدا','غانوندورف','إيبونا'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'vg3', text:'الشركة التي طورت ماينكرافت؟', options:['موجانغ ستوديوز','بيثيسدا','فالف','بليزارد'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'vg4', text:'الشخصية الكهربائية الأشهر في بوكيمون؟', options:['بيكاتشو','تشاريزارد','بولباسور','سكويرتل'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'vg5', text:'بطل سلسلة غود أوف وور؟', options:['كراتوس','أتريوس','زيوس','آريس'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'vg6', text:'بطل هيلو يُعرف باسم؟', options:['ماستر تشيف','الأربيتر','كورتانا','نوبل سيكس'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'vg7', text:'في أي لعبة يظهر مخلوق كريبر؟', options:['ماينكرافت','تيراريا','فورتنايت','روبلوكس'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'vg8', text:'سلسلة كرة القدم الشهيرة من EA؟', options:['فيفا','بي إي إس','فوتبول مانجر','إي فوتبول'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'vg9', text:'سلسلة غراند ثفت أوتو من تطوير؟', options:['روكستار غيمز','يوبيسوفت','إلكترونيك آرتس','سكوير إنكس'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'vg10', text:'الشخصية الزرقاء السريعة من سيغا؟', options:['سونيك','ميغا مان','كراش','سبايرو'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'vg11', text:'اسم الأميرة التي يحاول ماريو إنقاذها غالبًا؟', options:['الأميرة بيتش','الأميرة زيلدا','ديزي','روزالينا'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'vg12', text:'الخريطة الشهيرة "داست 2" تعود لأي لعبة؟', options:['كاونتر-سترايك','كول أوف ديوتي','أوفر واتش','فالورانت'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'vg13', text:'اللعبة الاجتماعية التي تضم أدوار محتال وطاقم؟', options:['أمونغ آس','فال غايز','أوفر كوكد','فالورانت'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'vg14', text:'سلسلة سباقات مع شخصيات ماريو؟', options:['ماريو كارت','نيد فور سبيد','غران تورزمو','فورزا'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'vg15', text:'اللعبة التي تجمع بين السيارات وكرة القدم؟', options:['روكيت ليغ','تراكمانيا','تويستد ميتال','فورزا هورايزن'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'vg16', text:'الاستوديو المطور لفورتنايت؟', options:['إيبك غيمز','رايوت غيمز','يوبيسوفت','فالف'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'vg17', text:'الأداة المستخدمة لالتقاط البوكيمون؟', options:['بوكِه بول','جرعة علاج','توت','طارد'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'vg18', text:'اللعبة التي تدور أحداثها في مدينة لوس سانتوس؟', options:['غران ثفت أوتو V','سليبينغ دوغز','سينتس رو','واتش دوغز'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'vg19', text:'سلسلة الاغتيالات التاريخية من يوبيسوفت؟', options:['أساسنز كريد','فار كراي','أمير بلاد فارس','واتش دوغز'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'vg20', text:'اللعبة المعروفة اختصارًا بـ "ببجي"؟', options:['بلاير أنونز باتل غراوندز','باتل غراوندز بابليك','برو أوربن باتل غراوند','بروجيكت باتلفرونت'], correctIndex:0, difficulty:'easy', points:100 },
+// متوسط
+{ id:'vg21', text:'في أي عام صدرت النسخة النهائية من ماينكرافت؟', options:['2011','2009','2013','2015'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'vg22', text:'مطوّر The Witcher 3: Wild Hunt؟', options:['سي دي بروجكت رِد','بيثيسدا غيم ستوديوز','بايووير','أوبسيديان إنترتينمنت'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'vg23', text:'اسم المملكة في The Legend of Zelda؟', options:['هايرول','سكاي ريم','ميدغارد','إيفاليس'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'vg24', text:'اسم السيف الأسطوري في زيلدا؟', options:['ماستر سورد','باستر سورد','دراجون سلاير','مونادو'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'vg25', text:'مطوّر Elden Ring؟', options:['فروم سوفتوير','تيم نينجا','بلاتينيوم غيمز','كابكوم'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'vg26', text:'أي جزء من GTA يظهر فيه نيكو بيليك؟', options:['GTA IV','GTA V','سان أندرياس','فايس سيتي'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'vg27', text:'أي دور في Overwatch مسؤول عن الشفاء والدعم؟', options:['الدعم','الدبابة','الضرر','الكشاف'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'vg28', text:'الشركة المطورة لـ League of Legends؟', options:['ريوت غيمز','فالف','بليزارد إنترتينمنت','يوبيسوفت'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'vg29', text:'اسم العملة داخل Fortnite؟', options:['في-باكس','كريدتس','كوينز','جِمز'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'vg30', text:'في Resident Evil الكلاسيكية، ما الأداة اللازمة للحفظ؟', options:['شريط الحبر','قرص يو إس بي','خرطوشة آلة كاتبة','ذاكرة فلاش'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'vg31', text:'أي سلسلة قتال تضم شخصية كازويا ميشيما؟', options:['تيكن','ستريت فايتر','مورتال كومбат','سول كاليبر'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'vg32', text:'ما اسم قذيفة الطاقة الشهيرة لريو في Street Fighter؟', options:['هادوكان','شوريوكن','تاتسومكي','فلاش كيك'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'vg33', text:'الشركة المطورة لـ Pokémon GO؟', options:['نيانتيك','غيم فريك','شركة بوكيمون','نينتندو'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'vg34', text:'اسم الشركة الخيالية في Portal؟', options:['أبرتشر ساينس','بلاك ميسا','وايلاند-يوتاني','أبستيرغو'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'vg35', text:'بطل Half-Life؟', options:['غوردون فريمان','أليكس فانس','بارني كالهون','إيلاي فانس'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'vg36', text:'مطوّر The Last of Us (2013)؟', options:['نوتي دوغ','إنسومنياك غيمز','سانتا مونيكا ستوديو','ساكر بانش'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'vg37', text:'اسم ابن كراتوس في God of War (2018)؟', options:['أتريوس','بالدور','ميمير','هايمدال'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'vg38', text:'ما اسم الجهاز الذي يتيح دخول الذكريات الجينية في Assassin’s Creed؟', options:['الأنيموس','إيغل فيجن','أبستيرغو','هيليكس'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'vg39', text:'من القائد ذو الشارب في سلسلة Modern Warfare؟', options:['الكابتن برايس','سوب ماكتافيش','غوست','ماكاروف'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'vg40', text:'ما اسم التنين الرئيسي في Skyrim؟', options:['ألدوين','بارثوناكس','ميرمولنير','أودافينغ'], correctIndex:0, difficulty:'medium', points:200 },
+// صعب
+{ id:'vg41', text:'في أي عام صدر أول The Legend of Zelda؟', options:['1986','1984','1988','1990'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'vg42', text:'ما اسم فريق التطوير الأصلي لسلسلة Silent Hill؟', options:['تيم سايلنت','آي دي سوفتوير','لوكينغ غلاس ستوديوز','ريمدي إنترتينمنت'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'vg43', text:'في Metroid Fusion، ما اسم الطفيلي الذي يصيب ساموس؟', options:['طفيلي إكس','ميترويد','فازون','كورديسيبس'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'vg44', text:'في Metroid Prime، ما اسم الكوكب الذي تدور عليه أحداث الجزء الأول؟', options:['تالون 4','SR388','زيبس','إيثر'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'vg45', text:'من الملحن الرئيسي لموسيقى Morrowind/Oblivion/Skyrim؟', options:['جيريمي سُول','نوبوؤ أويماتسو','كوجي كوندو','ياسونوري ميتسودا'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'vg46', text:'أي استوديو من سوني شارك FromSoftware تطوير Bloodborne؟', options:['ستوديو اليابان','بولي فوني ديجيتال','غيريلا غيمز','ميديا موليكيول'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'vg47', text:'في Dark Souls، ما اسم النار الأصلية التي يسعى اللوردات للحفاظ عليها؟', options:['اللهب الأول','لهيب الفوضى','لهيب الكلن','لهيب إردتري'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'vg48', text:'في Warcraft، ما اسم كوكب موطن الأورك الأصلي؟', options:['دراينور','آزيروث','أرغوس','سكيلغه'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'vg49', text:'في Diablo، ما اسم الأحجار التي تُستخدم لحبس الشياطين؟', options:['أحجار الأرواح','شظايا الدم','أحجار الرون','زمردات الفوضى'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'vg50', text:'في Mass Effect، ما اسم سفينة القائد شيبارد؟', options:['نورماندي','تمبست','عمود الخريف','صقر الأبنوس'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'vg51', text:'أيٌّ من التالي ليس عِرقًا في StarCraft؟', options:['كوفيننت','تيران','بروتوس','زِرغ'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'vg52', text:'في Persona 5، ما اسم المجموعة التي يقودها الجوكر؟', options:['لصوص الأشباح','فريق سيز','الفصل السابع','ديدسيك'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'vg53', text:'في Final Fantasy VII، ما اسم الشركة المسيطرة على الطاقة في ميدغار؟', options:['شركة شينرا للطاقة الكهربائية','أفالانش','شركة نيبلهيم','سيربيروس'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'vg54', text:'في BioShock، ما اسم المدينة تحت الماء؟', options:['رافتشر','كولومبيا','ريفن','أتلانتيكا'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'vg55', text:'في Chrono Trigger، ما اسم الكيان الطفيلي الذي يهدد العالم؟', options:['لافوس','غايغاس','ماذر برين','جينوفا'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'vg56', text:'في Hollow Knight، ما اسم المملكة التي تدور فيها الأحداث؟', options:['هالونست','ديرتموث','غرين باث','أشينا'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'vg57', text:'في Monster Hunter، ما اسم القطط الرفيقة للصياد؟', options:['باليكوز','موغلز','نافي','تشاو'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'vg58', text:'في Dota 2، ما اسم كأس بطولة The International؟', options:['إيجيس الأبطال','كأس السامونرز','كأس بورغ-وارنر','فروستموورن'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'vg59', text:'تقع أحداث Apex Legends ضمن عالم أي سلسلة؟', options:['تايتنفول','ديستني','هالو','أوفرواتش'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'vg60', text:'في The Last of Us، ما اسم الفطر المسبب للتحولات؟', options:['كورديسيبس','فطر النقر','نيكرومورف','العفن'], correctIndex:0, difficulty:'hard', points:400 }
+]};
+data.categories.push({ id:videoGames.id, name:videoGames.name, icon:videoGames.icon, questions: prepQuestions(videoGames.qs) });
+
+
+// ==================== مشاهير أجانب ====================
+var foreignCelebs = { id:'foreignCelebs', name:'مشاهير أجانب', icon:'🌍', qs:[
+// سهل
+{ id:'fc1', text:'من الممثل الذي جسّد جاك في فيلم تايتانيك؟', options:['ليوناردو دي كابريو','براد بيت','توم كروز','جوني ديب'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'fc2', text:'من المغني الذي قدّم أغنية ثريلر؟', options:['مايكل جاكسون','برنس','ستيفي وندر','برونو مارس'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'fc3', text:'من يجسّد شخصية آيرون مان في عالم مارفل؟', options:['روبرت داوني جونيور','كريس إيفانز','كريس هيمسوورث','مارك رافالو'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'fc4', text:'من تُعرف بلقب ملكة البوب؟', options:['مادونا','ليدي غاغا','بيونسيه','ريهانا'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'fc5', text:'من هو مؤسس شركة سبيس إكس؟', options:['إيلون ماسك','جيف بيزوس','بيل غيتس','لاري بايج'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'fc6', text:'فرقة بي تي إس من أي دولة؟', options:['كوريا الجنوبية','اليابان','الصين','تايلاند'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'fc7', text:'من جسّد الكابتن جاك سبارو في قراصنة الكاريبي؟', options:['جوني ديب','أورلاندو بلوم','هيو جاكمان','كيانو ريفز'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'fc8', text:'نجم سلسلة المهمة المستحيلة؟', options:['توم كروز','مات ديمون','بن أفليك','جورج كلوني'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'fc9', text:'ما الاسم الحقيقي لـ ذا روك؟', options:['دواين جونسون','فين ديزل','جيسون ستاثام','جون سينا'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'fc10', text:'من السباح الأكثر تتويجًا في تاريخ الأولمبياد؟', options:['مايكل فيلبس','إيان ثورب','رايان لوكتي','يوسين بولت'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'fc11', text:'من مؤلفة سلسلة هاري بوتر؟', options:['جيه كيه رولينغ','ستيفن كينغ','سوزان كولينز','جورج آر آر مارتن'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'fc12', text:'من مغني أغنية شايب أوف يو؟', options:['إد شيران','شون مينديز','جاستن بيبر','سام سميث'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'fc13', text:'من مغني أغنية بليندينغ لايتس؟', options:['ذا ويكند','برونو مارس','تشارلي بوث','هاري ستايلز'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'fc14', text:'من يُعرف بلقب ملك بوليوود؟', options:['شاه روخ خان','سلمان خان','عامر خان','أكشاي كومار'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'fc15', text:'من الممثلة التي جسدت هيرميون غرنجر؟', options:['إيما واتسون','إيما ستون','كيرا نايتلي','ناتالي بورتمان'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'fc16', text:'من جسّد نيو في فيلم ذا ماتريكس؟', options:['كيانو ريفز','كريستيان بيل','هيو جاكمان','مات ديمون'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'fc17', text:'من هو مؤسس فيسبوك؟', options:['مارك زوكربيرغ','إيلون ماسك','جاك دورسي','لاري إليسون'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'fc18', text:'من مغنية أغنية باد رومانس؟', options:['ليدي غاغا','كاتي بيري','أريانا غراندي','دوا ليبا'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'fc19', text:'من اللاعب الأرجنتيني الذي توّج بكأس العالم 2022؟', options:['ليونيل ميسي','أنخل دي ماريا','سيرخيو أغويرو','دييغو مارادونا'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'fc20', text:'من المغني الرئيسي لفرقة كولدبلاي؟', options:['كريس مارتن','آدم ليفين','براندون فلاورز','أليكس ترنر'], correctIndex:0, difficulty:'easy', points:100 },
+// متوسط
+{ id:'fc21', text:'في أي سنة صدر فيلم تايتانيك؟', options:['1997','1995','1999','2001'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'fc22', text:'من مخرج فيلم إنسبشن؟', options:['كريستوفر نولان','جيمس كاميرون','ريدلي سكوت','دينيس فيلنوف'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'fc23', text:'ما جنسية شاكيرا؟', options:['كولومبية','برازيلية','لبنانية','إسبانية'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'fc24', text:'من الممثل الذي جسّد وولفرين؟', options:['هيو جاكمان','رايان رينولدز','كريس إيفانز','بن أفليك'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'fc25', text:'من الممثل الذي يجسّد ديدبول؟', options:['رايان رينولدز','هيو جاكمان','كريس هيمسوورث','جيسون موموا'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'fc26', text:'من المغني الرئيسي لأغنية ديسباسيتو؟', options:['لويس فونسي','إنريكي إغليسياس','ريكي مارتن','جي بالفين'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'fc27', text:'ما اسم منسّق الأغاني الذي قدّم فِيدِد؟', options:['آلان ووكر','مارشميلو','زيد','كالفن هاريس'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'fc28', text:'ما جنسية لاعب التنس نوفاك ديوكوفيتش؟', options:['صربية','إسبانية','سويسرية','كرواتية'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'fc29', text:'كان فريدي ميركوري المغني الرئيسي لأي فرقة؟', options:['كوين','البيتلز','ال رولينغ ستونز','يو 2'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'fc30', text:'عن أي فيلم نال ليوناردو دي كابريو أول أوسكار؟', options:['العائد','ذئب وول ستريت','تايتانيك','جزيرة شاتر'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'fc31', text:'من المغني الرئيسي لفرقة مارون 5؟', options:['آدم ليفين','بريندون يوري','دان رينولدز','كريس مارتن'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'fc32', text:'فرقة بلاكبينك من أي بلد؟', options:['كوريا الجنوبية','اليابان','الصين','تايلاند'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'fc33', text:'من مخرج فيلم أفاتار؟', options:['جيمس كاميرون','بيتر جاكسون','جورج لوكاس','جاي جاي أبرامز'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'fc34', text:'من مغنية أغنية هِلو (2015)؟', options:['أديل','ريهانا','سيا','سيلينا غوميز'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'fc35', text:'من مؤسس شركة أمازون؟', options:['جيف بيزوس','لاري بايج','سيرغي برين','تيم كوك'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'fc36', text:'من يجسّد سبايدر-مان في عالم مارفل منذ 2016؟', options:['توم هولاند','أندرو غارفيلد','توبي ماغواير','توم هيدلستون'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'fc37', text:'من مغني الراب الكندي الملقّب دريزي؟', options:['دريك','ذا ويكند','ناف','شون مينديز'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'fc38', text:'من الممثلة التي جسدت الأرملة السوداء؟', options:['سكارليت جوهانسون','إليزابيث أولسن','بري لارسون','غال غادوت'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'fc39', text:'من قدّم أغنية واكا واكا لكأس العالم 2010؟', options:['شاكيرا','جينيفر لوبيز','بيتبول','كاتي بيري'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'fc40', text:'من مخرجة فيلم باربي (2023)؟', options:['غريتا غيرويغ','باتي جنكينز','صوفيا كوبولا','أوليفيا وايلد'], correctIndex:0, difficulty:'medium', points:200 },
+// صعب
+{ id:'fc41', text:'ما الاسم الحقيقي لليدي غاغا؟', options:['ستيفاني جوان أنجلينا جيرمانوتا','روبين ريحانا فينتي','أليشيا بيث مور','كاثرين إليزابيث هادسون'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'fc42', text:'ما الاسم الحقيقي لذي ويكند؟', options:['أبيل مكونن تسفاي','شون كوري كارتر','أوستن ريتشارد بوست','كاميرون جبريل توماس'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'fc43', text:'ما الاسم الحقيقي لبرونو مارس؟', options:['بيتر جين هيرنانديز','بول ديفيد هيوسن','غوردون ماثيو توماس سمنر','ستيفلاند هارداواي موريس'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'fc44', text:'ما علامة التجميل التي أسستها ريهانا؟', options:['فينتي بيوتي','كايلِي كوزمتكس','كي كي دبليو بيوتي','رير بيوتي'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'fc45', text:'من الممثل الذي فاز بأوسكار أفضل ممثل لعامين متتاليين في التسعينيات؟', options:['توم هانكس','دانيال دي لويس','دنزل واشنطن','شون بن'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'fc46', text:'من المخرج الأكثر فوزًا بجائزة أوسكار أفضل إخراج؟', options:['جون فورد','ستيفن سبيلبرغ','مارتن سكورسيزي','بيلي وايلدر'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'fc47', text:'من الفنان الأكثر تتويجًا بجوائز الغرامي حتى الآن؟', options:['بيونسيه','كوينسي جونز','جورج شولتي','تايلور سويفت'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'fc48', text:'في أي مدينة وُلد كيانو ريفز؟', options:['بيروت','لوس أنجلوس','تورونتو','أوكلاند'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'fc49', text:'عن أي فيلم فازت ميريل ستريب بأول أوسكار لها؟', options:['كرامر ضد كرامر','اختيار صوفي','السيدة الحديدية','صيد الغزال'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'fc50', text:'ما الاسم الحقيقي لإمينيم؟', options:['مارشال بروس ماذرز الثالث','كرتس جيمس جاكسون الثالث','كريستوفر براين بريدجز','كالفن كوردوزار برودوس الابن'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'fc51', text:'ما الاسم عند الميلاد لإلتون جون؟', options:['ريجينالد كينيث دوايت','ديفيد روبرت جونز','غوردون ماثيو توماس سمنر','بول هيوسن'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'fc52', text:'أي موسيقي ابتكر شخصية زيغي ستاردست؟', options:['ديفيد بوي','برنس','إيغي بوب','ميك جاغر'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'fc53', text:'من اللاعب الملقّب باليوناني المرعب؟', options:['يانيس أنتيتوكونمبو','نيكولا يوكيتش','لوكا دونتشيتش','باو غاسول'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'fc54', text:'من الممثلة التي فازت بالأوسكار عن فيلم الساعات (2002)؟', options:['نيكول كيدمان','جوليان مور','كيت بلانشيت','تشارليز ثيرون'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'fc55', text:'من الممثل الذي فاز بالأوسكار بعد وفاته عن دور الجوكر؟', options:['هيث ليدجر','فيليب سيمور هوفمان','تشادويك بوسمان','بيتر فينش'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'fc56', text:'ما اسم جولة تايلور سويفت 2023–2024؟', options:['ذا إيراز تور','جولة 1989','جولة ريبوتيشن','لوفر فِست'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'fc57', text:'من الممثل الوحيد الحاصل على ثلاث جوائز أوسكار أفضل ممثل؟', options:['دانيال دي لويس','جاك نيكلسون','آل باتشينو','أنتوني هوبكنز'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'fc58', text:'ما الاسم عند الميلاد لبراد بيت؟', options:['وليام برادلي بيت','كريستوفر بيتمن','برادلي ويليام كوبر','توماس جيفري هانكس'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'fc59', text:'ما الاسم الفني لغوردون ماثيو توماس سمنر؟', options:['ستينغ','بونو','سلاش','سيل'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'fc60', text:'من مؤسس علامة أوف-وايت للأزياء؟', options:['فيرجيل أبلوه','توم فورد','أوليفييه روستان','ريكاردو تِتشي'], correctIndex:0, difficulty:'hard', points:400 }
+]};
+data.categories.push({ id:foreignCelebs.id, name:foreignCelebs.name, icon:foreignCelebs.icon, questions: prepQuestions(foreignCelebs.qs) });
    
-   
-   
-   
-   
-   
+
+
+
+
+
    
     return data;
 }
