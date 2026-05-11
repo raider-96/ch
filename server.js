@@ -798,7 +798,148 @@ var foreignCelebs = { id:'foreignCelebs', name:'مشاهير أجانب', icon:'
 { id:'fc60', text:'من مؤسس علامة أوف-وايت للأزياء؟', options:['فيرجيل أبلوه','توم فورد','أوليفييه روستان','ريكاردو تِتشي'], correctIndex:0, difficulty:'hard', points:400 }
 ]};
 data.categories.push({ id:foreignCelebs.id, name:foreignCelebs.name, icon:foreignCelebs.icon, questions: prepQuestions(foreignCelebs.qs) });
-   
+   // ==================== جيم أوف ثرونز ====================
+var got = { id:'got', name:'جيم أوف ثرونز', icon:'🐲', qs:[
+// سهل
+{ id:'got1', text:'كم عدد مواسم مسلسل جيم أوف ثرونز؟', options:['8','7','6','9'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'got2', text:'ما الشبكة التي أنتجت المسلسل؟', options:['إتش بي أو','نتفليكس','أمازون برايم فيديو','إيه إم سي'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'got3', text:'ما عاصمة الممالك السبع؟', options:['كينغز لاندينغ','وينترفيل','برافوس','دورن'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'got4', text:'ما اسم قلعة آل ستارك؟', options:['وينترفيل','التوأمان','الإيري (العشّ)','هارنهال'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'got5', text:'ما اسم القارة التي تقع فيها الممالك السبع؟', options:['ويستروس','إيسوس','سوثوريوس','فاليريا'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'got6', text:'ما لقب دينيرس تارجاريان؟', options:['أم التنانين','ملكة الأشواك','السيدة الحمراء','روح الشمال'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'got7', text:'أيٌّ من التالي اسم أحد تنانين دينيرس؟', options:['درُوغون','سموغ','راثيون','سبايرو'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'got8', text:'ما اسم الجدار الجليدي الضخم في الشمال؟', options:['الجدار','الجرف','المرصد','الحد العظيم'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'got9', text:'من يحرس الجدار ويرتدي السواد؟', options:['حرس الليل','الحرس الذهبي','اللاملوّثون','أبناء الهاربي'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'got10', text:'ما لقب غريغور كليغان؟', options:['الجبل','الكلب','الذئب','النمر'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'got11', text:'ما لقب ساندور كليغان؟', options:['الكلب','الغراب','الثعلب','الصقر'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'got12', text:'ما اسم ذئب جون سنو الرهيب؟', options:['غوست','سمر','نايميريا','غراي ويند'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'got13', text:'شعار آل ستارك هو؟', options:['ذئب رهيب','أسد ذهبي','غزال متوّج','كراكن'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'got14', text:'شعار آل لانيستر هو؟', options:['أسد ذهبي','ذئب رهيب','أخطبوط','سيفان متقاطعان'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'got15', text:'كلمات آل ستارك الشهيرة؟', options:['الشتاء قادم','اسمعوا زئيري','النار والدم','نحن لا نزرع'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'got16', text:'من زوج دينيرس من الدوثراكي؟', options:['خالد دروغو','جوراه مورمونت','داريو ناهاريس','إيورون غريجوي'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'got17', text:'من هو الأخ التوأم لسيرسي لانيستر؟', options:['جيمي لانيستر','تايوين لانيستر','تيريون لانيستر','لوراس تايريل'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'got18', text:'إلى أي بيت ينتمي تيريون؟', options:['لانيستر','ستارك','تارغيريان','غريجوي'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'got19', text:'ما اسم القلعة الجزيرة مقرّ آل تارجاريان؟', options:['دراجونستون','هايغاردن','بوابة القمر','هارنهال'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'got20', text:'ما اسم القارة شرق البحر الضيق؟', options:['إيسوس','سوثوريوس','فاليريا','أثمان'], correctIndex:0, difficulty:'easy', points:100 },
+// متوسط
+{ id:'got21', text:'ما اسم سيف جون سنو المصنوع من الفولاذ الفاليري؟', options:['لونغكلو','آيس','عويل الأرملة','حافظة القسم'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'got22', text:'من درّب آريا ستارك على المبارزة في كينغز لاندينغ؟', options:['سيريو فوريل','جاكن هغار','برين أوف تارث','نيد ستارك'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'got23', text:'إلى أي إله تتبع جماعة الوجوه بلا ملامح؟', options:['الإله عديد الوجوه','إله الغرق','ربّ النور','الآلهة السبعة'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'got24', text:'في أي مدينة يوجد بيت الأسود والأبيض؟', options:['برافوس','ميرين','فولنتس','كارت'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'got25', text:'من ابن سيرسي الأكبر؟', options:['جوفري','تومِن','لوراس','بران'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'got26', text:'من كانت العقل المدبر لقتل الملك جوفري؟', options:['أولينا تايريل','بيتر بايليش','سيرسي لانيستر','مارجيري تايريل'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'got27', text:'من قتل تايوين لانيستر؟', options:['تيريون لانيستر','جيمي لانيستر','برون','آريا ستارك'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'got28', text:'من أُعلن ملك الشمال في نهاية الموسم السادس؟', options:['جون سنو','روبين آرين','ستانيس باراثيون','رامزي بولتون'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'got29', text:'من قتلت رامزي بولتون؟', options:['سانسا ستارك','جون سنو','ثيون غريجوي','بران ستارك'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'got30', text:'ما اسم شقيق دينيرس الذي طمع في العرش؟', options:['فيسيريس تارجاريان','ريغار تارجاريان','أيمون تارجاريان','إيغون تارجاريان'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'got31', text:'ما اسم المادة الخضراء التي استُخدمت في معركة بلاك ووتر؟', options:['النار البرية','الدراجون غلاس','الزيت الحار','بارود القلعة'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'got32', text:'ما اسم معقل آل فراي عند النهر؟', options:['التوأمان','هارنهال','ريفررن','هايغاردن'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'got33', text:'ما اسم أخت ثيون غريجوي في المسلسل؟', options:['يارا','آشا','ليانا','إيلاريا'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'got34', text:'إلى أي إله تؤمن ميليساندرا؟', options:['ربّ النور (رهلور)','الإله عديد الوجوه','إله الغرق','الآلهة السبعة'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'got35', text:'ما كلمات بيت تارجاريان؟', options:['النار والدم','نحن لا نزرع','اسمعوا زئيري','الشتاء قادم'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'got36', text:'من قتل ملك الليل؟', options:['آريا ستارك','جون سنو','بران ستارك','دينيرس تارجاريان'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'got37', text:'من هو "ليتل فينغر"؟', options:['بيتر بايليش','فاريس','قايبرن','تورموند'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'got38', text:'من مستشار الأسرار الملقّب بـ"العنكبوت"؟', options:['فاريس','بيتر بايليش','قايبرن','بادريك'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'got39', text:'ما اسم جيش الخصيان الذي يخدم دينيرس؟', options:['اللاملوّثون (Unsullied)','الدوثراكي','أبناء الهاربي','الحرس الذهبي'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'got40', text:'ما اسم القلعة المرتفعة في الوادي (فالي)؟', options:['الإيري (العشّ)','بوابة القمر','هايغاردن','ريفررن'], correctIndex:0, difficulty:'medium', points:200 },
+// صعب
+{ id:'got41', text:'كم عدد حلقات المسلسل؟', options:['73','70','75','80'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'got42', text:'من هما والدا جون سنو الحقيقيان؟', options:['ريغار تارجاريان وليانا ستارك','روبرت باراثيون وليانا ستارك','نيد ستارك وكاتلين تولي','إيغون تارجاريان وداينا'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'got43', text:'ما اسم السيف الضخم لآل ستارك المصنوع من الفولاذ الفاليري؟', options:['آيس','لونغكلو','عويل الأرملة','حافظة القسم'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'got44', text:'إلى أي سيفين أُعيدت صياغة "آيس"؟', options:['حافظة القسم وعويل الأرملة','لونغكلو وحافظة القسم','آيس ولونغكلو','السهم الأسود وحافظة القسم'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'got45', text:'جون سنو هو اللورد القائد رقم كم لحرس الليل؟', options:['998','997','999','1000'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'got46', text:'ما اسم سيف آريا ستارك الصغير؟', options:['إبرة','شوكة','السهم','الشعاع'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'got47', text:'أين وُلدت دينيرس (ستورم بورن)؟', options:['دراجونستون','بنتوس','ميرين','فاليريا'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'got48', text:'من وجّه الطعنة القاتلة لروب ستارك؟', options:['روز بولتون','والدر فراي','رامزي بولتون','تايوين لانيستر'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'got49', text:'من قتلت والدر فراي انتقامًا للزفاف الأحمر؟', options:['آريا ستارك','سانسا ستارك','برين أوف تارث','كاتلين ستارك'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'got50', text:'من كان قائد حرس المدينة (العباءات الذهبية) الذي خان نِد ستارك؟', options:['جانوس سلينت','مِرين ترانت','إيلين باين','مانس رايدر'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'got51', text:'رمز بيت غريجوي هو؟', options:['الكراكن','الغزال المتوَّج','الأسد الذهبي','السمكة الفضية'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'got52', text:'ما عاصمة إقليم دورن؟', options:['سنسبير','هايغاردن','ريفررن','أولدتاون'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'got53', text:'ما اسم سيف جوفري المصنوع من الفولاذ الفاليري؟', options:['عويل الأرملة','حافظة القسم','لونغكلو','آيس'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'got54', text:'ما اسم السيف الذي أعطاه جيمي لانيستر لبرين؟', options:['حافظة القسم','عويل الأرملة','لونغكلو','آيس'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'got55', text:'ما اللقب الذي يحمله بران ستارك في المواسم الأخيرة؟', options:['الغراب ذو الثلاث عيون','ملك الشمال','الذئب الرمادي','الممسوس'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'got56', text:'من العالم الذي أعاد غريغور كليغان (الجبل) للحياة؟', options:['قايبرن','بايسل','فاريس','تايوين'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'got57', text:'من التي أدارت طقوس حرق شيرين باراثيون؟', options:['ميليساندرا','سيرسي لانيستر','كاتلين ستارك','ديانيرا'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'got58', text:'أي مدينة في خليج العبيد حكمتها دينيرس لفترة؟', options:['ميرين','يُنْكاي','أستابور','فولانتس'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'got59', text:'كم تنينًا بقي مع دينيرس مع نهاية السلسلة؟', options:['واحد','اثنان','ثلاثة','لا شيء'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'got60', text:'من قتل الملك المجنون إيريس الثاني؟', options:['جيمي لانيستر','نيد ستارك','روبرت باراثيون','تايوين لانيستر'], correctIndex:0, difficulty:'hard', points:400 }
+]};
+data.categories.push({ id:got.id, name:got.name, icon:got.icon, questions: prepQuestions(got.qs) });
+
+// ==================== كرة قدم ====================
+var football = { id:'football', name:'كرة قدم', icon:'⚽', qs:[
+// سهل
+{ id:'fb1', text:'من الفائز بكأس العالم 2022؟', options:['الأرجنتين','فرنسا','البرازيل','ألمانيا'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'fb2', text:'من يُعرف بلقب "الدون"؟', options:['كريستيانو رونالدو','لوكا مودريتش','سيرخيو راموس','دييغو كوستا'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'fb3', text:'من يُعرف بلقب "البرغوث"؟', options:['ليونيل ميسي','نيمار','سيرخيو أغويرو','باولو ديبالا'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'fb4', text:'يلعب محمد صلاح لنادٍ إنجليزي هو؟', options:['ليفربول','تشيلسي','آرسنال','إيفرتون'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'fb5', text:'أكثر نادٍ تتويجًا بدوري أبطال أوروبا؟', options:['ريال مدريد','ميلان','بايرن ميونخ','برشلونة'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'fb6', text:'أكثر منتخب فوزًا بكأس العالم؟', options:['البرازيل','ألمانيا','إيطاليا','الأرجنتين'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'fb7', text:'بطل كأس أمم أوروبا 2024؟', options:['إسبانيا','إنجلترا','إيطاليا','ألمانيا'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'fb8', text:'مباراة ريال مدريد وبرشلونة تُسمّى؟', options:['الكلاسيكو','الديربي','السوبركلاسيكو','السوبر'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'fb9', text:'ملعب برشلونة يُعرف باسم؟', options:['كامب نو','سانتياغو برنابيو','أولد ترافورد','أنفيلد'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'fb10', text:'أول منتخب عربي يصل لنصف نهائي كأس العالم؟', options:['المغرب','مصر','السعودية','الجزائر'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'fb11', text:'الهدّاف التاريخي لكأس العالم؟', options:['ميروسلاف كلوزه','رونالدو نازاريو','بيليه','غيرد مولر'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'fb12', text:'مهد كرة القدم الحديثة؟', options:['إنجلترا','إسبانيا','إيطاليا','أوروغواي'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'fb13', text:'أين أُقيمت كأس العالم 2022؟', options:['قطر','روسيا','البرازيل','جنوب أفريقيا'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'fb14', text:'مدرب مانشستر سيتي منذ 2016؟', options:['بيب غوارديولا','يورغن كلوب','زين الدين زيدان','توماس توخيل'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'fb15', text:'بطل دوري أبطال أوروبا 2024؟', options:['ريال مدريد','مانشستر سيتي','إنتر ميلان','بايرن ميونخ'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'fb16', text:'من يُعرف بـ"السبيشل وان"؟', options:['جوزيه مورينيو','كارلو أنشيلوتي','أنطونيو كونتي','دييغو سيميوني'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'fb17', text:'ملعب ريال مدريد؟', options:['سانتياغو برنابيو','الميستايا','كامب نو','الماراكانا'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'fb18', text:'بطل الدوري الإنجليزي 2023-24؟', options:['مانشستر سيتي','آرسنال','ليفربول','تشيلسي'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'fb19', text:'أكثر المنتخبات تتويجًا بكأس أمم أفريقيا؟', options:['مصر','الكاميرون','غانا','نيجيريا'], correctIndex:0, difficulty:'easy', points:100 },
+{ id:'fb20', text:'المنتخب الملقّب بـ"الساموراي الأزرق"؟', options:['اليابان','كوريا الجنوبية','الصين','أستراليا'], correctIndex:0, difficulty:'easy', points:100 },
+// متوسط
+{ id:'fb21', text:'كم عدد تتويجات ريال مدريد بدوري الأبطال؟', options:['15','14','13','12'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'fb22', text:'كم مرة فازت البرازيل بكأس العالم؟', options:['5','4','6','3'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'fb23', text:'من فاز بكأس العالم 2018؟', options:['فرنسا','كرواتيا','ألمانيا','إسبانيا'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'fb24', text:'الهدّاف التاريخي لدوري أبطال أوروبا؟', options:['كريستيانو رونالدو','ليونيل ميسي','روبرت ليفاندوفسكي','كريم بنزيما'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'fb25', text:'أكثر لاعب تُوِّج بالكرة الذهبية (Ballon d’Or)؟', options:['ليونيل ميسي','كريستيانو رونالدو','يوهان كرويف','ميشيل بلاتيني'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'fb26', text:'أين أُقيمت كأس العالم 2014؟', options:['البرازيل','روسيا','جنوب أفريقيا','ألمانيا'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'fb27', text:'من سجل هدف الفوز في نهائي كأس العالم 2014؟', options:['ماريو غوتزه','ليونيل ميسي','توماس مولر','نيمار'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'fb28', text:'أين لُعب نهائي دوري الأبطال 2024؟', options:['ويمبلي - لندن','الأولمبيكو - روما','سان دوني - باريس','ملعب النور - لشبونة'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'fb29', text:'كم لاعبًا يبدأ لكل فريق داخل الملعب؟', options:['11','10','12','9'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'fb30', text:'ما مدة المباراة الأساسية؟', options:['90 دقيقة','80 دقيقة','100 دقيقة','70 دقيقة'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'fb31', text:'بطل أمم أوروبا 2016؟', options:['البرتغال','فرنسا','ألمانيا','إيطاليا'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'fb32', text:'من يُعرف بلقب "الشياطين الحمر" (نادي)؟', options:['مانشستر يونايتد','ليفربول','آرسنال','ميلان'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'fb33', text:'لقب "الروسونيري" يعود إلى نادي؟', options:['ميلان','إنتر','يوفنتوس','روما'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'fb34', text:'هدّاف كأس العالم 2022؟', options:['كيليان مبابي','ليونيل ميسي','أوليفيه جيرو','جوليان ألفاريز'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'fb35', text:'أفضل لاعب في كأس العالم 2022؟', options:['ليونيل ميسي','لوكا مودريتش','كيليان مبابي','أنطوان غريزمان'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'fb36', text:'كم بطولة أمم أفريقيا حققتها مصر؟', options:['7','6','8','5'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'fb37', text:'بطل كأس آسيا 2007؟', options:['العراق','السعودية','اليابان','أستراليا'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'fb38', text:'أول منتخب عربي شارك في كأس العالم؟', options:['مصر 1934','المغرب 1970','تونس 1978','العراق 1986'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'fb39', text:'طرفا "ديربي إيطاليا" (Derby d’Italia)؟', options:['يوفنتوس وإنتر','ميلان وإنتر','يوفنتوس وتورينو','روما ولاتسيو'], correctIndex:0, difficulty:'medium', points:200 },
+{ id:'fb40', text:'المدرب الذي قاد ريال مدريد لثلاثة ألقاب أبطال 2016–2018؟', options:['زين الدين زيدان','كارلو أنشيلوتي','رافا بينيتيز','جوزيه مورينيو'], correctIndex:0, difficulty:'medium', points:200 },
+// صعب
+{ id:'fb41', text:'كم كانت نتيجة نهائي كأس العالم 2022 قبل ركلات الترجيح؟', options:['3-3','2-2','1-1','4-4'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'fb42', text:'في أي سنة تأسس نادي ريال مدريد؟', options:['1902','1899','1905','1912'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'fb43', text:'صاحب الرقم القياسي في عدد المباريات الدولية؟', options:['كريستيانو رونالدو','بدر المطوع','سيرخيو راموس','أحمد حسن'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'fb44', text:'أول فريق إسباني حقق الثلاثية (دوري+كأس+دوري الأبطال) في موسم واحد؟', options:['برشلونة','ريال مدريد','أتلتيكو مدريد','فالنسيا'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'fb45', text:'أسرع هدف في تاريخ كأس العالم؟', options:['هاكان شوكور','كريستيانو رونالدو','ديفيد فيا','يورغن كلينسمان'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'fb46', text:'اسم الحكم الذي أدار نهائي كأس العالم 2022؟', options:['شيمون مارتشينياك','نيستور بيتانا','هاورد ويب','فيليكس بريش'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'fb47', text:'من فاز بأول كأس عالم 1930؟', options:['أوروغواي','الأرجنتين','البرازيل','إيطاليا'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'fb48', text:'كم مرة فازت ألمانيا بكأس العالم؟', options:['4','3','5','2'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'fb49', text:'كم ناديًا توّج بثلاثة ألقاب متتالية لكأس أوروبا/دوري الأبطال؟', options:['3','2','4','5'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'fb50', text:'في أي مدينة يقع ملعب سيغنال إيدونا بارك؟', options:['دورتموند','ميونخ','برلين','جلزنكرشن'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'fb51', text:'ما نتيجة نهائي دوري الأبطال 2024 بين ريال مدريد ودورتموند؟', options:['2-0 لريال مدريد','1-0 لريال مدريد','2-1 لريال مدريد','3-1 لريال مدريد'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'fb52', text:'كم هدفًا سجّل ميروسلاف كلوزه في كأس العالم؟', options:['16','15','14','13'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'fb53', text:'من من هؤلاء سجّل هاتريك في نهائي كأس العالم؟', options:['كيليان مبابي','زين الدين زيدان','غابرييل باتيستوتا','جيرد مولر'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'fb54', text:'أين استُضيفت كأس العالم 2002؟', options:['كوريا الجنوبية واليابان','اليابان فقط','كوريا الجنوبية فقط','الصين'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'fb55', text:'كم المسافة بين القائمين في مرمى كرة القدم؟', options:['7.32 متر','7.12 متر','7.50 متر','8.00 متر'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'fb56', text:'كم ارتفاع العارضة عن الأرض؟', options:['2.44 متر','2.20 متر','2.50 متر','2.75 متر'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'fb57', text:'أي نادٍ فاز بالدوري الإنجليزي دون هزيمة في موسم 2003-04؟', options:['آرسنال','مانشستر يونايتد','تشيلسي','ليفربول'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'fb58', text:'من المدرب الأكثر تتويجًا بدوري أبطال أوروبا؟', options:['كارلو أنشيلوتي','زين الدين زيدان','بيب غوارديولا','أليكس فيرغسون'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'fb59', text:'ما اسم أكاديمية برشلونة الشهيرة لإعداد المواهب؟', options:['لا ماسيا','فالفيردي','لامانتيا','لا فونتين'], correctIndex:0, difficulty:'hard', points:400 },
+{ id:'fb60', text:'كم عدد المنتخبات المشاركة في كأس العالم 2026؟', options:['48','40','32','36'], correctIndex:0, difficulty:'hard', points:400 }
+]};
+data.categories.push({ id:football.id, name:football.name, icon:football.icon, questions: prepQuestions(football.qs) });
+
+
+
+
+
+
+
 
 
 
