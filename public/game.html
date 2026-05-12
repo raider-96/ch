@@ -175,9 +175,10 @@
     <div class="team-overlay" id="teamOverlay"> 
         <div class="team-card">
             <h2>🎯 من أجاب على السؤال؟</h2>
+            <p>اختر الفريق الذي قدّم الإجابة</p>
             <div class="team-btns">
-                <button class="team-btn btn-t1" onclick="submitWithTeam('team1')"> <span id="selT1">فريق 1</span></button>
-                <button class="team-btn btn-t2" onclick="submitWithTeam('team2')"> <span id="selT2">فريق 2</span></button>
+                <button class="team-btn btn-t1" onclick="submitWithTeam('team1')">🔵 <span id="selT1">فريق 1</span></button>
+                <button class="team-btn btn-t2" onclick="submitWithTeam('team2')">🔴 <span id="selT2">فريق 2</span></button>
             </div>
             <button class="btn-none" onclick="submitWithTeam('none')">⏭️ لا أحد أجاب - تخطي السؤال</button>
         </div>
@@ -186,6 +187,7 @@
     <!-- نتيجة الإجابة -->
     <div class="result-overlay" id="resultOverlay">
         <div class="result-card">
+            <div class="result-icon" id="resIcon">✅</div>
             <div class="result-text" id="resText">إجابة صحيحة!</div>
             <div class="result-pts" id="resPts">+100</div>
             <button class="result-btn" id="resBtn" onclick="backToBoard()">🔙 العودة للوحة</button>
@@ -548,13 +550,13 @@
                         pts.textContent = '0 نقطة';
                         pts.style.color = '#888';
                     } else if (data.isCorrect) {
-                        icon.textContent = '✅';
-                        text.textContent = teamDisplayName + ' أجاب بشكل صحيح!';
+                        icon.textContent = '🎉';
+                        text.textContent = '✅ ' + teamDisplayName + ' أجاب بشكل صحيح!';
                         pts.textContent = '+' + data.pointsEarned + ' نقطة';
                         pts.style.color = '#2ecc71';
                     } else {
                         icon.textContent = '❌';
-                        text.textContent = teamDisplayName + ' أجاب بشكل خاطئ';
+                        text.textContent = '❌ ' + teamDisplayName + ' أجاب بشكل خاطئ';
                         pts.textContent = '0 نقطة';
                         pts.style.color = '#e74c3c';
                     }
