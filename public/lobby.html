@@ -16,7 +16,8 @@
             position: relative;
             overflow-x: hidden;
         }
-
+.category.disabled { opacity: 0.5; pointer-events: none; }
+.hidden { display: none; }
         /* خلفية متحركة */
         body::before {
             content: '';
@@ -523,6 +524,133 @@
         function showError(m){ var e=document.getElementById('errorMsg'); e.textContent=m; e.style.display='block'; }
         function hideError(){ document.getElementById('errorMsg').style.display='none'; }
         function logout(){ fetch('/api/auth/logout',{method:'POST'}).then(function(){ window.location.href='/index.html'; }); }
-    </script>
+   
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+const ROOM_ID = new URLSearchParams(location.search).get('room') || 'default';
+const CURRENT_TEAM = window.CURRENT_TEAM || 'team1'; // عيّنها حسب المستخدم
+
+function lockCategoryUI(id, hide=false){
+  const el = document.querySelector(`[data-category="${id}"]`);
+  if (!el) return;
+  if (hide) el.classList.add('hidden');
+  el.classList.add('disabled');
+  el.setAttribute('aria-disabled','true');
+  el.disabled = true;
+}
+
+function unlockCategoryUI(id){
+  const el = document.querySelector(`[data-category="${id}"]`);
+  if (!el) return;
+  el.classList.remove('disabled', 'hidden');
+  el.removeAttribute('aria-disabled');
+  el.disabled = false;
+}
+
+async function fetchState(){
+  const res = await fetch(`/api/pick/${ROOM_ID}/state`);
+  const data = await res.json();
+  if (!data.success) return;
+
+  // فعّل الكل أولاً
+  document.querySelectorAll('[data-category]').forEach(el => {
+    unlockCategoryUI(el.getAttribute('data-category'));
+  });
+
+  // اقفل كل المحجوز
+  data.locked.forEach(id => lockCategoryUI(id, /* hide? */ false));
+
+  // اعرض العداد مثلاً
+  document.getElementById('t1Count').textContent = data.picks.team1.length;
+  document.getElementById('t2Count').textContent = data.picks.team2.length;
+}
+
+// عند الضغط على صنف
+document.querySelectorAll('[data-category]').forEach(btn=>{
+  btn.addEventListener('click', async ()=>{
+    const categoryId = btn.getAttribute('data-category');
+    if (btn.classList.contains('disabled')) return;
+
+    const res = await fetch(`/api/pick/${ROOM_ID}/lock`, {
+      method: 'POST',
+      headers: { 'Content-Type':'application/json' },
+      body: JSON.stringify({ team: CURRENT_TEAM, categoryId })
+    }).then(r=>r.json());
+
+    if (!res.success) {
+      if (res.code === 'TAKEN') {
+        alert('الصنف محجوز لفريق آخر');
+        lockCategoryUI(categoryId);
+      } else if (res.code === 'LIMIT') {
+        alert('وصلت للحد الأقصى للأصناف');
+      } else {
+        alert(res.message || 'خطأ في الاختيار');
+      }
+    } else {
+      // قفل محليًا مباشرة
+      lockCategoryUI(categoryId);
+    }
+  });
+});
+
+// Poll بسيط كل ثانية لتحديث القفل بين الأجهزة
+setInterval(fetchState, 1000);
+fetchState();
+
+// بدء اللعبة باستخدام الاختيارات الحالية
+async function startGame(){
+  const state = await fetch(`/api/pick/${ROOM_ID}/state`).then(r=>r.json());
+  if (!state.success) return alert('تعذّر جلب الحالة');
+
+  // تأكد من العدد المطلوب لكل فريق (CONFIG.categoriesPerTeam = 3 افتراضيًا)
+  if (state.picks.team1.length !== 3 || state.picks.team2.length !== 3) {
+    return alert('كل فريق لازم يختار 3 أصناف قبل البدء');
+  }
+
+  const body = {
+    team1Name: document.getElementById('t1Name').value || 'الفريق 1',
+    team2Name: document.getElementById('t2Name').value || 'الفريق 2',
+    team1Categories: state.picks.team1,
+    team2Categories: state.picks.team2
+  };
+
+  const res = await fetch('/api/games/start', {
+    method: 'POST',
+    headers: { 'Content-Type':'application/json' },
+    body: JSON.stringify(body)
+  }).then(r=>r.json());
+
+  if (!res.success) {
+    // السيرفر ما زال يتحقق من التعارض كحماية أخيرة
+    return alert(res.message || res.code || 'تعذّر بدء اللعبة');
+  }
+  // انتقل لصفحة اللعب
+  location.href = `/game.html?gameId=${res.gameId}`;
+}
+   </script>
 </body>
 </html>

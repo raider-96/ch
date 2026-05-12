@@ -42,7 +42,14 @@ function readJSON(filename) {
         return null;
     }
 }
-
+// حالة اختيار الأصناف قبل بدء اللعبة (In‑Memory)
+const pickRooms = new Map();
+function getPickRoom(roomId) {
+  if (!pickRooms.has(roomId)) {
+    pickRooms.set(roomId, { locked: new Set(), picks: { team1: [], team2: [] } });
+  }
+  return pickRooms.get(roomId);
+}
 function writeJSON(filename, data) {
     try {
         var fp = path.join(DB_DIR, filename);
@@ -1859,6 +1866,62 @@ app.get('/api/categories', function(req, res) {
         return { id: c.id, name: c.name, icon: c.icon, totalQuestions: c.questions.length };
     });
     res.json({ success: true, categories: cats });
+});
+// رجع حالة الاختيارات لغرفة معيّنة
+app.get('/api/pick/:roomId/state', (req, res) => {
+  const room = getPickRoom(req.params.roomId);
+  res.json({
+    success: true,
+    locked: [...room.locked],
+    picks: room.picks
+  });
+});
+
+// قفل (اختيار) صنف لفريق: يمنع الفريق الآخر من استخدامه
+app.post('/api/pick/:roomId/lock', (req, res) => {
+  const roomId = req.params.roomId;
+  const { team, categoryId } = req.body;
+  if (team !== 'team1' && team !== 'team2') {
+    return res.json({ success: false, message: 'team غير صالح' });
+  }
+  const room = getPickRoom(roomId);
+
+  // الحد الأقصى لكل فريق (من CONFIG)
+  if (room.picks[team].length >= CONFIG.categoriesPerTeam) {
+    return res.json({ success: false, code: 'LIMIT', message: 'وصلت للحد الأقصى من الأصناف' });
+  }
+
+  // لو الصنف محجوز مسبقًا
+  if (room.locked.has(categoryId)) {
+    return res.json({ success: false, code: 'TAKEN', message: 'الصنف محجوز لفريق آخر' });
+  }
+
+  // قفل الصنف وتسجيله للفريق
+  room.locked.add(categoryId);
+  room.picks[team].push(categoryId);
+  res.json({ success: true, locked: [...room.locked], picks: room.picks });
+});
+
+// إلغاء قفل (اختياري لو تحتاج زر تراجع)
+app.post('/api/pick/:roomId/unlock', (req, res) => {
+  const roomId = req.params.roomId;
+  const { team, categoryId } = req.body;
+  if (team !== 'team1' && team !== 'team2') {
+    return res.json({ success: false, message: 'team غير صالح' });
+  }
+  const room = getPickRoom(roomId);
+  const idx = room.picks[team].indexOf(categoryId);
+  if (idx === -1) return res.json({ success: false, message: 'الصنف غير موجود ضمن اختيارات هذا الفريق' });
+
+  room.picks[team].splice(idx, 1);
+  room.locked.delete(categoryId);
+  res.json({ success: true, locked: [...room.locked], picks: room.picks });
+});
+
+// إعادة ضبط اختيار الأصناف للغرفة (مثلاً عند بداية مباراة جديدة)
+app.post('/api/pick/:roomId/reset', (req, res) => {
+  pickRooms.delete(req.params.roomId);
+  res.json({ success: true });
 });
 
 app.post('/api/games/start', function(req, res) {
