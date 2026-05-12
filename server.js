@@ -1812,33 +1812,95 @@ app.get('/api/categories', function(req, res) {
 
 app.post('/api/games/start', function(req, res) {
     var t1 = req.body.team1Name, t2 = req.body.team2Name;
-    var t1c = req.body.team1Categories, t2c = req.body.team2Categories;
+    var t1c = req.body.team1Categories || [];
+    var t2c = req.body.team2Categories || [];
+
     if (!t1 || !t2 || !t1c || t1c.length !== 3 || !t2c || t2c.length !== 3) {
         return res.json({ success: false, message: 'بيانات ناقصة' });
     }
 
+    // بيانات اللعبة/الأسئلة
     var userId = req.session.userId || 'guest';
     var qData = readJSON('questions.json');
     var gData = readJSON('games.json');
-    if (!qData || !gData) return res.json({ success: false });
+    if (!qData || !gData) return res.json({ success: false, message: 'خطأ في قاعدة البيانات' });
 
-    var gameId = 'game_' + Date.now();
+    // فهارس مساعدة
+    var idToCat = {};
+    for (var i = 0; i < qData.categories.length; i++) {
+        idToCat[qData.categories[i].id] = qData.categories[i];
+    }
+
+    function findDups(arr) {
+        var seen = {};
+        var d = [];
+        for (var i = 0; i < arr.length; i++) {
+            if (seen[arr[i]]) d.push(arr[i]);
+            else seen[arr[i]] = 1;
+        }
+        return d;
+    }
+    function intersect(a, b) {
+        var setB = {};
+        for (var i = 0; i < b.length; i++) setB[b[i]] = 1;
+        var res = [];
+        for (var j = 0; j < a.length; j++) if (setB[a[j]]) res.push(a[j]);
+        return res;
+    }
+
+    // 1) منع تكرار الصنف داخل نفس الفريق
+    var d1 = findDups(t1c);
+    if (d1.length) {
+        var names1 = d1.map(function(id){ return (idToCat[id] && idToCat[id].name) || id; });
+        return res.json({ success: false, code: 'DUP_TEAM1', message: 'الفريق 1 اختار صنفًا مكررًا', duplicates: d1, duplicateNames: names1 });
+    }
+    var d2 = findDups(t2c);
+    if (d2.length) {
+        var names2 = d2.map(function(id){ return (idToCat[id] && idToCat[id].name) || id; });
+        return res.json({ success: false, code: 'DUP_TEAM2', message: 'الفريق 2 اختار صنفًا مكررًا', duplicates: d2, duplicateNames: names2 });
+    }
+
+    // 2) منع اختيار نفس الصنف بين الفريقين (كل صنف مرة واحدة في المباراة)
+    var conflict = intersect(t1c, t2c);
+    if (conflict.length) {
+        var conflictNames = conflict.map(function(id){ return (idToCat[id] && idToCat[id].name) || id; });
+        return res.json({
+            success: false,
+            code: 'CATEGORY_CONFLICT',
+            message: 'لا يمكن للفريقين اختيار نفس الصنف في نفس المباراة',
+            duplicates: conflict,
+            duplicateNames: conflictNames
+        });
+    }
+
+    // 3) التحقق من صحة المعرّفات (لا أصناف غير معروفة)
     var allCats = t1c.concat(t2c);
+    var invalid = [];
+    for (var z = 0; z < allCats.length; z++) {
+        if (!idToCat[allCats[z]]) invalid.push(allCats[z]);
+    }
+    if (invalid.length) {
+        return res.json({
+            success: false,
+            code: 'INVALID_CATEGORY',
+            message: 'تم إرسال أصناف غير موجودة',
+            invalid: invalid
+        });
+    }
+
+    // 4) بناء الأسئلة
+    var gameId = 'game_' + Date.now();
     var gameQuestions = [];
 
     for (var c = 0; c < allCats.length; c++) {
-        var cat = null;
-        for (var x = 0; x < qData.categories.length; x++) {
-            if (qData.categories[x].id === allCats[c]) { cat = qData.categories[x]; break; }
-        }
+        var cat = idToCat[allCats[c]];
         if (!cat) continue;
         var diffs = ['easy', 'medium', 'hard'];
         for (var d = 0; d < diffs.length; d++) {
-            // استبعاد الأسئلة المستخدمة من قبل هذا المستخدم
             var avail = cat.questions.filter(function(q) {
                 return q.difficulty === diffs[d] && q.usedByUsers.indexOf(userId) === -1;
             });
-            var sel = shuffleArray(avail).slice(0, 2);
+            var sel = shuffleArray(avail).slice(0, 2); // خذ 2 لكل صعوبة
             for (var s = 0; s < sel.length; s++) {
                 gameQuestions.push({
                     questionId: sel[s].id, categoryId: allCats[c], categoryName: cat.name,
@@ -1846,7 +1908,6 @@ app.post('/api/games/start', function(req, res) {
                     difficulty: diffs[d], points: sel[s].points, image: sel[s].image || '',
                     answered: false, answeredBy: null, isCorrect: null, selectedOption: null
                 });
-                // تسجيل استخدام المستخدم لهذا السؤال
                 sel[s].usedByUsers.push(userId);
             }
         }
@@ -1866,7 +1927,6 @@ app.post('/api/games/start', function(req, res) {
     writeJSON('games.json', gData);
     res.json({ success: true, gameId: gameId });
 });
-
 app.get('/api/games/:gameId/board', function(req, res) {
     var gData = readJSON('games.json');
     if (!gData) return res.json({ success: false });
