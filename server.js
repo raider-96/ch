@@ -1,155 +1,77 @@
-'use strict';
+var express = require('express');
+var session = require('express-session');
+var fs = require('fs');
+var path = require('path');
 
-/*
-  Trivia Game Server (Express + JSON DB)
-  - مصادقة بسيطة بجلسات
-  - إدارة مستخدمين (أدمن)
-  - بنك أسئلة JSON
-  - بدء مباراة / لوحة / سؤال / مساعدات / إجابة / نتائج
-  - منع تكرار الأصناف بين الفريقين
-  - تعديل نقاط ديناميكي (+100 / -100)
-*/
+var app = express();
+var PORT = process.env.PORT || 3000;
+var DB_DIR = path.join(__dirname, 'database');
 
-const express = require('express');
-const session = require('express-session');
-const fs = require('fs');
-const path = require('path');
-
-const app = express();
-
-// ======================== الإعدادات العامة ========================
-const PORT = process.env.PORT || 3000;
-const DB_DIR = path.join(__dirname, 'database');
-
-const CONFIG = {
-  categoriesPerTeam: 3,          // عدد الأصناف لكل فريق
-  questionsPerDifficulty: 2,     // عدد الأسئلة المختارة لكل صعوبة من كل صنف
-  helps: { remove2: 1, extraTime: 1, changeQ: 1 },
-  extraTimeSeconds: 30,
-  allowNegativeScore: false,     // منع النقاط السالبة إذا false
-  cors: {
-    allowAll: true,              // لو عندك دومين محدد عدّلها إلى false وأضف origins
-    origins: ['http://localhost:3000']
-  },
-  session: {
-    secret: process.env.SESSION_SECRET || 'chigar-secret-key-2024',
-    cookieDays: 1
-  },
-  admin: {
-    user: process.env.ADMIN_USER || 'reder',
-    pass: process.env.ADMIN_PASS || 'reder11'
-  }
-};
-
-// ======================== Middleware & Static ========================
+// ===== Middleware =====
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// CORS مبسّط (مع اعتماد allowAll بشكل افتراضي)
-app.use((req, res, next) => {
-  const origin = req.headers.origin;
-  if (CONFIG.cors.allowAll) {
-    res.header('Access-Control-Allow-Origin', origin || '*');
+app.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
+    res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
     res.header('Access-Control-Allow-Credentials', 'true');
-  } else if (CONFIG.cors.origins.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', origin);
-    res.header('Access-Control-Allow-Credentials', 'true');
-  }
-
-  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-  if (req.method === 'OPTIONS') return res.sendStatus(200);
-  next();
+    if (req.method === 'OPTIONS') return res.sendStatus(200);
+    next();
 });
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-// جلسات
 app.set('trust proxy', 1);
 app.use(session({
-  secret: CONFIG.session.secret,
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    maxAge: CONFIG.session.cookieDays * 24 * 60 * 60 * 1000,
-    secure: false,        // اجعله true خلف HTTPS
-    httpOnly: true,
-    sameSite: 'lax'
-  }
+    secret: 'chigar-secret-key-2024',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 86400000, secure: false, httpOnly: true, sameSite: 'lax' }
 }));
 
-// ======================== Utilities ========================
-function ensureDir(p) {
-  if (!fs.existsSync(p)) fs.mkdirSync(p, { recursive: true });
-}
 
+// ===== مساعدة JSON =====
 function readJSON(filename) {
-  try {
-    const fp = path.join(DB_DIR, filename);
-    if (!fs.existsSync(fp)) return null;
-    return JSON.parse(fs.readFileSync(fp, 'utf8'));
-  } catch (e) {
-    console.error('خطأ قراءة', filename, e.message);
-    return null;
-  }
+    try {
+        var fp = path.join(DB_DIR, filename);
+        if (!fs.existsSync(fp)) return null;
+        return JSON.parse(fs.readFileSync(fp, 'utf8'));
+    } catch (e) {
+        console.log('خطأ قراءة ' + filename + ':', e.message);
+        return null;
+    }
 }
 
 function writeJSON(filename, data) {
-  try {
-    const fp = path.join(DB_DIR, filename);
-    const tmp = fp + '.tmp';
-    fs.writeFileSync(tmp, JSON.stringify(data, null, 2), 'utf8');
-    fs.renameSync(tmp, fp);
-  } catch (e) {
-    console.error('خطأ كتابة', filename, e.message);
-  }
+    try {
+        var fp = path.join(DB_DIR, filename);
+        fs.writeFileSync(fp, JSON.stringify(data, null, 2), 'utf8');
+    } catch (e) {
+        console.log('خطأ كتابة ' + filename + ':', e.message);
+    }
 }
 
 function shuffleArray(arr) {
-  const a = arr.slice();
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
 }
 
-function uid(prefix) {
-  return prefix + '_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 8);
-}
-
-// دالة مساعدة لإضافة الحقول الافتراضية لو رغبت تستخدمها لاحقًا (اختياري)
-function prepQuestions(qs) {
-  return qs.map(q => ({
-    id: q.id,
-    text: q.text,
-    options: q.options,
-    correctIndex: q.correctIndex,
-    difficulty: q.difficulty,
-    points: q.points,
-    image: q.image || '',
-    usedByUsers: Array.isArray(q.usedByUsers) ? q.usedByUsers : []
-  }));
-}
-
-// ======================== بيانات أولية ========================
-// مولد مستخدمين افتراضيين
+// ===== اليوزرات =====
 function getPresetUsers() {
-  const users = [];
-  for (let i = 1; i <= 20; i++) {
-    users.push({
-      id: 'u' + i,
-      username: i === 1 ? '1' : '2' + String(i).padStart(2, '0'),
-      password: i === 1 ? '1' : '2',
-      active: true,
-      usedQuestions: []
-    });
-  }
-  return {
-    admin: { username: CONFIG.admin.user, password: CONFIG.admin.pass },
-    users
-  };
+    return {
+        admin: { username: 'reder', password: 'reder11' },
+        users: [
+            { id: 'u1', username: '1', password: '1', active: true, usedQuestions: [] }
+               ]
+                         };
 }
+
+// ===== بنك الأسئلة (مختصر للمثال) =====
 
 function getQuestionsData() {
     function prepQuestions(qs) {
@@ -1801,534 +1723,436 @@ function prepQuestions(qs) {
     return result;
 }
 
-// تهيئة قاعدة البيانات (لن يكتب فوق ملفات موجودة)
+// ===== تهيئة ===========================================================================================================================
 function initDB() {
-  console.log('=== تهيئة قاعدة البيانات ===');
-  ensureDir(DB_DIR);
+    console.log('=== تهيئة قاعدة البيانات ===');
+    if (!fs.existsSync(DB_DIR)) fs.mkdirSync(DB_DIR, { recursive: true });
 
-  const usersPath = path.join(DB_DIR, 'users.json');
-  const gamesPath = path.join(DB_DIR, 'games.json');
-  const questionsPath = path.join(DB_DIR, 'questions.json');
+    var usersData = getPresetUsers();
+    fs.writeFileSync(path.join(DB_DIR, 'users.json'), JSON.stringify(usersData, null, 2), 'utf8');
+    console.log('يوزرات:', usersData.users.length);
 
-  if (!fs.existsSync(usersPath)) {
-    const usersData = getPresetUsers();
+    if (!fs.existsSync(path.join(DB_DIR, 'games.json'))) {
+        fs.writeFileSync(path.join(DB_DIR, 'games.json'), JSON.stringify({ games: [] }, null, 2), 'utf8');
+    }
+
+    var qData = getQuestionsData();
+    fs.writeFileSync(path.join(DB_DIR, 'questions.json'), JSON.stringify(qData, null, 2), 'utf8');
+    console.log('أصناف:', qData.categories.length);
+
+    console.log('=== تهيئة اكتملت ===');
+}
+
+// ===== المصادقة =====
+app.post('/api/auth/login', function(req, res) {
+    var username = req.body.username;
+    var password = req.body.password;
+    var data = readJSON('users.json');
+    if (!data) return res.json({ success: false, message: 'خطأ' });
+
+    if (data.admin && username === data.admin.username && password === data.admin.password) {
+        req.session.userId = 'admin';
+        req.session.username = 'admin';
+        req.session.isAdmin = true;
+        return res.json({ success: true, message: 'مرحباً أدمن!', isAdmin: true });
+    }
+
+    if (data.users) {
+        for (var i = 0; i < data.users.length; i++) {
+            if (data.users[i].username === username && data.users[i].password === password) {
+                if (!data.users[i].active) return res.json({ success: false, message: 'اليوزر معطل' });
+                req.session.userId = data.users[i].id;
+                req.session.username = data.users[i].username;
+                req.session.isAdmin = false;
+                return res.json({ success: true, message: 'مرحباً ' + username + '!' });
+            }
+        }
+    }
+    res.json({ success: false, message: 'بيانات غير صحيحة' });
+});
+
+app.get('/api/auth/me', function(req, res) {
+    if (req.session && req.session.userId) {
+        res.json({ loggedIn: true, userId: req.session.userId, username: req.session.username, isAdmin: req.session.isAdmin || false });
+    } else {
+        res.json({ loggedIn: false });
+    }
+});
+
+app.post('/api/auth/logout', function(req, res) { req.session.destroy(); res.json({ success: true }); });
+
+// ===== الأدمن =====
+app.get('/api/admin/users', function(req, res) {
+    if (!req.session || !req.session.isAdmin) return res.json({ success: false });
+    var data = readJSON('users.json');
+    if (!data) return res.json({ success: false });
+    res.json({ success: true, users: data.users });
+});
+
+app.post('/api/admin/add-user', function(req, res) {
+    if (!req.session || !req.session.isAdmin) return res.json({ success: false });
+    var data = readJSON('users.json');
+    if (!data) return res.json({ success: false });
+    for (var i = 0; i < data.users.length; i++) {
+        if (data.users[i].username === req.body.username) return res.json({ success: false, message: 'موجود' });
+    }
+    data.users.push({ id: 'u_' + Date.now(), username: req.body.username, password: req.body.password, active: true, usedQuestions: [] });
+    writeJSON('users.json', data);
+    res.json({ success: true, message: 'تمت الإضافة' });
+});
+
+app.post('/api/admin/toggle-user', function(req, res) {
+    if (!req.session || !req.session.isAdmin) return res.json({ success: false });
+    var data = readJSON('users.json');
+    if (!data) return res.json({ success: false });
+    for (var i = 0; i < data.users.length; i++) {
+        if (data.users[i].id === req.body.userId) {
+            data.users[i].active = !data.users[i].active;
+            writeJSON('users.json', data);
+            return res.json({ success: true, active: data.users[i].active });
+        }
+    }
+    res.json({ success: false });
+});
+
+app.post('/api/admin/delete-user', function(req, res) {
+    if (!req.session || !req.session.isAdmin) return res.json({ success: false });
+    var data = readJSON('users.json');
+    if (!data) return res.json({ success: false });
+    data.users = data.users.filter(function(u) { return u.id !== req.body.userId; });
+    writeJSON('users.json', data);
+    res.json({ success: true });
+});
+
+// إعادة تعيين أسئلة مستخدم
+app.post('/api/admin/reset-user-questions', function(req, res) {
+    if (!req.session || !req.session.isAdmin) return res.json({ success: false });
+    var userId = req.body.userId;
+    var usersData = readJSON('users.json');
+    var questionsData = readJSON('questions.json');
+    if (!usersData || !questionsData) return res.json({ success: false });
+
+    for (var i = 0; i < usersData.users.length; i++) {
+        if (usersData.users[i].id === userId) {
+            usersData.users[i].usedQuestions = [];
+            break;
+        }
+    }
+
+    for (var c = 0; c < questionsData.categories.length; c++) {
+        for (var q = 0; q < questionsData.categories[c].questions.length; q++) {
+            var idx = questionsData.categories[c].questions[q].usedByUsers.indexOf(userId);
+            if (idx !== -1) questionsData.categories[c].questions[q].usedByUsers.splice(idx, 1);
+        }
+    }
+
     writeJSON('users.json', usersData);
-    console.log('تم إنشاء users.json');
-  }
-
-  if (!fs.existsSync(gamesPath)) {
-    writeJSON('games.json', { games: [] });
-    console.log('تم إنشاء games.json');
-  }
-
-  if (!fs.existsSync(questionsPath)) {
-    const qData = getQuestionsData(); // <-- هنا تضيف أسئلتك لاحقًا
-    writeJSON('questions.json', qData);
-    console.log('تم إنشاء questions.json (فارغ/مبدئي)');
-  }
-
-  console.log('=== التهيئة اكتملت ===');
-}
-
-// ======================== مصادقة ========================
-app.post('/api/auth/login', (req, res) => {
-  const { username, password } = req.body;
-  const data = readJSON('users.json');
-  if (!data) return res.json({ success: false, message: 'خطأ في قاعدة البيانات' });
-
-  if (data.admin && username === data.admin.username && password === data.admin.password) {
-    req.session.userId = 'admin';
-    req.session.username = 'admin';
-    req.session.isAdmin = true;
-    return res.json({ success: true, message: 'مرحباً أدمن!', isAdmin: true });
-  }
-
-  const user = (data.users || []).find(u => u.username === username && u.password === password);
-  if (!user) return res.json({ success: false, message: 'بيانات غير صحيحة' });
-  if (!user.active) return res.json({ success: false, message: 'الحساب معطّل' });
-
-  req.session.userId = user.id;
-  req.session.username = user.username;
-  req.session.isAdmin = false;
-  res.json({ success: true, message: 'مرحباً ' + username + '!' });
+    writeJSON('questions.json', questionsData);
+    res.json({ success: true, message: 'تم إعادة تعيين الأسئلة' });
 });
 
-app.get('/api/auth/me', (req, res) => {
-  if (req.session && req.session.userId) {
-    return res.json({
-      loggedIn: true,
-      userId: req.session.userId,
-      username: req.session.username,
-      isAdmin: !!req.session.isAdmin
+// ===== اللعبة =====
+app.get('/api/categories', function(req, res) {
+    var data = readJSON('questions.json');
+    if (!data || !data.categories) return res.json({ success: false });
+    var cats = data.categories.map(function(c) {
+        return { id: c.id, name: c.name, icon: c.icon, totalQuestions: c.questions.length };
     });
-  }
-  res.json({ loggedIn: false });
+    res.json({ success: true, categories: cats });
 });
 
-app.post('/api/auth/logout', (req, res) => {
-  req.session.destroy(() => res.json({ success: true }));
-});
+app.post('/api/games/start', function(req, res) {
+    var t1 = req.body.team1Name, t2 = req.body.team2Name;
+    var t1c = req.body.team1Categories || [];
+    var t2c = req.body.team2Categories || [];
 
-// ======================== واجهة الأدمن ========================
-function requireAdmin(req, res) {
-  if (!req.session || !req.session.isAdmin) {
-    res.json({ success: false, message: 'غير مصرّح' });
-    return false;
-  }
-  return true;
-}
+    if (!t1 || !t2 || !t1c || t1c.length !== 3 || !t2c || t2c.length !== 3) {
+        return res.json({ success: false, message: 'بيانات ناقصة' });
+    }
 
-app.get('/api/admin/users', (req, res) => {
-  if (!requireAdmin(req, res)) return;
-  const data = readJSON('users.json');
-  if (!data) return res.json({ success: false });
-  res.json({ success: true, users: data.users });
-});
+    // بيانات اللعبة/الأسئلة
+    var userId = req.session.userId || 'guest';
+    var qData = readJSON('questions.json');
+    var gData = readJSON('games.json');
+    if (!qData || !gData) return res.json({ success: false, message: 'خطأ في قاعدة البيانات' });
 
-app.post('/api/admin/add-user', (req, res) => {
-  if (!requireAdmin(req, res)) return;
-  const data = readJSON('users.json');
-  if (!data) return res.json({ success: false });
+    // فهارس مساعدة
+    var idToCat = {};
+    for (var i = 0; i < qData.categories.length; i++) {
+        idToCat[qData.categories[i].id] = qData.categories[i];
+    }
 
-  const { username, password } = req.body;
-  if (!username || !password) return res.json({ success: false, message: 'بيانات ناقصة' });
-  if (data.users.find(u => u.username === username)) {
-    return res.json({ success: false, message: 'المستخدم موجود' });
-  }
+    function findDups(arr) {
+        var seen = {};
+        var d = [];
+        for (var i = 0; i < arr.length; i++) {
+            if (seen[arr[i]]) d.push(arr[i]);
+            else seen[arr[i]] = 1;
+        }
+        return d;
+    }
+    function intersect(a, b) {
+        var setB = {};
+        for (var i = 0; i < b.length; i++) setB[b[i]] = 1;
+        var res = [];
+        for (var j = 0; j < a.length; j++) if (setB[a[j]]) res.push(a[j]);
+        return res;
+    }
 
-  data.users.push({ id: uid('u'), username, password, active: true, usedQuestions: [] });
-  writeJSON('users.json', data);
-  res.json({ success: true, message: 'تمت الإضافة' });
-});
+    // 1) منع تكرار الصنف داخل نفس الفريق
+    var d1 = findDups(t1c);
+    if (d1.length) {
+        var names1 = d1.map(function(id){ return (idToCat[id] && idToCat[id].name) || id; });
+        return res.json({ success: false, code: 'DUP_TEAM1', message: 'الفريق 1 اختار صنفًا مكررًا', duplicates: d1, duplicateNames: names1 });
+    }
+    var d2 = findDups(t2c);
+    if (d2.length) {
+        var names2 = d2.map(function(id){ return (idToCat[id] && idToCat[id].name) || id; });
+        return res.json({ success: false, code: 'DUP_TEAM2', message: 'الفريق 2 اختار صنفًا مكررًا', duplicates: d2, duplicateNames: names2 });
+    }
 
-app.post('/api/admin/toggle-user', (req, res) => {
-  if (!requireAdmin(req, res)) return;
-  const data = readJSON('users.json');
-  if (!data) return res.json({ success: false });
-
-  const user = data.users.find(u => u.id === req.body.userId);
-  if (!user) return res.json({ success: false, message: 'غير موجود' });
-  user.active = !user.active;
-
-  writeJSON('users.json', data);
-  res.json({ success: true, active: user.active });
-});
-
-app.post('/api/admin/delete-user', (req, res) => {
-  if (!requireAdmin(req, res)) return;
-  const data = readJSON('users.json');
-  if (!data) return res.json({ success: false });
-
-  data.users = data.users.filter(u => u.id !== req.body.userId);
-  writeJSON('users.json', data);
-  res.json({ success: true });
-});
-
-app.post('/api/admin/reset-user-questions', (req, res) => {
-  if (!requireAdmin(req, res)) return;
-  const userId = req.body.userId;
-  const usersData = readJSON('users.json');
-  const questionsData = readJSON('questions.json');
-  if (!usersData || !questionsData) return res.json({ success: false });
-
-  const user = usersData.users.find(u => u.id === userId);
-  if (user) user.usedQuestions = [];
-
-  // إزالة userId من usedByUsers داخل كل سؤال
-  (questionsData.categories || []).forEach(cat => {
-    (cat.questions || []).forEach(q => {
-      if (!Array.isArray(q.usedByUsers)) q.usedByUsers = [];
-      const idx = q.usedByUsers.indexOf(userId);
-      if (idx !== -1) q.usedByUsers.splice(idx, 1);
-    });
-  });
-
-  writeJSON('users.json', usersData);
-  writeJSON('questions.json', questionsData);
-  res.json({ success: true, message: 'تم إعادة تعيين الأسئلة' });
-});
-
-// ======================== اللعبة ========================
-// جلب الأصناف
-app.get('/api/categories', (req, res) => {
-  const data = readJSON('questions.json');
-  if (!data || !data.categories) return res.json({ success: false, categories: [] });
-
-  const cats = data.categories.map(c => ({
-    id: c.id,
-    name: c.name,
-    icon: c.icon,
-    totalQuestions: (c.questions || []).length
-  }));
-  res.json({ success: true, categories: cats });
-});
-
-// بدء مباراة (مع منع تكرار صنف داخل/بين الفريقين)
-app.post('/api/games/start', (req, res) => {
-  const t1 = req.body.team1Name;
-  const t2 = req.body.team2Name;
-  const t1c = req.body.team1Categories || [];
-  const t2c = req.body.team2Categories || [];
-
-  if (!t1 || !t2 || t1c.length !== CONFIG.categoriesPerTeam || t2c.length !== CONFIG.categoriesPerTeam) {
-    return res.json({ success: false, message: 'بيانات ناقصة أو عدد أصناف غير صحيح' });
-  }
-
-  const userId = req.session.userId || 'guest';
-  const qData = readJSON('questions.json');
-  const gData = readJSON('games.json');
-  if (!qData || !gData) return res.json({ success: false, message: 'خطأ في قاعدة البيانات' });
-
-  const idToCat = {};
-  (qData.categories || []).forEach(c => { idToCat[c.id] = c; });
-
-  const findDups = arr => {
-    const seen = new Set(), d = [];
-    arr.forEach(v => { if (seen.has(v)) d.push(v); else seen.add(v); });
-    return d;
-  };
-  const intersect = (a, b) => {
-    const setB = new Set(b);
-    return a.filter(v => setB.has(v));
-  };
-
-  // تكرار داخل نفس الفريق
-  const dup1 = findDups(t1c);
-  if (dup1.length) {
-    return res.json({ success: false, code: 'DUP_TEAM1', duplicateNames: dup1.map(id => idToCat[id]?.name || id) });
-  }
-  const dup2 = findDups(t2c);
-  if (dup2.length) {
-    return res.json({ success: false, code: 'DUP_TEAM2', duplicateNames: dup2.map(id => idToCat[id]?.name || id) });
-  }
-
-  // تضارب بين الفريقين
-  const conflict = intersect(t1c, t2c);
-  if (conflict.length) {
-    return res.json({ success: false, code: 'CATEGORY_CONFLICT', duplicateNames: conflict.map(id => idToCat[id]?.name || id) });
-  }
-
-  // أصناف غير معروفة
-  const allCats = t1c.concat(t2c);
-  const invalid = allCats.filter(id => !idToCat[id]);
-  if (invalid.length) {
-    return res.json({ success: false, code: 'INVALID_CATEGORY', invalid });
-  }
-
-  // بناء الأسئلة
-  const gameId = uid('game');
-  const gameQuestions = [];
-  const diffs = ['easy', 'medium', 'hard'];
-
-  allCats.forEach(catId => {
-    const cat = idToCat[catId];
-    diffs.forEach(df => {
-      const avail = (cat.questions || []).filter(q =>
-        q.difficulty === df &&
-        Array.isArray(q.usedByUsers) &&
-        q.usedByUsers.indexOf(userId) === -1
-      );
-
-      let need = CONFIG.questionsPerDifficulty;
-      if (avail.length < need) need = avail.length; // خذ المتاح فقط
-      const sel = shuffleArray(avail).slice(0, need);
-
-      sel.forEach(sq => {
-        gameQuestions.push({
-          questionId: sq.id,
-          categoryId: catId,
-          categoryName: cat.name,
-          text: sq.text,
-          options: sq.options,
-          correctIndex: sq.correctIndex,
-          difficulty: df,
-          points: sq.points,
-          image: sq.image || '',
-          answered: false,
-          answeredBy: null,
-          isCorrect: null,
-          selectedOption: null
+    // 2) منع اختيار نفس الصنف بين الفريقين (كل صنف مرة واحدة في المباراة)
+    var conflict = intersect(t1c, t2c);
+    if (conflict.length) {
+        var conflictNames = conflict.map(function(id){ return (idToCat[id] && idToCat[id].name) || id; });
+        return res.json({
+            success: false,
+            code: 'CATEGORY_CONFLICT',
+            message: 'لا يمكن للفريقين اختيار نفس الصنف في نفس المباراة',
+            duplicates: conflict,
+            duplicateNames: conflictNames
         });
-        sq.usedByUsers.push(userId);
-      });
-    });
-  });
-
-  writeJSON('questions.json', qData);
-
-  gData.games.push({
-    id: gameId,
-    userId,
-    team1: { name: t1, categories: t1c, score: 0, helps: { ...CONFIG.helps } },
-    team2: { name: t2, categories: t2c, score: 0, helps: { ...CONFIG.helps } },
-    questions: gameQuestions,
-    status: 'playing',
-    createdAt: new Date().toISOString()
-  });
-  writeJSON('games.json', gData);
-
-  res.json({ success: true, gameId });
-});
-
-// لوحة المباراة
-app.get('/api/games/:gameId/board', (req, res) => {
-  const gData = readJSON('games.json');
-  if (!gData) return res.json({ success: false });
-
-  const game = gData.games.find(g => g.id === req.params.gameId);
-  if (!game) return res.json({ success: false });
-  if (game.status === 'finished') return res.json({ success: true, status: 'finished' });
-
-  const board = {};
-  game.questions.forEach(q => {
-    if (!board[q.categoryId]) {
-      board[q.categoryId] = { categoryId: q.categoryId, categoryName: q.categoryName, easy: [], medium: [], hard: [] };
-    }
-    board[q.categoryId][q.difficulty].push({ questionId: q.questionId, answered: q.answered, points: q.points });
-  });
-
-  const arr = Object.keys(board).map(k => board[k]);
-  res.json({
-    success: true,
-    board: arr,
-    team1: { name: game.team1.name, score: game.team1.score, helps: game.team1.helps },
-    team2: { name: game.team2.name, score: game.team2.score, helps: game.team2.helps },
-    status: game.status
-  });
-});
-
-// جلب سؤال
-app.get('/api/games/:gameId/question/:questionId', (req, res) => {
-  const gData = readJSON('games.json');
-  if (!gData) return res.json({ success: false });
-
-  const game = gData.games.find(g => g.id === req.params.gameId);
-  if (!game) return res.json({ success: false });
-
-  const q = game.questions.find(qq => qq.questionId === req.params.questionId);
-  if (!q || q.answered) return res.json({ success: false });
-
-  res.json({
-    success: true,
-    question: {
-      questionId: q.questionId,
-      categoryName: q.categoryName,
-      text: q.text,
-      options: q.options,
-      difficulty: q.difficulty,
-      points: q.points,
-      image: q.image
-    }
-  });
-});
-
-// استخدام مساعدات
-app.post('/api/games/:gameId/use-help', (req, res) => {
-  const { helpType, team, questionId } = req.body;
-  const gData = readJSON('games.json');
-  if (!gData) return res.json({ success: false });
-
-  const game = gData.games.find(g => g.id === req.params.gameId);
-  if (!game) return res.json({ success: false });
-
-  const td = (team === 'team1') ? game.team1 : game.team2;
-  if (!td || !td.helps[helpType] || td.helps[helpType] <= 0) {
-    return res.json({ success: false, message: 'المساعدة غير متاحة' });
-  }
-
-  if (helpType === 'remove2') {
-    const q = game.questions.find(x => x.questionId === questionId);
-    if (!q) return res.json({ success: false, message: 'سؤال غير موجود' });
-    const wrong = q.options.map((_, i) => i).filter(i => i !== q.correctIndex);
-    td.helps.remove2--;
-    writeJSON('games.json', gData);
-    return res.json({
-      success: true,
-      helpType: 'remove2',
-      removeIndexes: shuffleArray(wrong).slice(0, 2),
-      helps: td.helps
-    });
-  }
-
-  if (helpType === 'extraTime') {
-    td.helps.extraTime--;
-    writeJSON('games.json', gData);
-    return res.json({ success: true, helpType: 'extraTime', extraSeconds: CONFIG.extraTimeSeconds, helps: td.helps });
-  }
-
-  if (helpType === 'changeQ') {
-    const oldIdx = game.questions.findIndex(x => x.questionId === questionId);
-    if (oldIdx === -1) return res.json({ success: false, message: 'سؤال غير موجود' });
-
-    const oldQ = game.questions[oldIdx];
-    const qData = readJSON('questions.json');
-
-    const cat = (qData.categories || []).find(c => c.id === oldQ.categoryId);
-    if (!cat) return res.json({ success: false, message: 'صنف غير موجود' });
-
-    const avail = (cat.questions || []).filter(qq =>
-      qq.difficulty === oldQ.difficulty &&
-      qq.id !== oldQ.questionId &&
-      (game.questions.findIndex(gq => gq.questionId === qq.id) === -1) &&
-      Array.isArray(qq.usedByUsers) &&
-      qq.usedByUsers.indexOf(game.userId) === -1
-    );
-
-    if (avail.length === 0) {
-      return res.json({ success: false, message: 'لا يوجد بديل مناسب' });
     }
 
-    const nq = avail[Math.floor(Math.random() * avail.length)];
-    game.questions[oldIdx] = {
-      questionId: nq.id,
-      categoryId: oldQ.categoryId,
-      categoryName: oldQ.categoryName,
-      text: nq.text,
-      options: nq.options,
-      correctIndex: nq.correctIndex,
-      difficulty: nq.difficulty,
-      points: nq.points,
-      image: nq.image || '',
-      answered: false,
-      answeredBy: null,
-      isCorrect: null,
-      selectedOption: null
-    };
-    nq.usedByUsers.push(game.userId);
+    // 3) التحقق من صحة المعرّفات (لا أصناف غير معروفة)
+    var allCats = t1c.concat(t2c);
+    var invalid = [];
+    for (var z = 0; z < allCats.length; z++) {
+        if (!idToCat[allCats[z]]) invalid.push(allCats[z]);
+    }
+    if (invalid.length) {
+        return res.json({
+            success: false,
+            code: 'INVALID_CATEGORY',
+            message: 'تم إرسال أصناف غير موجودة',
+            invalid: invalid
+        });
+    }
 
-    td.helps.changeQ--;
-    writeJSON('games.json', gData);
+    // 4) بناء الأسئلة
+    var gameId = 'game_' + Date.now();
+    var gameQuestions = [];
+
+    for (var c = 0; c < allCats.length; c++) {
+        var cat = idToCat[allCats[c]];
+        if (!cat) continue;
+        var diffs = ['easy', 'medium', 'hard'];
+        for (var d = 0; d < diffs.length; d++) {
+            var avail = cat.questions.filter(function(q) {
+                return q.difficulty === diffs[d] && q.usedByUsers.indexOf(userId) === -1;
+            });
+            var sel = shuffleArray(avail).slice(0, 2); // خذ 2 لكل صعوبة
+            for (var s = 0; s < sel.length; s++) {
+                gameQuestions.push({
+                    questionId: sel[s].id, categoryId: allCats[c], categoryName: cat.name,
+                    text: sel[s].text, options: sel[s].options, correctIndex: sel[s].correctIndex,
+                    difficulty: diffs[d], points: sel[s].points, image: sel[s].image || '',
+                    answered: false, answeredBy: null, isCorrect: null, selectedOption: null
+                });
+                sel[s].usedByUsers.push(userId);
+            }
+        }
+    }
+
     writeJSON('questions.json', qData);
 
-    return res.json({
-      success: true,
-      helpType: 'changeQ',
-      helps: td.helps,
-      newQuestion: {
-        questionId: nq.id,
-        categoryName: oldQ.categoryName,
-        text: nq.text,
-        options: nq.options,
-        difficulty: nq.difficulty,
-        points: nq.points,
-        image: nq.image || ''
-      }
+    gData.games.push({
+        id: gameId,
+        userId: userId,
+        team1: { name: t1, categories: t1c, score: 0, helps: { remove2: 1, extraTime: 1, changeQ: 1 } },
+        team2: { name: t2, categories: t2c, score: 0, helps: { remove2: 1, extraTime: 1, changeQ: 1 } },
+        questions: gameQuestions,
+        status: 'playing',
+        createdAt: new Date().toISOString()
     });
-  }
+    writeJSON('games.json', gData);
+    res.json({ success: true, gameId: gameId });
+});
+app.get('/api/games/:gameId/board', function(req, res) {
+    var gData = readJSON('games.json');
+    if (!gData) return res.json({ success: false });
+    var game = null;
+    for (var i = 0; i < gData.games.length; i++) { if (gData.games[i].id === req.params.gameId) { game = gData.games[i]; break; } }
+    if (!game) return res.json({ success: false });
+    if (game.status === 'finished') return res.json({ success: true, status: 'finished' });
 
-  res.json({ success: false, message: 'نوع مساعدة غير معروف' });
+    var board = {};
+    for (var j = 0; j < game.questions.length; j++) {
+        var q = game.questions[j];
+        if (!board[q.categoryName]) board[q.categoryName] = { categoryId: q.categoryId, categoryName: q.categoryName, easy: [], medium: [], hard: [] };
+        board[q.categoryName][q.difficulty].push({ questionId: q.questionId, answered: q.answered, points: q.points });
+    }
+    var arr = [];
+    for (var key in board) arr.push(board[key]);
+
+    res.json({
+        success: true, board: arr,
+        team1: { name: game.team1.name, score: game.team1.score, helps: game.team1.helps },
+        team2: { name: game.team2.name, score: game.team2.score, helps: game.team2.helps },
+        status: game.status
+    });
 });
 
-// تقديم إجابة
-app.post('/api/games/:gameId/answer', (req, res) => {
-  const { questionId, selectedOption, team } = req.body;
-
-  const gData = readJSON('games.json');
-  if (!gData) return res.json({ success: false });
-
-  const game = gData.games.find(g => g.id === req.params.gameId);
-  if (!game) return res.json({ success: false });
-
-  const q = game.questions.find(qq => qq.questionId === questionId && !qq.answered);
-  if (!q) return res.json({ success: false });
-
-  const isCorrect = (Number(selectedOption) === q.correctIndex);
-  q.answered = true;
-  q.answeredBy = team;
-  q.isCorrect = isCorrect;
-  q.selectedOption = Number(selectedOption);
-
-  if (isCorrect) {
-    if (team === 'team1') game.team1.score += q.points;
-    else game.team2.score += q.points;
-  }
-
-  const remaining = game.questions.filter(qq => !qq.answered).length;
-  if (remaining === 0) game.status = 'finished';
-
-  writeJSON('games.json', gData);
-  res.json({
-    success: true,
-    isCorrect,
-    correctIndex: q.correctIndex,
-    pointsEarned: isCorrect ? q.points : 0,
-    team1Score: game.team1.score,
-    team2Score: game.team2.score,
-    finished: game.status === 'finished',
-    remaining
-  });
+app.get('/api/games/:gameId/question/:questionId', function(req, res) {
+    var gData = readJSON('games.json');
+    if (!gData) return res.json({ success: false });
+    var game = null;
+    for (var i = 0; i < gData.games.length; i++) { if (gData.games[i].id === req.params.gameId) { game = gData.games[i]; break; } }
+    if (!game) return res.json({ success: false });
+    var q = null;
+    for (var j = 0; j < game.questions.length; j++) { if (game.questions[j].questionId === req.params.questionId) { q = game.questions[j]; break; } }
+    if (!q || q.answered) return res.json({ success: false });
+    res.json({ success: true, question: { questionId: q.questionId, categoryName: q.categoryName, text: q.text, options: q.options, difficulty: q.difficulty, points: q.points, image: q.image } });
 });
 
-// تعديل النقاط ديناميكيًا (+100 أو -100)
-app.post('/api/games/:gameId/edit-score', (req, res) => {
-  const team = req.body.team;              // 'team1' أو 'team2'
-  const delta = Number(req.body.delta);    // 100 أو -100
+app.post('/api/games/:gameId/use-help', function(req, res) {
+    var helpType = req.body.helpType, team = req.body.team, questionId = req.body.questionId;
+    var gData = readJSON('games.json');
+    if (!gData) return res.json({ success: false });
+    var game = null;
+    for (var i = 0; i < gData.games.length; i++) { if (gData.games[i].id === req.params.gameId) { game = gData.games[i]; break; } }
+    if (!game) return res.json({ success: false });
+    var td = (team === 'team1') ? game.team1 : game.team2;
+    if (!td.helps[helpType] || td.helps[helpType] <= 0) return res.json({ success: false, message: 'لا تملك' });
+    td.helps[helpType]--;
 
-  if (team !== 'team1' && team !== 'team2') {
-    return res.json({ success: false, message: 'team غير صالح' });
-  }
-  if (delta !== 100 && delta !== -100) {
-    return res.json({ success: false, message: 'delta يجب أن يكون 100 أو -100' });
-  }
+    if (helpType === 'remove2') {
+        var q = null;
+        for (var j = 0; j < game.questions.length; j++) { if (game.questions[j].questionId === questionId) { q = game.questions[j]; break; } }
+        if (!q) return res.json({ success: false });
+        var wrong = [];
+        for (var k = 0; k < q.options.length; k++) { if (k !== q.correctIndex) wrong.push(k); }
+        writeJSON('games.json', gData);
+        return res.json({ success: true, helpType: 'remove2', removeIndexes: shuffleArray(wrong).slice(0, 2), helps: td.helps });
+    }
+    if (helpType === 'extraTime') {
+        writeJSON('games.json', gData);
+        return res.json({ success: true, helpType: 'extraTime', extraSeconds: 30, helps: td.helps });
+    }
+    if (helpType === 'changeQ') {
+        var oldQ = null, oldIdx = -1;
+        for (var m = 0; m < game.questions.length; m++) { if (game.questions[m].questionId === questionId) { oldQ = game.questions[m]; oldIdx = m; break; } }
+        if (!oldQ) return res.json({ success: false });
+        var qData = readJSON('questions.json');
+        var cat = null;
+        for (var n = 0; n < qData.categories.length; n++) { if (qData.categories[n].id === oldQ.categoryId) { cat = qData.categories[n]; break; } }
+        var avail = [];
+        if (cat) {
+            for (var p = 0; p < cat.questions.length; p++) {
+                if (cat.questions[p].difficulty === oldQ.difficulty && cat.questions[p].id !== oldQ.questionId) {
+                    var used = false;
+                    for (var r = 0; r < game.questions.length; r++) { if (game.questions[r].questionId === cat.questions[p].id) { used = true; break; } }
+                    if (!used && cat.questions[p].usedByUsers.indexOf(game.userId) === -1) avail.push(cat.questions[p]);
+                }
+            }
+        }
+        if (avail.length === 0) { td.helps.changeQ++; writeJSON('games.json', gData); return res.json({ success: false, message: 'لا بديل' }); }
+        var nq = avail[Math.floor(Math.random() * avail.length)];
+        game.questions[oldIdx] = { questionId: nq.id, categoryId: oldQ.categoryId, categoryName: oldQ.categoryName, text: nq.text, options: nq.options, correctIndex: nq.correctIndex, difficulty: nq.difficulty, points: nq.points, image: nq.image || '', answered: false, answeredBy: null, isCorrect: null, selectedOption: null };
+        nq.usedByUsers.push(game.userId);
+        writeJSON('games.json', gData);
+        writeJSON('questions.json', qData);
+        return res.json({ success: true, helpType: 'changeQ', helps: td.helps, newQuestion: { questionId: nq.id, categoryName: oldQ.categoryName, text: nq.text, options: nq.options, difficulty: nq.difficulty, points: nq.points, image: nq.image || '' } });
+    }
+    writeJSON('games.json', gData);
+    res.json({ success: false });
+});
 
-  const gData = readJSON('games.json');
-  if (!gData) return res.json({ success: false });
+// تقديم إجابة (مع اختيار الفريق)
+app.post('/api/games/:gameId/answer', function(req, res) {
+    var questionId = req.body.questionId, selectedOption = req.body.selectedOption, team = req.body.team;
+    var gData = readJSON('games.json');
+    if (!gData) return res.json({ success: false });
+    var game = null;
+    for (var i = 0; i < gData.games.length; i++) { if (gData.games[i].id === req.params.gameId) { game = gData.games[i]; break; } }
+    if (!game) return res.json({ success: false });
+    var question = null;
+    for (var j = 0; j < game.questions.length; j++) { if (game.questions[j].questionId === questionId && !game.questions[j].answered) { question = game.questions[j]; break; } }
+    if (!question) return res.json({ success: false });
 
-  const game = gData.games.find(g => g.id === req.params.gameId);
-  if (!game) return res.json({ success: false });
+    var isCorrect = (selectedOption === question.correctIndex);
+    question.answered = true;
+    question.answeredBy = team;
+    question.isCorrect = isCorrect;
+    question.selectedOption = selectedOption;
 
-  if (team === 'team1') {
-    game.team1.score += delta;
-    if (!CONFIG.allowNegativeScore && game.team1.score < 0) game.team1.score = 0;
-  } else {
-    game.team2.score += delta;
-    if (!CONFIG.allowNegativeScore && game.team2.score < 0) game.team2.score = 0;
-  }
+    if (isCorrect) {
+        if (team === 'team1') game.team1.score += question.points;
+        else game.team2.score += question.points;
+    }
 
-  writeJSON('games.json', gData);
-  res.json({ success: true, delta, team, team1Score: game.team1.score, team2Score: game.team2.score });
+    var remaining = 0;
+    for (var k = 0; k < game.questions.length; k++) { if (!game.questions[k].answered) remaining++; }
+    if (remaining === 0) game.status = 'finished';
+
+    writeJSON('games.json', gData);
+    res.json({ success: true, isCorrect: isCorrect, correctIndex: question.correctIndex, pointsEarned: isCorrect ? question.points : 0, team1Score: game.team1.score, team2Score: game.team2.score, finished: game.status === 'finished', remaining: remaining });
+});
+
+// تعديل النقاط يدوياً
+app.post('/api/games/:gameId/edit-score', function(req, res) {
+    var team = req.body.team;
+    
+    var gData = readJSON('games.json');
+    if (!gData) return res.json({ success: false });
+    
+    var game = null;
+    for (var i = 0; i < gData.games.length; i++) { 
+        if (gData.games[i].id === req.params.gameId) { 
+            game = gData.games[i]; 
+            break; 
+        } 
+    }
+    
+    if (!game) return res.json({ success: false });
+
+    if (team === 'team1') {
+        game.team1.score += 100; 
+    } else {
+        game.team2.score += 100;
+    }
+
+    writeJSON('games.json', gData);
+    res.json({ success: true, team1Score: game.team1.score, team2Score: game.team2.score });
 });
 
 // النتائج
-app.get('/api/games/:gameId/results', (req, res) => {
-  const gData = readJSON('games.json');
-  if (!gData) return res.json({ success: false });
-
-  const game = gData.games.find(g => g.id === req.params.gameId);
-  if (!game) return res.json({ success: false });
-
-  let winner = 'تعادل!';
-  if (game.team1.score > game.team2.score) winner = game.team1.name;
-  else if (game.team2.score > game.team1.score) winner = game.team2.name;
-
-  const stats = {};
-  game.questions.forEach(q => {
-    if (!stats[q.categoryId]) stats[q.categoryId] = { categoryId: q.categoryId, categoryName: q.categoryName, total: 0, correct: 0, points: 0 };
-    stats[q.categoryId].total++;
-    if (q.isCorrect) { stats[q.categoryId].correct++; stats[q.categoryId].points += q.points; }
-  });
-
-  res.json({
-    success: true,
-    team1: { name: game.team1.name, score: game.team1.score },
-    team2: { name: game.team2.name, score: game.team2.score },
-    winner,
-    categoryStats: stats
-  });
+app.get('/api/games/:gameId/results', function(req, res) {
+    var gData = readJSON('games.json');
+    if (!gData) return res.json({ success: false });
+    var game = null;
+    for (var i = 0; i < gData.games.length; i++) { if (gData.games[i].id === req.params.gameId) { game = gData.games[i]; break; } }
+    if (!game) return res.json({ success: false });
+    var winner = 'تعادل!';
+    if (game.team1.score > game.team2.score) winner = game.team1.name;
+    else if (game.team2.score > game.team1.score) winner = game.team2.name;
+    var stats = {};
+    for (var j = 0; j < game.questions.length; j++) {
+        var q = game.questions[j];
+        if (!stats[q.categoryName]) stats[q.categoryName] = { total: 0, correct: 0, points: 0 };
+        stats[q.categoryName].total++;
+        if (q.isCorrect) { stats[q.categoryName].correct++; stats[q.categoryName].points += q.points; }
+    }
+    res.json({ success: true, team1: { name: game.team1.name, score: game.team1.score }, team2: { name: game.team2.name, score: game.team2.score }, winner: winner, categoryStats: stats });
 });
 
-// ======================== خدمات مساعدة/صحة ========================
-app.get('/health', (req, res) => res.json({ ok: true }));
-app.get('/version', (req, res) => res.json({ version: '1.0.0' }));
+app.get('/', function(req, res) { res.sendFile(path.join(__dirname, 'public', 'index.html')); });
 
-// الصفحة الرئيسية
-app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'public', 'index.html')));
-
-// ======================== تشغيل ========================
 initDB();
-app.listen(PORT, () => {
-  console.log('========================================');
-  console.log('  السيرفر يعمل: http://localhost:' + PORT);
-  console.log('  أدمن:', CONFIG.admin.user, '/', CONFIG.admin.pass);
-  console.log('========================================');
+app.listen(PORT, function() {
+    console.log('========================================');
+    console.log('  سيرفر چگار: http://localhost:' + PORT);
+    console.log('  أدمن: reder / reder11');
+    console.log('  يوزرات: player01-20 / jkar2024');
+    console.log('========================================');
 });
